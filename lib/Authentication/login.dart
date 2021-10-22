@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/Ultility/function.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,19 +13,13 @@ class Login extends StatelessWidget {
     );
 
     Widget appName = const Text(
-      'S TuTor',
+      'S TUTOR',
       style: TextStyle(
         color: Colors.blue,
         fontSize: 30,
         fontWeight: FontWeight.bold,
       ),
     );
-    //);
-
-    Widget space(double size) => SizedBox(
-          height: size,
-          width: size,
-        );
 
     Widget loginForm = Form(
       child: Column(
@@ -100,29 +95,38 @@ class Login extends StatelessWidget {
       ),
     );
 
-    Widget facebookIcon = const Image(
-      image: AssetImage('images/facebook_icon.png'),
-      height: 50,
-      width: 50,
+    Widget facebookIcon = GestureDetector(
+      child: const Image(
+        image: AssetImage('images/facebook_icon.png'),
+        height: 50,
+        width: 50,
+      ),
+      onTap: null,
     );
 
-    Widget googleIcon = const Image(
-      image: AssetImage('images/google_icon.png'),
-      height: 50,
-      width: 50,
+    Widget googleIcon = GestureDetector(
+      child: const Image(
+        image: AssetImage('images/google_icon.png'),
+        height: 50,
+        width: 50,
+      ),
+      onTap: null,
     );
 
     Widget signUpRediect = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don't have an account?"),
-        space(1),
+        const Text(
+          "Don't have an account?",
+          style: TextStyle(fontSize: 15),
+        ),
         TextButton(
           onPressed: () {},
           child: const Text(
             'Sign Up',
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              fontSize: 15,
             ),
           ),
         ),
@@ -132,6 +136,7 @@ class Login extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign in'),
+        centerTitle: true,
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),

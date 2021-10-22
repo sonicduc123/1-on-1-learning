@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Authentication/login.dart';
+import 'Authentication/forgot_password.dart';
+import 'Authentication/login.dart';
+import 'Authentication/register.dart';
 
 void main() {
   runApp(const MaterialApp(
       title: 'My App',
       home: SafeArea(
-        child: Login(),
+        child: ForgotPassword(),
       )));
 }
