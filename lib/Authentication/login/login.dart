@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Ultility/function.dart';
+import 'package:let_tutor/Authentication/login/input.dart';
+import 'package:let_tutor/Function/button_expanded.dart';
+import 'package:let_tutor/Function/space.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -21,31 +23,16 @@ class Login extends StatelessWidget {
       ),
     );
 
+    Widget emailInput = createInput('Email', false);
+    Widget passwordInput = createInput('Password', true);
+    Widget loginButton = createButtonExpanded('Log In');
+
     Widget loginForm = Form(
       child: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Email',
-              hintText: 'Enter your email',
-              contentPadding: const EdgeInsets.fromLTRB(20, 5, 10, 5),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
+          emailInput,
           space(20),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Enter your password',
-              labelText: 'Password',
-              contentPadding: const EdgeInsets.fromLTRB(20, 5, 10, 5),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            obscureText: true,
-          ),
+          passwordInput,
           space(5),
           Align(
             alignment: Alignment.bottomRight,
@@ -63,27 +50,7 @@ class Login extends StatelessWidget {
             ),
           ),
           space(5),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          loginButton,
         ],
       ),
     );
@@ -135,8 +102,15 @@ class Login extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign in'),
+        title: const Text(
+          'Sign in',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),

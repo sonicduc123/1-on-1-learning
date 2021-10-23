@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'AccountManagement/setting.dart';
+import 'AccountManagement/setting/setting.dart';
 import 'Authentication/forgot_password.dart';
-import 'Authentication/login.dart';
+import 'Authentication/login/login.dart';
 import 'Authentication/register.dart';
 
 void main() {

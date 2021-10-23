@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Ultility/function.dart';
+import 'package:let_tutor/Function/button_expanded.dart';
+import 'package:let_tutor/Function/input_with_icon.dart';
+import 'package:let_tutor/Function/space.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -21,46 +23,26 @@ class ForgotPassword extends StatelessWidget {
       textAlign: TextAlign.center,
     );
 
-    Widget inputEmail = Row(
-      children: [
-        const Icon(
-          Icons.mail,
-          color: Colors.blue,
-          size: 30,
-        ),
-        space(20),
-        Expanded(
-          child: TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Enter your email',
-            ),
-          ),
-        ),
-      ],
+    Widget inputEmail = createInputWithIcon(
+      Icons.mail,
+      'Enter your email',
     );
 
-    Widget sendButton = Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Send'),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.only(top: 15, bottom: 15),
-            ),
-          ),
-        ),
-      ],
-    );
+    Widget sendButton = createButtonExpanded('Send');
 
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back_ios_new),
-        title: const Text('Forgot password'),
+        leading: const Icon(
+          Icons.arrow_back_ios_new,
+          color: Colors.black,
+        ),
+        title: const Text(
+          'Forgot password',
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),

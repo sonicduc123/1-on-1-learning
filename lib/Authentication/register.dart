@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Ultility/function.dart';
+import 'package:let_tutor/Function/button_expanded.dart';
+import 'package:let_tutor/Function/space.dart';
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -32,6 +33,8 @@ class Register extends StatelessWidget {
       );
     }
 
+    Widget registerButton = createButtonExpanded('Register');
+
     Widget registerForm = Form(
       child: Column(
         children: [
@@ -40,27 +43,7 @@ class Register extends StatelessWidget {
           input('Password', true),
           input('Confirm password', true),
           space(30),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          registerButton,
         ],
       ),
     );
@@ -112,9 +95,17 @@ class Register extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign up'),
+        leading: const Icon(
+          Icons.arrow_back_ios_new,
+          color: Colors.black,
+        ),
+        title: const Text(
+          'Sign up',
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
-        leading: const Icon(Icons.arrow_back_ios_new),
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
