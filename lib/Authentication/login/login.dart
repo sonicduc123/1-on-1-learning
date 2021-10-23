@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/Authentication/login/input.dart';
+import 'package:let_tutor/Function/app_bar.dart';
 import 'package:let_tutor/Function/button_expanded.dart';
 import 'package:let_tutor/Function/space.dart';
 
@@ -101,17 +102,7 @@ class Login extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Sign in',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
+      appBar: createAppBar('Sign in', false, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: SingleChildScrollView(

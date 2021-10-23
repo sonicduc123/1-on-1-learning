@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/Function/app_bar.dart';
 import 'package:let_tutor/Function/button_expanded.dart';
 import 'package:let_tutor/Function/input_with_icon.dart';
 import 'package:let_tutor/Function/space.dart';
@@ -31,19 +32,7 @@ class ForgotPassword extends StatelessWidget {
     Widget sendButton = createButtonExpanded('Send');
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.black,
-        ),
-        title: const Text(
-          'Forgot password',
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
+      appBar: createAppBar('Forgot password', true, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: SingleChildScrollView(

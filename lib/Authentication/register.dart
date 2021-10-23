@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/Function/app_bar.dart';
 import 'package:let_tutor/Function/button_expanded.dart';
 import 'package:let_tutor/Function/space.dart';
 
@@ -94,19 +95,7 @@ class Register extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.black,
-        ),
-        title: const Text(
-          'Sign up',
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
+      appBar: createAppBar('Sign up', true, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: SingleChildScrollView(

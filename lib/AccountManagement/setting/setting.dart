@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/Function/app_bar.dart';
 import 'package:let_tutor/Function/button_expanded.dart';
 import 'package:let_tutor/Function/space.dart';
 
@@ -22,7 +23,7 @@ class Setting extends StatelessWidget {
         ),
       ),
       subtitle: Text('phamanhduc@gmail.com'),
-      contentPadding: EdgeInsets.only(left: 60),
+      contentPadding: EdgeInsets.only(left: 60, bottom: 10),
     );
 
     Widget viewFeedbacks = listItem(
@@ -49,7 +50,7 @@ class Setting extends StatelessWidget {
       Icons.language,
       'Our Website',
     );
-    
+
     Widget facebook = listItem(
       Icons.facebook_outlined,
       'Facebook',
@@ -63,15 +64,7 @@ class Setting extends StatelessWidget {
     Widget logoutButton = createButtonExpanded('Log Out');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings',
-            style: TextStyle(
-              color: Colors.black,
-            )),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-      ),
+      appBar: createAppBar('Setttings', false, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
@@ -84,7 +77,7 @@ class Setting extends StatelessWidget {
             space(15),
             outWebsite,
             facebook,
-            space(15),
+            space(5),
             version,
             logoutButton,
           ],
