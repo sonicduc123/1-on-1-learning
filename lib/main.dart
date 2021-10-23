@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/AccountManagement/profile.dart';
+import 'package:let_tutor/Homepage/homepage.dart';
 import 'AccountManagement/setting/setting.dart';
 import 'Authentication/forgot_password.dart';
 import 'Authentication/login/login.dart';
@@ -9,6 +10,6 @@ void main() {
   runApp(const MaterialApp(
       title: 'My App',
       home: SafeArea(
-        child: Profile(),
+        child: HomePage(),
       )));
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Function/app_bar.dart';
-import 'package:let_tutor/Function/button_expanded.dart';
-import 'package:let_tutor/Function/input_with_icon.dart';
-import 'package:let_tutor/Function/space.dart';
+import 'package:let_tutor/Ultility/app_bar.dart';
+import 'package:let_tutor/Ultility/button_expanded.dart';
+import 'package:let_tutor/Ultility/input_with_icon.dart';
+import 'package:let_tutor/Ultility/space.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
