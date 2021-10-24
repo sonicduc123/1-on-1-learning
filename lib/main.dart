@@ -11,12 +11,13 @@ import 'Authentication/forgot_password.dart';
 import 'Authentication/login/login.dart';
 import 'Authentication/register.dart';
 import 'Chat/chat.dart';
+import 'Meeting/meeting.dart';
 import 'Tutor/DetailTutor/detail_tutor.dart';
 
 void main() {
   runApp(const MaterialApp(
       title: 'My App',
       home: SafeArea(
-        child: BookingHistory(),
+        child: Meeting(),
       )));
 }
