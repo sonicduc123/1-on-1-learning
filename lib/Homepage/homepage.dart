@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/Homepage/title.dart';
-import 'package:let_tutor/Ultility/card_info.dart';
+import 'package:let_tutor/Tutor/card_info.dart';
 import 'package:let_tutor/Ultility/list_chip.dart';
 import 'package:let_tutor/Ultility/space.dart';
 
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
         actions: [
           Container(
             child: const CircleAvatar(
-              backgroundImage: AssetImage('images/avatar.png'),
+              backgroundImage: AssetImage('assets/images/avatar.png'),
             ),
             margin: const EdgeInsets.only(right: 10),
           ),
@@ -109,9 +109,12 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 const Heading(title: 'Find a tutor'),
+                space(5),
                 listSpecialities,
                 headingRecommentTutor,
-                BriefInfoCard(),
+                Column(
+                  children: List.generate(5, (index) => const BriefInfoCard()),
+                ),
               ],
             ),
           ),

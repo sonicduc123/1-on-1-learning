@@ -10,7 +10,7 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget logo = const Image(
-      image: AssetImage('images/logo.png'),
+      image: AssetImage('assets/images/logo.png'),
       height: 150,
       width: 150,
     );

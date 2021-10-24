@@ -12,7 +12,7 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget information = const ListTile(
       leading: CircleAvatar(
-        backgroundImage: AssetImage('images/avatar.png'),
+        backgroundImage: AssetImage('assets/images/avatar.png'),
         radius: 30,
       ),
       title: Text(

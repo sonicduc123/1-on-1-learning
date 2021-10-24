@@ -13,7 +13,7 @@ class Profile extends StatelessWidget {
       alignment: Alignment.bottomRight,
       children: [
         const CircleAvatar(
-          backgroundImage: AssetImage('images/avatar.png'),
+          backgroundImage: AssetImage('assets/images/avatar.png'),
           radius: 50,
         ),
         Container(

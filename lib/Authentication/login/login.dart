@@ -9,7 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget logo = const Image(
-      image: AssetImage('images/logo.png'),
+      image: AssetImage('assets/images/logo.png'),
       height: 150,
       width: 150,
     );
@@ -64,7 +64,7 @@ class Login extends StatelessWidget {
 
     Widget facebookIcon = GestureDetector(
       child: const Image(
-        image: AssetImage('images/facebook_icon.png'),
+        image: AssetImage('assets/images/facebook_icon.png'),
         height: 50,
         width: 50,
       ),
@@ -73,7 +73,7 @@ class Login extends StatelessWidget {
 
     Widget googleIcon = GestureDetector(
       child: const Image(
-        image: AssetImage('images/google_icon.png'),
+        image: AssetImage('assets/images/google_icon.png'),
         height: 50,
         width: 50,
       ),
