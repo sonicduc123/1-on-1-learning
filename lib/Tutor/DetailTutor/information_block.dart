@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Tutor/detail_tutor/information_field.dart';
 import 'package:let_tutor/Ultility/space.dart';
+
+import 'information_field.dart';
 
 class InforBlock extends StatelessWidget {
   const InforBlock({Key? key, required this.field, required this.description})

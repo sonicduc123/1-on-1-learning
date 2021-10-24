@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/Tutor/detail_tutor/course.dart';
-import 'package:let_tutor/Tutor/detail_tutor/header.dart';
-import 'package:let_tutor/Tutor/detail_tutor/information_block.dart';
-import 'package:let_tutor/Tutor/detail_tutor/information_chip.dart';
-import 'package:let_tutor/Tutor/detail_tutor/information_field.dart';
-import 'package:let_tutor/Tutor/detail_tutor/interaction_button.dart';
-import 'package:let_tutor/Tutor/detail_tutor/rating_and_comment.dart';
+import 'package:let_tutor/Tutor/DetailTutor/rating_and_comment.dart';
 import 'package:let_tutor/Ultility/app_bar.dart';
 import 'package:let_tutor/Ultility/button_expanded.dart';
 import 'package:let_tutor/Ultility/list_chip.dart';
 import 'package:let_tutor/Ultility/rating_start.dart';
 import 'package:let_tutor/Ultility/space.dart';
+
+import 'Course/course.dart';
+import 'header.dart';
+import 'information_block.dart';
+import 'information_chip.dart';
+import 'information_field.dart';
+import 'interaction_button.dart';
 
 class DetailTutor extends StatelessWidget {
   const DetailTutor({Key? key}) : super(key: key);
