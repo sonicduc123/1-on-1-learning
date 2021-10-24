@@ -5,6 +5,7 @@ import 'package:let_tutor/Tutor/detail_tutor/information_block.dart';
 import 'package:let_tutor/Tutor/detail_tutor/information_chip.dart';
 import 'package:let_tutor/Tutor/detail_tutor/information_field.dart';
 import 'package:let_tutor/Tutor/detail_tutor/interaction_button.dart';
+import 'package:let_tutor/Tutor/detail_tutor/rating_and_comment.dart';
 import 'package:let_tutor/Ultility/app_bar.dart';
 import 'package:let_tutor/Ultility/button_expanded.dart';
 import 'package:let_tutor/Ultility/list_chip.dart';
@@ -86,6 +87,17 @@ class DetailTutor extends StatelessWidget {
     Widget ratingAndComment = Column(
       children: [
         InforField(title: 'Rating and Comment (3)'),
+        Column(
+          children: List.generate(
+            3,
+            (index) => Column(
+              children: [
+                space(10),
+                RatingComment(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
 
