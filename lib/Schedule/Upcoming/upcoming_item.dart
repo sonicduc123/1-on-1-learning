@@ -42,7 +42,7 @@ class UpcomingItem extends StatelessWidget {
                           style: TextStyle(color: Colors.red),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 )
               ],
