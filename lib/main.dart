@@ -8,12 +8,13 @@ import 'AccountManagement/setting/setting.dart';
 import 'Authentication/forgot_password.dart';
 import 'Authentication/login/login.dart';
 import 'Authentication/register.dart';
+import 'Chat/chat.dart';
 import 'Tutor/DetailTutor/detail_tutor.dart';
 
 void main() {
   runApp(const MaterialApp(
       title: 'My App',
       home: SafeArea(
-        child: Upcoming(),
+        child: Chat(),
       )));
 }
