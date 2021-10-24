@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 Widget createListChip(List<String> listChip) => SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Wrap(
-        spacing: 3,
+        spacing: 5,
         children: List.generate(
           listChip.length,
           (index) => Chip(

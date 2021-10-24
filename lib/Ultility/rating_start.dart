@@ -5,8 +5,7 @@ class RatingStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 3,
+    return Row(
       children: List.generate(
         5,
         (index) => Icon(
