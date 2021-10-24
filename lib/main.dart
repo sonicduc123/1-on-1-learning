@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/AccountManagement/profile.dart';
 import 'package:let_tutor/Homepage/homepage.dart';
+import 'package:let_tutor/Schedule/Upcoming/upcoming.dart';
 import 'package:let_tutor/Tutor/DetailTutor/Course/DetailCourse/detail_course.dart';
 import 'package:let_tutor/Tutor/tutor.dart';
 import 'AccountManagement/setting/setting.dart';
@@ -13,6 +14,6 @@ void main() {
   runApp(const MaterialApp(
       title: 'My App',
       home: SafeArea(
-        child: DetailCourse(),
+        child: Upcoming(),
       )));
 }
