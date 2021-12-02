@@ -49,7 +49,7 @@ class Profile extends StatelessWidget {
 
     Widget birthday = createInputWithIcon(Icons.cake, 'Birthday');
 
-    Widget saveButton = createButtonExpanded('Save');
+    Widget saveButton = createButtonExpanded('Save', action:  (){});
 
     return Scaffold(
       appBar: createAppBar('Profile', true, context),

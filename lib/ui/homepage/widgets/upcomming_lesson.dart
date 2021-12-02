@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class UpcommingLesson extends StatelessWidget {
-  const UpcommingLesson({ Key? key }) : super(key: key);
+  const UpcommingLesson({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,9 @@ class UpcommingLesson extends StatelessWidget {
           ),
           space(10),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.meeting);
+            },
             child: const Text(
               'Enter lesson room',
               style: TextStyle(

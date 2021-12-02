@@ -25,7 +25,7 @@ class Login extends StatelessWidget {
 
     Widget emailInput = createInput('Email', false);
     Widget passwordInput = createInput('Password', true);
-    Widget loginButton = createButtonExpanded('Log In');
+    Widget loginButton = createButtonExpanded('Log In',action:  (){});
 
     Widget loginForm = Form(
       child: Column(

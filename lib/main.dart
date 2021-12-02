@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/account/setting/setting.dart';
+import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
@@ -7,9 +9,10 @@ import 'package:let_tutor/ui/tutor/tutor.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      title: 'My App',
+    MaterialApp(
+      title: 'Tutor App',
       home: TutorApp(),
+      routes: Routes.routes,
     ),
   );
 }
@@ -23,28 +26,35 @@ class TutorApp extends StatefulWidget {
 
 class _TutorAppState extends State<TutorApp> {
   int selectedIndex = 0;
+  bool isLogin = false;
+
+  void tabBarCallback(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    Widget SetCurrentPage() {
+    Widget setCurrentPage() {
       switch (selectedIndex) {
-        case 0:
-          return HomePage();
-        case 1:
+        case BottomBars.home:
+          return HomePage(callback: tabBarCallback);
+        case BottomBars.chat:
           return Chat();
-        case 2:
+        case BottomBars.upcoming:
           return Upcoming();
-        case 3:
+        case BottomBars.tutor:
           return Tutor();
-        case 4:
+        case BottomBars.setting:
           return Setting();
         default:
-          return HomePage();
+          return HomePage(callback: tabBarCallback);
       }
     }
 
     return Scaffold(
-      body: SetCurrentPage(),
+      body: setCurrentPage(),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

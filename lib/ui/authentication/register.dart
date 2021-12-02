@@ -34,7 +34,7 @@ class Register extends StatelessWidget {
       );
     }
 
-    Widget registerButton = createButtonExpanded('Register');
+    Widget registerButton = createButtonExpanded('Register', action: (){});
 
     Widget registerForm = Form(
       child: Column(

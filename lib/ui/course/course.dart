@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 
@@ -53,7 +54,9 @@ class Course extends StatelessWidget {
                     ),
                   ),
                   space(10),
-                  createButtonExpanded('Explore'),
+                  createButtonExpanded('Explore', action: () {
+                    Navigator.pushNamed(context, Routes.detailCourse);
+                  }),
                 ],
               ),
             ),

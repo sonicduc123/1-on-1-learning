@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/Tutor/card_info.dart';
+import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/homepage/widgets/title.dart';
 import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
+import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/space.dart';
 
+typedef TabBarCallback = void Function(int tabIndex);
+
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.callback}) : super(key: key);
+
+  final TabBarCallback callback;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -38,7 +44,11 @@ class _HomePageState extends State<HomePage> {
         Stack(
           alignment: Alignment.centerRight,
           children: [
-            TextButton(onPressed: () {}, child: Text('See all')),
+            TextButton(
+                onPressed: () {
+                  widget.callback(BottomBars.tutor);
+                },
+                child: Text('See all')),
             const Icon(
               Icons.arrow_forward_ios,
               color: Colors.blue,
@@ -58,8 +68,13 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           Container(
-            child: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/avatar.png'),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.profile);
+              },
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/images/avatar.png'),
+              ),
             ),
             margin: const EdgeInsets.only(right: 10),
           ),

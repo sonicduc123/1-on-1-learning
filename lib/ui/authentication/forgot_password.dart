@@ -29,7 +29,7 @@ class ForgotPassword extends StatelessWidget {
       'Enter your email',
     );
 
-    Widget sendButton = createButtonExpanded('Send');
+    Widget sendButton = createButtonExpanded('Send', action: (){});
 
     return Scaffold(
       appBar: createAppBar('Forgot password', true, context),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/tutor/detail_tutor/rating_and_comment.dart';
+import 'package:let_tutor/ui/course/course.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/header.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/information_block.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/information_chip.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/information_field.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/interaction_button.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/rating_and_comment.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
-
-import 'Course/course.dart';
-import 'header.dart';
-import 'information_block.dart';
-import 'information_chip.dart';
-import 'information_field.dart';
-import 'interaction_button.dart';
 
 class DetailTutor extends StatelessWidget {
   const DetailTutor({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class DetailTutor extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget header = DetailTutorHeader();
 
-    Widget bookingButton = createButtonExpanded('Booking');
+    Widget bookingButton = createButtonExpanded('Booking', action: () {});
 
     Widget interactionButtons = Row(
       children: const [

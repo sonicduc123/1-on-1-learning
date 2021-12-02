@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/Tutor/card_info.dart';
+import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class Tutor extends StatelessWidget {

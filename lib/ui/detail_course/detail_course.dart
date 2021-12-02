@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/tutor/detail_tutor/course/detail_course/heading.dart';
-import 'package:let_tutor/ui/tutor/detail_tutor/course/detail_course/label_item.dart';
+import 'package:let_tutor/ui/detail_course/widgets/heading.dart';
+import 'package:let_tutor/ui/detail_course/widgets/label_item.dart';
 
 class DetailCourse extends StatelessWidget {
   const DetailCourse({Key? key}) : super(key: key);
@@ -53,9 +53,7 @@ class DetailCourse extends StatelessWidget {
           padding: EdgeInsets.all(10),
           child: Text(
             "- Why take this course\nUnderstanding business culture and customs is just as important as learning traditional business-related vocabulary. With Cambly's Business English course, you have the chance to learn from expertly-crafted lessons as well as from your tutor's personal experiences.\n\n- What will you be able to do\nThis course covers the most common vocabulary and grammatical structures needed to do business in English. The course focuses on simulating real-life business situations to build professional communicative competency. You will also learn idioms being used in English-speaking offices across the globe.",
-            style: TextStyle(
-              fontSize: 15,
-            ),
+            style: TextStyle(fontSize: 15),
           ),
         ),
       ],
@@ -98,7 +96,12 @@ class DetailCourse extends StatelessWidget {
         preferredSize: Size.fromHeight(200),
         child: AppBar(
           elevation: 0,
-          leading: const Icon(Icons.arrow_back_ios_new),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(

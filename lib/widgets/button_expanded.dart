@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget createButtonExpanded(String name) => Row(
+typedef VoidCallback = void Function();
+
+Widget createButtonExpanded(String name, {VoidCallback? action}) => Row(
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: action,
             child: Text(
               name,
               style: const TextStyle(

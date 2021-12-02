@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget listItem(IconData icon, String name) => Card(
+typedef VoidCallback = void Function();
+
+Widget listItem(IconData icon, String name, {VoidCallback? action}) => Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -21,5 +23,6 @@ Widget listItem(IconData icon, String name) => Card(
           color: Colors.black,
           size: 15,
         ),
+        onTap: action,
       ),
     );

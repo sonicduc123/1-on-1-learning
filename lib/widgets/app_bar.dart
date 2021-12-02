@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 AppBar createAppBar(String title, bool isHaveLeading, BuildContext context) =>
     AppBar(
       leading: isHaveLeading
-          ? const Icon(
-              Icons.arrow_back_ios_new,
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
               color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
             )
           : null,
       title: Text(title,

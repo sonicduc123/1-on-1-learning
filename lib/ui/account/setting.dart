@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/account/widgets/list_item.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
-
-import 'list_item.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget information = const ListTile(
+    Widget information = ListTile(
       leading: CircleAvatar(
         backgroundImage: AssetImage('assets/images/avatar.png'),
         radius: 30,
@@ -24,44 +24,40 @@ class Setting extends StatelessWidget {
       ),
       subtitle: Text('phamanhduc@gmail.com'),
       contentPadding: EdgeInsets.only(left: 60, bottom: 10),
+      onTap: () {
+        Navigator.pushNamed(context, Routes.profile);
+      },
     );
 
-    Widget viewFeedbacks = listItem(
-      Icons.person_outline,
-      'View Feedbacks',
-    );
+    Widget viewFeedbacks = listItem(Icons.person_outline, 'View Feedbacks');
 
     Widget bookingHistory = listItem(
       Icons.list,
       'Booking History',
+      action: () {
+        Navigator.pushNamed(context, Routes.bookingHistory);
+      },
     );
 
     Widget sessionHistory = listItem(
       Icons.history,
       'Session History',
+      action: () {
+        Navigator.pushNamed(context, Routes.sessionHistory);
+      },
     );
 
-    Widget advancedSettings = listItem(
-      Icons.settings_outlined,
-      'Advanced Settings',
-    );
+    Widget advancedSettings =
+        listItem(Icons.settings_outlined, 'Advanced Settings');
 
-    Widget outWebsite = listItem(
-      Icons.language,
-      'Our Website',
-    );
+    Widget outWebsite = listItem(Icons.language, 'Our Website');
 
-    Widget facebook = listItem(
-      Icons.facebook_outlined,
-      'Facebook',
-    );
+    Widget facebook = listItem(Icons.facebook_outlined, 'Facebook');
 
     Widget version = const Align(
-      alignment: Alignment.topRight,
-      child: Text('Version 1.1.0'),
-    );
+        alignment: Alignment.topRight, child: Text('Version 1.1.0'));
 
-    Widget logoutButton = createButtonExpanded('Log Out');
+    Widget logoutButton = createButtonExpanded('Log Out', action: () {});
 
     return Scaffold(
       appBar: createAppBar('Setttings', false, context),
