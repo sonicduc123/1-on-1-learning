@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/account/setting.dart';
+import 'package:let_tutor/ui/authentication/forgot_password.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
 import 'package:let_tutor/ui/authentication/register.dart';
 import 'package:let_tutor/ui/chat/chat.dart';
@@ -19,6 +20,7 @@ class Routes {
   // static variables
   static const String home = '/home';
   static const String login = '/login';
+  static const String forgotPassword = 'forgot_password';
   static const String register = '/register';
   static const String chat = '/chat';
   static const String upcomming = '/upcomming';
@@ -33,8 +35,9 @@ class Routes {
 
   static final routes = <String, WidgetBuilder>{
     // home: (BuildContext context) => HomePage(),
-    login: (BuildContext context) => Login(),
+    // login: (BuildContext context) => Login(),
     register: (BuildContext context) => Register(),
+    forgotPassword: (BuildContext context) => ForgotPassword(),
     chat: (BuildContext context) => Chat(),
     upcomming: (BuildContext context) => Upcoming(),
     tutor: (BuildContext context) => Tutor(),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/schedule/session_history/session_history_item/part.dart';
+import 'package:let_tutor/ui/schedule/session_history/widgets/part.dart';
 import 'package:let_tutor/widgets/space.dart';
-
 
 class SessionHistoryItem extends StatelessWidget {
   const SessionHistoryItem({Key? key}) : super(key: key);
@@ -66,7 +65,7 @@ class SessionHistoryItem extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[200],
+                    primary: Colors.grey[50],
                     onPrimary: Colors.blue,
                   ),
                   onPressed: () {},

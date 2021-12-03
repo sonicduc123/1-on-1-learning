@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/Chat/chat_item.dart';
+import 'package:let_tutor/ui/chat/widgets/chat_item.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/space.dart';
 

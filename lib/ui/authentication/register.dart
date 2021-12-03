@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/ui/authentication/widgets/register_form.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
-import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class Register extends StatelessWidget {
@@ -8,46 +8,7 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget input(String name, bool isPassword) {
-      return Column(
-        children: [
-          space(20),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              name + ' *',
-              style: const TextStyle(fontSize: 15),
-            ),
-          ),
-          space(5),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Enter your ' + name,
-              contentPadding: const EdgeInsets.fromLTRB(20, 5, 10, 5),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            obscureText: isPassword,
-          ),
-        ],
-      );
-    }
-
-    Widget registerButton = createButtonExpanded('Register', action: (){});
-
-    Widget registerForm = Form(
-      child: Column(
-        children: [
-          input('Full name', false),
-          input('Email', false),
-          input('Password', true),
-          input('Confirm password', true),
-          space(30),
-          registerButton,
-        ],
-      ),
-    );
+    Widget registerForm = RegisterForm();
 
     Widget otherWayLogin = const Text(
       'Or continue with',
@@ -82,7 +43,9 @@ class Register extends StatelessWidget {
           style: TextStyle(fontSize: 15),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           child: const Text(
             'Log In',
             style: TextStyle(

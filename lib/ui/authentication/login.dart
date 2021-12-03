@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/Authentication/login/input.dart';
+import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/authentication/widgets/login_form.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
-import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
 
+typedef LoginSuccessCallback = Function();
+
+class Login extends StatelessWidget {
+  const Login({Key? key, required this.loginSuccessCallback}) : super(key: key);
+
+  final LoginSuccessCallback loginSuccessCallback;
   @override
   Widget build(BuildContext context) {
     Widget logo = const Image(
@@ -23,37 +27,7 @@ class Login extends StatelessWidget {
       ),
     );
 
-    Widget emailInput = createInput('Email', false);
-    Widget passwordInput = createInput('Password', true);
-    Widget loginButton = createButtonExpanded('Log In',action:  (){});
-
-    Widget loginForm = Form(
-      child: Column(
-        children: [
-          emailInput,
-          space(20),
-          passwordInput,
-          space(5),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Forgot Password?',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 15),
-              ),
-            ),
-          ),
-          space(5),
-          loginButton,
-        ],
-      ),
-    );
+    Widget loginForm = LoginForm(loginSuccessCallback);
 
     Widget otherWayLogin = const Text(
       'Or continue with',
@@ -88,7 +62,9 @@ class Login extends StatelessWidget {
           style: TextStyle(fontSize: 15),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.register);
+          },
           child: const Text(
             'Sign Up',
             style: TextStyle(

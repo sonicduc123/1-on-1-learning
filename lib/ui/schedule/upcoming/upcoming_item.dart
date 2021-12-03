@@ -53,7 +53,7 @@ class UpcomingItem extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[200],
+                    primary: Colors.grey[50],
                     onPrimary: Colors.blue,
                   ),
                   onPressed: () {},

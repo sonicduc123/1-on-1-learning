@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:let_tutor/ui/schedule/session_history/session_history_item/session_history_item.dart';
+import 'package:let_tutor/ui/schedule/session_history/widgets/session_history_item.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/space.dart';
 
