@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/authentication/widgets/login_input.dart';
@@ -17,15 +19,21 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Widget emailInput = createInput('Email', false);
+    Widget emailInput = createInput('Email', false, emailController);
 
-    Widget passwordInput = createInput('Password', true);
+    Widget passwordInput = createInput('Password', true, passwordController);
 
     Widget loginButton = createButtonExpanded('Log In', action: () {
       if (formKey.currentState!.validate()) {
+        log('Log in: ');
+        log('email: ' + emailController.text);
+        log('password:' + passwordController.text);
+        log('--------------------------------------');
         widget.loginSuccessCallback();
       }
     });

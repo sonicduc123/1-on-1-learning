@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:let_tutor/utils/validate_input.dart';
 import 'package:let_tutor/widgets/space.dart';
 
-Widget createRegisterInput(String name, bool isPassword) {
+Widget createRegisterInput(String name, bool isPassword,
+    {TextEditingController? controller,
+    TextEditingController? passwordController}) {
   return Column(
     children: [
       space(20),
@@ -15,6 +17,7 @@ Widget createRegisterInput(String name, bool isPassword) {
       ),
       space(5),
       TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           hintText: 'Enter your ' + name.toLowerCase(),
           contentPadding: const EdgeInsets.fromLTRB(20, 5, 10, 5),
@@ -23,7 +26,14 @@ Widget createRegisterInput(String name, bool isPassword) {
           ),
         ),
         obscureText: isPassword,
-        validator: (value) => validate_input(value, name),
+        validator: (value) {
+          if (name == "Confirm password") {
+            if (controller!.text != passwordController!.text) {
+              return "Your confirm password must be same your password";
+            }
+          }
+          return validate_input(value, name);
+        },
       ),
     ],
   );

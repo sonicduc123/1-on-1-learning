@@ -20,7 +20,7 @@ class Routes {
   // static variables
   static const String home = '/home';
   static const String login = '/login';
-  static const String forgotPassword = 'forgot_password';
+  static const String forgotPassword = '/forgot_password';
   static const String register = '/register';
   static const String chat = '/chat';
   static const String upcomming = '/upcomming';
@@ -43,7 +43,7 @@ class Routes {
     tutor: (BuildContext context) => Tutor(),
     detailTutor: (BuildContext context) => DetailTutor(),
     detailCourse: (BuildContext context) => DetailCourse(),
-    setting: (BuildContext context) => Setting(),
+    //setting: (BuildContext context) => Setting(),
     profile: (BuildContext context) => Profile(),
     meeting: (BuildContext context) => Meeting(),
     bookingHistory: (BuildContext context) => BookingHistory(),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/homepage/widgets/title.dart';
 import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
 import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/space.dart';
+import 'package:provider/src/provider.dart';
 
 typedef TabBarCallback = void Function(int tabIndex);
 
@@ -24,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     Widget upcomingLesson = const UpcommingLesson();
 
     List<String> listChip = [
+      'Tất cả',
       'Kids',
       'Business',
       'IELTS',
@@ -35,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       'PET',
       'KET'
     ];
-    Widget listSpecialities = createListChip(listChip);
+    Widget listSpecialities = ListChip(listChip: listChip);
 
     Widget headingRecommentTutor = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,6 +61,8 @@ class _HomePageState extends State<HomePage> {
         )
       ],
     );
+
+    List<TutorDTO> listTutor = context.read<List<TutorDTO>>();
 
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                 listSpecialities,
                 headingRecommentTutor,
                 Column(
-                  children: List.generate(5, (index) => const BriefInfoCard()),
+                  children: List.generate(listTutor.length, (index) => BriefInfoCard(tutor: listTutor[index])),
                 ),
               ],
             ),

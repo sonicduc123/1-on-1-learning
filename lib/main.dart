@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
@@ -7,6 +8,7 @@ import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -19,7 +21,7 @@ void main() {
 }
 
 class TutorApp extends StatefulWidget {
-  const TutorApp({Key? key}) : super(key: key);
+  TutorApp({Key? key}) : super(key: key);
 
   @override
   _TutorAppState createState() => _TutorAppState();
@@ -28,6 +30,12 @@ class TutorApp extends StatefulWidget {
 class _TutorAppState extends State<TutorApp> {
   int selectedIndex = 0;
   bool isLogin = false;
+  List<TutorDTO> listTutor = [
+    TutorDTO('1', 'Phạm Anh Đức', ['Conversational', 'STARTERS', 'MOVERS'], 4),
+    TutorDTO('2', 'Ngô Hải Hà', ['IELTS', 'TOEFL'], 5),
+    TutorDTO('3', 'Nguyễn Duy', ['Kids', 'Business'], 3),
+    TutorDTO('4', 'Đạt Nguyễn', ['IELTS'], 2),
+  ];
 
   void tabBarCallback(int index) {
     setState(() {
@@ -38,6 +46,12 @@ class _TutorAppState extends State<TutorApp> {
   void loginSuccessCallback() {
     setState(() {
       isLogin = true;
+    });
+  }
+
+  void logoutCallback() {
+    setState(() {
+      isLogin = false;
     });
   }
 
@@ -55,7 +69,7 @@ class _TutorAppState extends State<TutorApp> {
           case BottomBars.tutor:
             return Tutor();
           case BottomBars.setting:
-            return Setting();
+            return Setting(logoutCallback: logoutCallback);
           default:
             return HomePage(callback: tabBarCallback);
         }
@@ -91,9 +105,12 @@ class _TutorAppState extends State<TutorApp> {
       return null;
     }
 
-    return Scaffold(
-      body: setCurrentPage(),
-      bottomNavigationBar: createBottonNavigationBar(),
+    return MultiProvider(
+      providers: [Provider(create: (context) => listTutor)],
+      child: Scaffold(
+        body: setCurrentPage(),
+        bottomNavigationBar: createBottonNavigationBar(),
+      ),
     );
   }
 }

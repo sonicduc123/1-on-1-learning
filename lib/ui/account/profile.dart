@@ -4,8 +4,21 @@ import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/input_with_icon.dart';
 import 'package:let_tutor/widgets/space.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  TextEditingController phoneController =
+      TextEditingController(text: '0123456789');
+  TextEditingController languageController =
+      TextEditingController(text: 'English');
+  TextEditingController locationController =
+      TextEditingController(text: 'TP.HCM');
+  TextEditingController birthdayController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +54,22 @@ class Profile extends StatelessWidget {
 
     Widget email = const Text('phamanhduc@gmail.com');
 
-    Widget phone = createInputWithIcon(Icons.phone, 'Phone Number');
+    Widget phone =
+        createInputWithIcon(Icons.phone, 'Phone Number', phoneController);
 
-    Widget language = createInputWithIcon(Icons.language, 'Language');
+    Widget language =
+        createInputWithIcon(Icons.language, 'Language', languageController);
 
-    Widget location = createInputWithIcon(Icons.location_on, 'Location');
+    Widget location =
+        createInputWithIcon(Icons.location_on, 'Location', locationController);
 
-    Widget birthday = createInputWithIcon(Icons.cake, 'Birthday');
+    Widget birthday =
+        createInputWithIcon(Icons.cake, 'Birthday', birthdayController);
 
-    Widget saveButton = createButtonExpanded('Save', action:  (){});
+    Widget saveButton = createButtonExpanded('Save', action: () {
+      
+      Navigator.pop(context);
+    });
 
     return Scaffold(
       appBar: createAppBar('Profile', true, context),

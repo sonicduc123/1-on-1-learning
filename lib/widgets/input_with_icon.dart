@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'space.dart';
 
-Widget createInputWithIcon(IconData icon, String hint) => Row(
+Widget createInputWithIcon(IconData icon, String hint, TextEditingController controller) => Row(
       children: [
         Icon(
           icon,
@@ -11,6 +11,7 @@ Widget createInputWithIcon(IconData icon, String hint) => Row(
         space(20),
         Expanded(
           child: TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: hint,
             ),

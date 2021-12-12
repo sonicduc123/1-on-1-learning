@@ -41,7 +41,7 @@ class DetailTutorHeader extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const RatingStar(),
+            RatingStar(rating: 5),
             space(15),
             const Icon(
               Icons.favorite_outline,

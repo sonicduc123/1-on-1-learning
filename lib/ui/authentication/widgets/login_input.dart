@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/utils/validate_input.dart';
 
-Widget createInput(String name, bool isPassword) => TextFormField(
+Widget createInput(String name, bool isPassword, TextEditingController controller) => TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: name,
         hintText: 'Enter your ' + name.toLowerCase(),

@@ -5,8 +5,12 @@ import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 
+typedef LogoutCallback = Function();
+
 class Setting extends StatelessWidget {
-  const Setting({Key? key}) : super(key: key);
+  const Setting({Key? key, required this.logoutCallback}) : super(key: key);
+
+  final LogoutCallback logoutCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +61,9 @@ class Setting extends StatelessWidget {
     Widget version = const Align(
         alignment: Alignment.topRight, child: Text('Version 1.1.0'));
 
-    Widget logoutButton = createButtonExpanded('Log Out', action: () {});
+    Widget logoutButton = createButtonExpanded('Log Out', action: () {
+      logoutCallback();
+    });
 
     return Scaffold(
       appBar: createAppBar('Setttings', false, context),

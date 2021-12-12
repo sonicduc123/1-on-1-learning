@@ -41,7 +41,7 @@ class RatingComment extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  RatingStar(),
+                  RatingStar(rating: 5),
                   Text(
                     '18:53:00, 24/10/2021',
                     style: TextStyle(

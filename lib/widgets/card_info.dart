@@ -1,13 +1,16 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/rating_star.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class BriefInfoCard extends StatelessWidget {
-  const BriefInfoCard({Key? key}) : super(key: key);
+  const BriefInfoCard({Key? key, required this.tutor}) : super(key: key);
+
+  final TutorDTO tutor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +37,13 @@ class BriefInfoCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Phạm Anh Đức',
+                            Text(
+                              tutor.name,
                               style: TextStyle(fontSize: 17),
                             ),
-                            const RatingStar(),
+                            RatingStar(
+                              rating: tutor.rating,
+                            ),
                             createListChip(['English'])
                           ],
                         ),

@@ -1,11 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/input_with_icon.dart';
 import 'package:let_tutor/widgets/space.dart';
 
-class ForgotPassword extends StatelessWidget {
+class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
+
+  @override
+  _ForgotPasswordState createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +33,14 @@ class ForgotPassword extends StatelessWidget {
       textAlign: TextAlign.center,
     );
 
-    Widget inputEmail = createInputWithIcon(
-      Icons.mail,
-      'Enter your email',
-    );
+    Widget inputEmail =
+        createInputWithIcon(Icons.mail, 'Enter your email', emailController);
 
-    Widget sendButton = createButtonExpanded('Send', action: (){});
+    Widget sendButton = createButtonExpanded('Send', action: () {
+      log('Forgot password: ');
+      log('Email: ' + emailController.text);
+      log('------------------------------------');
+    });
 
     return Scaffold(
       appBar: createAppBar('Forgot password', true, context),
