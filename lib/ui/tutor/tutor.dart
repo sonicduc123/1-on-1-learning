@@ -11,7 +11,7 @@ class Tutor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<TutorDTO> listTutor = context.read<List<TutorDTO>>();
-
+    TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tutors',
@@ -35,7 +35,8 @@ class Tutor extends StatelessWidget {
         padding: EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
-            const CupertinoSearchTextField(
+            CupertinoSearchTextField(
+              controller: searchController,
               placeholder: 'Search tutors by name, nation, ...',
               padding: EdgeInsets.all(8),
             ),
@@ -43,7 +44,8 @@ class Tutor extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: List.generate(listTutor.length, (index) => BriefInfoCard(tutor: listTutor[index])),
+                  children: List.generate(listTutor.length,
+                      (index) => BriefInfoCard(tutor: listTutor[index])),
                 ),
               ),
             ),

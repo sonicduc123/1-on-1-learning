@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class TutorDTO {
   final String id;
   final String name;

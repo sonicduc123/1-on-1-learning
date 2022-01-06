@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ListChip extends StatefulWidget {
-  const ListChip({Key? key, required this.listChip}) : super(key: key);
+typedef IndexCallback = Function(int index);
 
+class ListChip extends StatefulWidget {
+  const ListChip({Key? key, required this.listChip, required this.callback})
+      : super(key: key);
+
+  final IndexCallback callback;
   final List<String> listChip;
 
   @override
@@ -25,6 +29,7 @@ class _ListChipState extends State<ListChip> {
             onSelected: (bool selected) {
               setState(() {
                 _value = selected ? index : null;
+                widget.callback(index);
               });
             },
             label: Text(widget.listChip[index]),
