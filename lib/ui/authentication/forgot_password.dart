@@ -1,8 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/models/error.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
+import 'package:let_tutor/widgets/dialog.dart';
 import 'package:let_tutor/widgets/input_with_icon.dart';
 import 'package:let_tutor/widgets/space.dart';
 
@@ -14,7 +19,29 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
+  bool isLoading = false;
+
+  Future<void> onForgotPasswordPress() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    Response response = await post(Uri.parse(Endpoints.forgotPassword),
+        body: {'email': emailController.text});
+
+    if (response.statusCode != 200) {
+      ErrorFetch errorFetch = ErrorFetch.fromJson(jsonDecode(response.body));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(errorFetch.message!)));
+    } else {
+      makeDialog(
+          'Check your email',
+          'We just send an email to you with a link to reset your password',
+          context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +61,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
 
     Widget inputEmail =
-        createInputWithIcon(Icons.mail, 'Enter your email', emailController);
+        createInputWithIcon(Icons.mail, 'email', emailController);
 
-    Widget sendButton = createButtonExpanded('Send', action: () {
-      log('Forgot password: ');
-      log('Email: ' + emailController.text);
-      log('------------------------------------');
+    Widget sendButton = createButtonExpanded('Send', action: () async {
+      if (formKey.currentState!.validate()) {
+        await onForgotPasswordPress();
+      }
     });
 
     return Scaffold(
@@ -54,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               space(30),
               description,
               space(30),
-              inputEmail,
+              Form(key: formKey, child: inputEmail),
               space(30),
               sendButton,
             ],

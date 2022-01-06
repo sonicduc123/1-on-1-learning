@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/utils/validate_input.dart';
 import 'space.dart';
 
-Widget createInputWithIcon(IconData icon, String hint, TextEditingController controller) => Row(
+Widget createInputWithIcon(
+        IconData icon, String hint, TextEditingController controller) =>
+    Row(
       children: [
         Icon(
           icon,
@@ -13,8 +16,9 @@ Widget createInputWithIcon(IconData icon, String hint, TextEditingController con
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              hintText: hint,
+              hintText: "Enter your " + hint.toLowerCase(),
             ),
+            validator: (value) => validate_input(value, hint),
           ),
         ),
       ],

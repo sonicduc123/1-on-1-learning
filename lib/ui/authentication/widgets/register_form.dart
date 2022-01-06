@@ -9,6 +9,7 @@ import 'package:let_tutor/models/auth.dart';
 import 'package:let_tutor/models/error.dart';
 import 'package:let_tutor/ui/authentication/widgets/register_input.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
+import 'package:let_tutor/widgets/dialog.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -25,34 +26,6 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Success'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text(
-                    'You have registered successfully. Please check your email to active.'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Future<void> onRegisterPress() async {
     setState(() {
@@ -86,7 +59,7 @@ class _RegisterFormState extends State<RegisterForm> {
       }
     }
     Navigator.pop(context);
-    _showMyDialog();
+    makeDialog('Success !!!', 'You have register successfully. Please check your email to active!', context);
   }
 
   @override
