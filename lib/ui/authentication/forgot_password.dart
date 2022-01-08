@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/error.dart';
+import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/dialog.dart';
@@ -28,13 +29,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       isLoading = true;
     });
 
-    Response response = await post(Uri.parse(Endpoints.forgotPassword),
-        body: {'email': emailController.text});
+    Response response = await post(
+      Uri.parse(Endpoints.forgotPassword),
+      body: {'email': emailController.text},
+    );
+
+    setState(() {
+      isLoading = false;
+    });
 
     if (response.statusCode != 200) {
-      ErrorFetch errorFetch = ErrorFetch.fromJson(jsonDecode(response.body));
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(errorFetch.message!)));
+      HandleErrorFetch(response.body, context);
     } else {
       makeDialog(
           'Check your email',
@@ -84,6 +89,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Form(key: formKey, child: inputEmail),
               space(30),
               sendButton,
+              if (isLoading) const CircularProgressIndicator(),
             ],
           ),
         ),

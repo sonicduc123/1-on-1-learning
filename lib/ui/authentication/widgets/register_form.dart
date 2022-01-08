@@ -8,6 +8,7 @@ import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/auth.dart';
 import 'package:let_tutor/models/error.dart';
 import 'package:let_tutor/ui/authentication/widgets/register_input.dart';
+import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/dialog.dart';
 import 'package:let_tutor/widgets/space.dart';
@@ -44,12 +45,7 @@ class _RegisterFormState extends State<RegisterForm> {
       isLoading = false;
     });
     if (response.statusCode != 201) {
-      ErrorFetch error = ErrorFetch.fromJson(jsonDecode(response.body));
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(error.message!),
-        ),
-      );
+      HandleErrorFetch(response.body, context);
       return;
     } else {
       try {
