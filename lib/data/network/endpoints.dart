@@ -12,4 +12,10 @@ class Endpoints {
 
   // login
   static const String login = baseUrl + "auth/login";
+
+  // get user infor
+  static const String getUserInfor = baseUrl + "user/info";
+
+  // get list tutor
+  static const String getListTutor = baseUrl + "tutor/more?";
 }

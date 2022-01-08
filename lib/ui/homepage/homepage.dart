@@ -2,7 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/constants/chips.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
+import 'package:let_tutor/models/tutors.dart';
+import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/homepage/widgets/title.dart';
 import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
@@ -24,45 +27,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int indexChip = 0;
-  List<TutorDTO>? listFilterTutor;
+  List<TutorDTO> listFilterTutor = [];
+  List<TutorDTO> listTutor = [];
+  UserInfor? userInfor; 
+     
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    listTutor = context.read<List<TutorDTO>>();
+    listFilterTutor = listTutor.sublist(0);
+    userInfor = context.read<UserInfor>();
+    super.initState();
+  }
+
+  Widget upcomingLesson = const UpcommingLesson();
+  List<String> listChip = Chips.listChip;
 
   @override
   Widget build(BuildContext context) {
-    Widget upcomingLesson = const UpcommingLesson();
-    List<TutorDTO> listTutor = context.read<List<TutorDTO>>();
-    setState(() {
-      listFilterTutor = listTutor.sublist(0);
-    });
-
-    List<String> listChip = [
-      'Tất cả',
-      'Kids',
-      'Business',
-      'IELTS',
-      'TOEFL',
-      'STARTERS',
-      'Conversational',
-      'STARTERS',
-      'MOVERS',
-      'PET',
-      'KET'
-    ];
-
     listChipCallback(int newIndexChip) {
       setState(() {
         indexChip = newIndexChip;
-        log(indexChip.toString());
         if (newIndexChip == 0) {
           listFilterTutor = listTutor.sublist(0);
           return;
         }
-        listFilterTutor?.clear();
-        listTutor.forEach((tutor) {
-          if (tutor.specialities.contains(listChip[newIndexChip])) {
-            listFilterTutor?.add(tutor);
-            log(listFilterTutor.toString());
+        listFilterTutor = [];
+        for (TutorDTO tutor in listTutor) {
+          List<String> listSpecialties = tutor.specialties!.split(",");
+          if (listSpecialties.contains(listChip[newIndexChip].toLowerCase())) {
+            listFilterTutor.add(tutor);
           }
-        });
+        }
       });
     }
 
@@ -104,8 +101,8 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.pushNamed(context, Routes.profile);
               },
-              child: const CircleAvatar(
-                backgroundImage: AssetImage('assets/images/avatar.png'),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(userInfor!.user!.avatar!),
               ),
             ),
             margin: const EdgeInsets.only(right: 10),
@@ -126,8 +123,8 @@ class _HomePageState extends State<HomePage> {
                 listSpecialities,
                 headingRecommentTutor,
                 Column(
-                  children: List.generate(listFilterTutor!.length,
-                      (index) => BriefInfoCard(tutor: listFilterTutor![index])),
+                  children: List.generate(listFilterTutor.length,
+                      (index) => BriefInfoCard(tutor: listFilterTutor[index])),
                 ),
               ],
             ),

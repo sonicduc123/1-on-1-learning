@@ -32,7 +32,7 @@ class _ListChipState extends State<ListChip> {
                 widget.callback(index);
               });
             },
-            label: Text(widget.listChip[index]),
+            label: Text(widget.listChip[index].toUpperCase()),
             labelStyle: const TextStyle(color: Colors.blue),
             backgroundColor: Colors.blue[50],
             shape: StadiumBorder(side: BorderSide(color: Colors.blue.shade100)),
@@ -50,7 +50,7 @@ Widget createListChip(List<String> listChip) => SingleChildScrollView(
         children: List.generate(
           listChip.length,
           (index) => Chip(
-            label: Text(listChip[index]),
+            label: Text(listChip[index].toUpperCase()),
             labelStyle: const TextStyle(color: Colors.blue),
             backgroundColor: Colors.blue[50],
             shape: StadiumBorder(side: BorderSide(color: Colors.blue.shade100)),

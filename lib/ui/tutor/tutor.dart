@@ -32,13 +32,14 @@ class Tutor extends StatelessWidget {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
             CupertinoSearchTextField(
               controller: searchController,
               placeholder: 'Search tutors by name, nation, ...',
               padding: EdgeInsets.all(8),
+              prefixIcon: const Icon(Icons.search),
             ),
             space(20),
             Expanded(

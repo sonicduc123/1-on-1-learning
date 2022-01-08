@@ -39,7 +39,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     });
 
     if (response.statusCode != 200) {
-      HandleErrorFetch(response.body, context);
+      handleErrorFetch(response.body, context);
     } else {
       makeDialog(
           'Check your email',

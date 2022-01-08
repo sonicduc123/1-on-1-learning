@@ -1,6 +1,13 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
+import 'package:let_tutor/models/tutors.dart';
+import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
@@ -8,7 +15,9 @@ import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
+import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
@@ -30,12 +39,37 @@ class TutorApp extends StatefulWidget {
 class _TutorAppState extends State<TutorApp> {
   int selectedIndex = 0;
   bool isLogin = false;
-  List<TutorDTO> listTutor = [
-    TutorDTO('1', 'Phạm Anh Đức', ['Conversational', 'STARTERS', 'MOVERS'], 4),
-    TutorDTO('2', 'Ngô Hải Hà', ['IELTS', 'TOEFL'], 5),
-    TutorDTO('3', 'Nguyễn Duy', ['Kids', 'Business'], 3),
-    TutorDTO('4', 'Đạt Nguyễn', ['IELTS'], 2),
-  ];
+  UserInfor? userInfor;
+  Tutors? listTutor;
+
+  @override
+  void initState() {
+    getUserInfor();
+    getListTutor();
+    log(listTutor.toString());
+  }
+
+  void getListTutor() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Response response = await get(Uri.parse(Endpoints.getListTutor), headers: {
+      "Authorization": "Bearer " + prefs.getString("accessToken")!,
+    });
+    if (response.statusCode != 200) {
+      handleErrorFetch(response.body, context);
+    }
+    listTutor = TutorsInfo.fromJson(jsonDecode(response.body)).tutors;
+  }
+
+  void getUserInfor() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Response response = await get(Uri.parse(Endpoints.getUserInfor), headers: {
+      "Authorization": "Bearer " + prefs.getString("accessToken")!,
+    });
+    if (response.statusCode != 200) {
+      handleErrorFetch(response.body, context);
+    }
+    userInfor = UserInfor.fromJson(jsonDecode(response.body));
+  }
 
   void tabBarCallback(int index) {
     setState(() {
@@ -85,7 +119,7 @@ class _TutorAppState extends State<TutorApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.message_rounded), label: 'Message'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.access_time), label: 'Upcomming'),
+                icon: Icon(Icons.access_time), label: 'Schedule'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.groups_rounded), label: 'Tutors'),
             BottomNavigationBarItem(
@@ -106,7 +140,10 @@ class _TutorAppState extends State<TutorApp> {
     }
 
     return MultiProvider(
-      providers: [Provider(create: (context) => listTutor)],
+      providers: [
+        Provider(create: (context) => listTutor!.listTutor),
+        Provider(create: (context) => userInfor)
+      ],
       child: Scaffold(
         body: setCurrentPage(),
         bottomNavigationBar: createBottonNavigationBar(),

@@ -45,7 +45,7 @@ class _RegisterFormState extends State<RegisterForm> {
       isLoading = false;
     });
     if (response.statusCode != 201) {
-      HandleErrorFetch(response.body, context);
+      handleErrorFetch(response.body, context);
       return;
     } else {
       try {

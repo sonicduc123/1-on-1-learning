@@ -14,7 +14,7 @@ class UpcommingLesson extends StatelessWidget {
             'Total lesson time is 11 hours 46 minustes',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 17,
             ),
           ),
           space(10),

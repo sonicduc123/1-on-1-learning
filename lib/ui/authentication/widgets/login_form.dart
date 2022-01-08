@@ -50,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
       isLoading = false;
     });
     if (response.statusCode != 200) {
-      HandleErrorFetch(response.body, context);
+      handleErrorFetch(response.body, context);
       return;
     } else {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -102,6 +102,13 @@ class _LoginFormState extends State<LoginForm> {
           ),
           space(5),
           loginButton,
+          if (isLoading)
+            Column(
+              children: [
+                space(10),
+                const CircularProgressIndicator(),
+              ],
+            )
         ],
       ),
     );

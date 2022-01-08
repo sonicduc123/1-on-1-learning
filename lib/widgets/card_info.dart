@@ -6,11 +6,21 @@ import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/rating_star.dart';
 import 'package:let_tutor/widgets/space.dart';
+import 'package:country_codes/country_codes.dart';
 
 class BriefInfoCard extends StatelessWidget {
   const BriefInfoCard({Key? key, required this.tutor}) : super(key: key);
 
   final TutorDTO tutor;
+
+  int calculateRating() {
+    int sum = 0;
+    tutor.feedbacks!.forEach((feedback) {
+      sum += feedback.rating!;
+    });
+    double average = sum / tutor.feedbacks!.length;
+    return average.toInt();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +37,8 @@ class BriefInfoCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/avatar.png'),
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(tutor.avatar!),
                         radius: 30,
                       ),
                       space(10),
@@ -38,20 +48,20 @@ class BriefInfoCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              tutor.name,
+                              tutor.name!,
                               style: TextStyle(fontSize: 17),
                             ),
                             RatingStar(
-                              rating: tutor.rating,
+                              rating: calculateRating(),
                             ),
-                            createListChip(['English'])
+                            createListChip(tutor.specialties!.split(','))
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const Text(
-                    "I have been teaching English as a second language for kids, teenagers and adults for 5 years. I can help you gain a stronger foundation in English before furthering your studies. I'm patient, will speak slowly and clearly so don't hesitate to ask for good understanding.",
+                  Text(
+                    tutor.bio!,
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   )

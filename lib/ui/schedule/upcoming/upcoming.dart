@@ -8,7 +8,7 @@ class Upcoming extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: createAppBar('Upcoming', false, context),
+      appBar: createAppBar('Schedule', false, context),
       body: Container(
         padding: EdgeInsets.all(10),
         child: ListView(

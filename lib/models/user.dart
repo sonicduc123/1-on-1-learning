@@ -8,7 +8,7 @@ class User {
   String? language;
   DateTime? birthday;
   bool? isActivated;
-  Null? timezone;
+  int? timezone;
 
   User(
       {this.id,
@@ -47,6 +47,24 @@ class User {
     data['birthday'] = this.birthday;
     data['isActivated'] = this.isActivated;
     data['timezone'] = this.timezone;
+    return data;
+  }
+}
+
+class UserInfor {
+  User? user;
+
+  UserInfor({this.user});
+
+  UserInfor.fromJson(Map<String, dynamic> json) {
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
     return data;
   }
 }
