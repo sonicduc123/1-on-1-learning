@@ -9,4 +9,7 @@ class Endpoints {
 
   // forgot password
   static const String forgotPassword = baseUrl + "user/forgotPassword";
+
+  // login
+  static const String login = baseUrl + "auth/login";
 }
