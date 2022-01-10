@@ -1,17 +1,50 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/rating_star.dart';
 import 'package:let_tutor/widgets/space.dart';
 import 'package:country_codes/country_codes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class BriefInfoCard extends StatelessWidget {
-  const BriefInfoCard({Key? key, required this.tutor}) : super(key: key);
+typedef FavoriteCallback = void Function();
+
+class BriefInfoCard extends StatefulWidget {
+  const BriefInfoCard({Key? key, required this.tutor, required this.callback})
+      : super(key: key);
 
   final TutorDTO tutor;
+  final FavoriteCallback callback;
+
+  @override
+  _BriefInfoCardState createState() => _BriefInfoCardState();
+}
+
+class _BriefInfoCardState extends State<BriefInfoCard> {
+  void onPressFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Response response = await post(
+      Uri.parse(Endpoints.addFavorite),
+      headers: {
+        "Authorization": "Bearer " + prefs.getString("accessToken")!,
+      },
+      body: {
+        "tutorId": widget.tutor.userId,
+      },
+    );
+    if (response.statusCode != 200) {
+      handleErrorFetch(response.body, context);
+    }
+    setState(() {
+      widget.tutor.isFavarite = !widget.tutor.isFavarite;
+    });
+    widget.callback();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +62,7 @@ class BriefInfoCard extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(tutor.avatar!),
+                        backgroundImage: NetworkImage(widget.tutor.avatar!),
                         radius: 30,
                       ),
                       space(10),
@@ -39,36 +72,33 @@ class BriefInfoCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              tutor.name!,
+                              widget.tutor.name!,
                               style: TextStyle(fontSize: 17),
                             ),
                             RatingStar(
-                              rating: tutor.rating,
+                              rating: widget.tutor.rating,
                             ),
-                            createListChip(tutor.specialties!.split(','))
+                            createListChip(widget.tutor.specialties!.split(','))
                           ],
                         ),
                       ),
                     ],
                   ),
                   Text(
-                    tutor.bio!,
+                    widget.tutor.bio!,
                     maxLines: 4,
                     overflow: TextOverflow.ellipsis,
                   )
                 ],
               ),
-              !tutor.isFavarite
-                  ? const Icon(
-                      Icons.favorite_outline,
-                      color: Colors.blue,
-                      size: 35,
-                    )
-                  : const Icon(
-                      Icons.favorite,
-                      color: Colors.blue,
-                      size: 35,
-                    ),
+              IconButton(
+                icon: !widget.tutor.isFavarite
+                    ? const Icon(Icons.favorite_outline)
+                    : const Icon(Icons.favorite),
+                color: Colors.blue,
+                iconSize: 35,
+                onPressed: () => onPressFavorite(),
+              )
             ],
           ),
         ),

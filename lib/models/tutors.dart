@@ -54,16 +54,7 @@ class TutorsInfo {
       }
     }
 
-    tutors!.listTutor!.sort((a, b) {
-      if (a.isFavarite && !b.isFavarite) {
-        return -1;
-      }
-      if (b.isFavarite && !a.isFavarite) {
-        return 1;
-      }
-
-      return (a.rating > b.rating) ? -1 : 1;
-    });
+    tutors!.listTutor!.sort((a, b) => sortListTutor(a, b));
   }
 
   Map<String, dynamic> toJson() {
@@ -76,4 +67,15 @@ class TutorsInfo {
     }
     return data;
   }
+}
+
+sortListTutor(TutorDTO a, TutorDTO b) {
+  if (a.isFavarite && !b.isFavarite) {
+    return -1;
+  }
+  if (b.isFavarite && !a.isFavarite) {
+    return 1;
+  }
+
+  return -a.rating.compareTo(b.rating);
 }

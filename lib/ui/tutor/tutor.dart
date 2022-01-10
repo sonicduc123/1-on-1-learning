@@ -1,17 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
+import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/space.dart';
 import 'package:provider/src/provider.dart';
 
-class Tutor extends StatelessWidget {
+class Tutor extends StatefulWidget {
   const Tutor({Key? key}) : super(key: key);
 
   @override
+  _TutorState createState() => _TutorState();
+}
+
+class _TutorState extends State<Tutor> {
+  List<TutorDTO>? listTutor;
+  TextEditingController searchController = TextEditingController();
+  
+  favoriteCallback() {
+    setState(() {
+      listTutor!.sort((a, b) => sortListTutor(a, b));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    listTutor = context.read<List<TutorDTO>>();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<TutorDTO> listTutor = context.read<List<TutorDTO>>();
-    TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tutors',
@@ -45,8 +65,11 @@ class Tutor extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: List.generate(listTutor.length,
-                      (index) => BriefInfoCard(tutor: listTutor[index])),
+                  children: List.generate(
+                    listTutor!.length,
+                    (index) => BriefInfoCard(
+                        tutor: listTutor![index], callback: favoriteCallback),
+                  ),
                 ),
               ),
             ),

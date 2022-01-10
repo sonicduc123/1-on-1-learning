@@ -29,8 +29,7 @@ class _HomePageState extends State<HomePage> {
   int indexChip = 0;
   List<TutorDTO> listFilterTutor = [];
   List<TutorDTO> listTutor = [];
-  UserInfor? userInfor; 
-     
+  UserInfor? userInfor;
 
   @override
   void initState() {
@@ -44,10 +43,9 @@ class _HomePageState extends State<HomePage> {
   Widget upcomingLesson = const UpcommingLesson();
   List<String> listChip = Chips.listChip;
 
-  @override
-  Widget build(BuildContext context) {
-    listChipCallback(int newIndexChip) {
-      setState(() {
+  listChipCallback(int newIndexChip) {
+    setState(
+      () {
         indexChip = newIndexChip;
         if (newIndexChip == 0) {
           listFilterTutor = listTutor.sublist(0);
@@ -60,9 +58,19 @@ class _HomePageState extends State<HomePage> {
             listFilterTutor.add(tutor);
           }
         }
-      });
-    }
+      },
+    );
+  }
 
+  favoriteCallback() {
+    setState(() {
+      listTutor.sort((a, b) => sortListTutor(a, b));
+      listFilterTutor.sort((a, b) => sortListTutor(a, b));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Widget listSpecialities =
         ListChip(listChip: listChip, callback: listChipCallback);
 
@@ -123,8 +131,12 @@ class _HomePageState extends State<HomePage> {
                 listSpecialities,
                 headingRecommentTutor,
                 Column(
-                  children: List.generate(listFilterTutor.length,
-                      (index) => BriefInfoCard(tutor: listFilterTutor[index])),
+                  children: List.generate(
+                      listFilterTutor.length,
+                      (index) => BriefInfoCard(
+                            tutor: listFilterTutor[index],
+                            callback: favoriteCallback,
+                          )),
                 ),
               ],
             ),
