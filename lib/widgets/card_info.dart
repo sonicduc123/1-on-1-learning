@@ -13,15 +13,6 @@ class BriefInfoCard extends StatelessWidget {
 
   final TutorDTO tutor;
 
-  int calculateRating() {
-    int sum = 0;
-    tutor.feedbacks!.forEach((feedback) {
-      sum += feedback.rating!;
-    });
-    double average = sum / tutor.feedbacks!.length;
-    return average.toInt();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -52,7 +43,7 @@ class BriefInfoCard extends StatelessWidget {
                               style: TextStyle(fontSize: 17),
                             ),
                             RatingStar(
-                              rating: calculateRating(),
+                              rating: tutor.rating,
                             ),
                             createListChip(tutor.specialties!.split(','))
                           ],
@@ -67,11 +58,17 @@ class BriefInfoCard extends StatelessWidget {
                   )
                 ],
               ),
-              const Icon(
-                Icons.favorite_outline,
-                color: Colors.blue,
-                size: 35,
-              ),
+              !tutor.isFavarite
+                  ? const Icon(
+                      Icons.favorite_outline,
+                      color: Colors.blue,
+                      size: 35,
+                    )
+                  : const Icon(
+                      Icons.favorite,
+                      color: Colors.blue,
+                      size: 35,
+                    ),
             ],
           ),
         ),

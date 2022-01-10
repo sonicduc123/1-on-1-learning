@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutor_favarite.dart';
 
@@ -12,16 +14,16 @@ class Tutors {
     if (json['rows'] != null) {
       listTutor = <TutorDTO>[];
       json['rows'].forEach((v) {
-        listTutor!.add(new TutorDTO.fromJson(v));
+        listTutor!.add(TutorDTO.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    if (this.listTutor != null) {
-      data['rows'] = this.listTutor!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['count'] = count;
+    if (listTutor != null) {
+      data['rows'] = listTutor!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -34,24 +36,43 @@ class TutorsInfo {
   TutorsInfo({this.tutors, this.favoriteTutor});
 
   TutorsInfo.fromJson(Map<String, dynamic> json) {
-    tutors =
-        json['tutors'] != null ? new Tutors.fromJson(json['tutors']) : null;
+    tutors = json['tutors'] != null ? Tutors.fromJson(json['tutors']) : null;
     if (json['favoriteTutor'] != null) {
       favoriteTutor = <FavoriteTutor>[];
       json['favoriteTutor'].forEach((v) {
-        favoriteTutor!.add(new FavoriteTutor.fromJson(v));
+        favoriteTutor!.add(FavoriteTutor.fromJson(v));
       });
     }
+    List<FavoriteTutor> favorites = favoriteTutor!.sublist(0);
+    for (TutorDTO tutor in tutors!.listTutor!) {
+      for (int i = 0; i < favorites.length; i++) {
+        if (favorites[i].tutorID == tutor.userId) {
+          tutor.isFavarite = true;
+          favorites.removeAt(i);
+          continue;
+        }
+      }
+    }
+
+    tutors!.listTutor!.sort((a, b) {
+      if (a.isFavarite && !b.isFavarite) {
+        return -1;
+      }
+      if (b.isFavarite && !a.isFavarite) {
+        return 1;
+      }
+
+      return (a.rating > b.rating) ? -1 : 1;
+    });
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.tutors != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (tutors != null) {
       data['tutors'] = this.tutors!.toJson();
     }
-    if (this.favoriteTutor != null) {
-      data['favoriteTutor'] =
-          this.favoriteTutor!.map((v) => v.toJson()).toList();
+    if (favoriteTutor != null) {
+      data['favoriteTutor'] = favoriteTutor!.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -6,6 +6,7 @@ class TutorDTO {
   String? country;
   List<Feedbacks>? feedbacks;
   String? id;
+  String? userId;
   String? video;
   String? bio;
   String? education;
@@ -15,6 +16,8 @@ class TutorDTO {
   String? languages;
   String? specialties;
   bool? isOnline;
+  bool isFavarite = false;
+  int rating = 0;
 
   TutorDTO(
       {this.avatar,
@@ -22,6 +25,7 @@ class TutorDTO {
       this.country,
       this.feedbacks,
       this.id,
+      this.userId,
       this.video,
       this.bio,
       this.education,
@@ -43,6 +47,7 @@ class TutorDTO {
       });
     }
     id = json['id'];
+    userId = json['userId'];
     video = json['video'];
     bio = json['bio'];
     education = json['education'];
@@ -52,6 +57,7 @@ class TutorDTO {
     languages = json['languages'];
     specialties = json['specialties'];
     isOnline = json['isOnline'];
+    rating = calculateRating();
   }
 
   Map<String, dynamic> toJson() {
@@ -63,6 +69,7 @@ class TutorDTO {
       data['feedbacks'] = this.feedbacks!.map((v) => v.toJson()).toList();
     }
     data['id'] = this.id;
+    data['userId'] = userId;
     data['video'] = this.video;
     data['bio'] = this.bio;
     data['education'] = this.education;
@@ -73,5 +80,14 @@ class TutorDTO {
     data['specialties'] = this.specialties;
     data['isOnline'] = this.isOnline;
     return data;
+  }
+
+  int calculateRating() {
+    int sum = 0;
+    for (var feedback in feedbacks!) {
+      sum += feedback.rating!;
+    }
+    double average = sum / feedbacks!.length;
+    return average.toInt();
   }
 }

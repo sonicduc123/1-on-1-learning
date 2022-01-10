@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
-import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
@@ -41,6 +40,7 @@ class _TutorAppState extends State<TutorApp> {
   bool isLogin = false;
   UserInfor? userInfor;
   Tutors? listTutor;
+  TutorsInfo? tutorsInfo;
 
   @override
   void initState() {
@@ -57,7 +57,8 @@ class _TutorAppState extends State<TutorApp> {
     if (response.statusCode != 200) {
       handleErrorFetch(response.body, context);
     }
-    listTutor = TutorsInfo.fromJson(jsonDecode(response.body)).tutors;
+    tutorsInfo = TutorsInfo.fromJson(jsonDecode(response.body));
+    listTutor = tutorsInfo!.tutors;
   }
 
   void getUserInfor() async {
