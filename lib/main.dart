@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -46,7 +45,6 @@ class _TutorAppState extends State<TutorApp> {
   void initState() {
     getUserInfor();
     getListTutor();
-    log(listTutor.toString());
   }
 
   void getListTutor() async {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
@@ -5,6 +7,7 @@ import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/space.dart';
 import 'package:provider/src/provider.dart';
+import 'package:tiengviet/tiengviet.dart';
 
 class Tutor extends StatefulWidget {
   const Tutor({Key? key}) : super(key: key);
@@ -15,19 +18,22 @@ class Tutor extends StatefulWidget {
 
 class _TutorState extends State<Tutor> {
   List<TutorDTO>? listTutor;
+  List<TutorDTO> listSearchTutor = [];
   TextEditingController searchController = TextEditingController();
-  
-  favoriteCallback() {
-    setState(() {
-      listTutor!.sort((a, b) => sortListTutor(a, b));
-    });
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     listTutor = context.read<List<TutorDTO>>();
+    listSearchTutor = listTutor!.sublist(0);
     super.initState();
+  }
+
+  favoriteCallback() {
+    setState(() {
+      listTutor!.sort((a, b) => sortListTutor(a, b));
+      listSearchTutor.sort((a, b) => sortListTutor(a, b));
+    });
   }
 
   @override
@@ -60,19 +66,34 @@ class _TutorState extends State<Tutor> {
               placeholder: 'Search tutors by name, nation, ...',
               padding: EdgeInsets.all(8),
               prefixIcon: const Icon(Icons.search),
+              onChanged: (value) => {
+                setState(() {
+                  listSearchTutor = [];
+                  for (var tutor in listTutor!) {
+                    if (TiengViet.parse(tutor.name!)
+                        .toLowerCase()
+                        .contains(value.toLowerCase())) {
+                      listSearchTutor.add(tutor);
+                    }
+                  }
+                })
+              },
             ),
             space(20),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: List.generate(
-                    listTutor!.length,
-                    (index) => BriefInfoCard(
-                        tutor: listTutor![index], callback: favoriteCallback),
-                  ),
-                ),
-              ),
-            ),
+            listSearchTutor.isNotEmpty
+                ? Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: List.generate(
+                          listSearchTutor.length,
+                          (index) => BriefInfoCard(
+                              tutor: listSearchTutor[index],
+                              callback: favoriteCallback),
+                        ),
+                      ),
+                    ),
+                  )
+                : const Text('There is no tutor in system'),
           ],
         ),
       ),
