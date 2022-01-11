@@ -21,7 +21,6 @@ class InforBlock extends StatelessWidget {
             child: Text(
               description,
               style: const TextStyle(
-                color: Colors.grey,
                 fontSize: 15,
               ),
             ),

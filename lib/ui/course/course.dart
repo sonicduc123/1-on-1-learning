@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class Course extends StatelessWidget {
-  const Course({Key? key}) : super(key: key);
+  const Course({Key? key, required this.courses}) : super(key: key);
+
+  final Courses courses;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      width: 400,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -19,36 +23,34 @@ class Course extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                'assets/images/course.png',
-              ),
+              child: Image.network(courses.imageUrl!),
             ),
             Container(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Business English',
-                    style: TextStyle(
+                  Text(
+                    courses.name!,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
                     ),
                   ),
                   space(10),
-                  const Text(
-                    'The English you need for your work ',
-                    style: TextStyle(
+                  Text(
+                    courses.description!,
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   space(10),
-                  const Align(
+                  Align(
                     alignment: Alignment.topRight,
                     child: Text(
-                      'Level 4',
-                      style: TextStyle(
+                      'Level ' + courses.level!,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),

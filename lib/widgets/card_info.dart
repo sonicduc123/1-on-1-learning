@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/detail_tutor/models/detail_tutor_argument.dart';
 import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/rating_star.dart';
@@ -13,6 +14,7 @@ import 'package:country_codes/country_codes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 typedef FavoriteCallback = void Function();
+typedef DetailFavoriteCallback = void Function();
 
 class BriefInfoCard extends StatefulWidget {
   const BriefInfoCard({Key? key, required this.tutor, required this.callback})
@@ -41,13 +43,22 @@ class _BriefInfoCardState extends State<BriefInfoCard> {
       handleErrorFetch(response.body, context);
     }
     setState(() {
-      widget.tutor.isFavarite = !widget.tutor.isFavarite;
+      widget.tutor.isFavorite = !widget.tutor.isFavorite;
+    });
+    widget.callback();
+  }
+
+  favoriteDetailCallback() {
+    setState(() {
+      widget.tutor.isFavorite = !widget.tutor.isFavorite;
     });
     widget.callback();
   }
 
   @override
   Widget build(BuildContext context) {
+    DetailTutorArgument args =
+        DetailTutorArgument(widget.tutor.userId!, favoriteDetailCallback);
     return Card(
       margin: const EdgeInsets.only(bottom: 20),
       elevation: 5,
@@ -92,7 +103,7 @@ class _BriefInfoCardState extends State<BriefInfoCard> {
                 ],
               ),
               IconButton(
-                icon: !widget.tutor.isFavarite
+                icon: !widget.tutor.isFavorite
                     ? const Icon(Icons.favorite_outline)
                     : const Icon(Icons.favorite),
                 color: Colors.blue,
@@ -103,7 +114,7 @@ class _BriefInfoCardState extends State<BriefInfoCard> {
           ),
         ),
         onTap: () {
-          Navigator.pushNamed(context, Routes.detailTutor);
+          Navigator.pushNamed(context, Routes.detailTutor, arguments: args);
         },
       ),
     );

@@ -1,11 +1,11 @@
-import 'package:let_tutor/models/tutor_feedback.dart';
+import 'dart:developer';
+
+import 'package:country_codes/country_codes.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:let_tutor/constants/language_code.dart';
 import 'package:let_tutor/models/user.dart';
 
-class TutorDTO {
-  String? avatar;
-  String? name;
-  String? country;
-  List<Feedbacks>? feedbacks;
+class TutorDetail {
   String? id;
   String? userId;
   String? video;
@@ -15,17 +15,15 @@ class TutorDTO {
   String? profession;
   String? interests;
   String? languages;
+  List<String> listLanguages = [];
   String? specialties;
-  bool? isOnline;
-  bool isFavorite = false;
-  int rating = 0;
+  User? user;
+  bool? isFavorite;
+  double? avgRating;
+  int? price;
 
-  TutorDTO(
-      {this.avatar,
-      this.name,
-      this.country,
-      this.feedbacks,
-      this.id,
+  TutorDetail(
+      {this.id,
       this.userId,
       this.video,
       this.bio,
@@ -35,18 +33,12 @@ class TutorDTO {
       this.interests,
       this.languages,
       this.specialties,
-      this.isOnline,});
+      this.user,
+      this.isFavorite,
+      this.avgRating,
+      this.price});
 
-  TutorDTO.fromJson(Map<String, dynamic> json) {
-    avatar = json['avatar'];
-    name = json['name'];
-    country = json['country'];
-    if (json['feedbacks'] != null) {
-      feedbacks = <Feedbacks>[];
-      json['feedbacks'].forEach((v) {
-        feedbacks!.add(new Feedbacks.fromJson(v));
-      });
-    }
+  TutorDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];
     video = json['video'];
@@ -56,21 +48,18 @@ class TutorDTO {
     profession = json['profession'];
     interests = json['interests'];
     languages = json['languages'];
+    convertLanguageCode();
     specialties = json['specialties'];
-    isOnline = json['isOnline'];
-    rating = calculateRating();
+    user = json['User'] != null ? new User.fromJson(json['User']) : null;
+    isFavorite = json['isFavorite'];
+    avgRating = (json['avgRating']).toDouble();
+    price = json['price'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['avatar'] = this.avatar;
-    data['name'] = this.name;
-    data['country'] = this.country;
-    if (this.feedbacks != null) {
-      data['feedbacks'] = this.feedbacks!.map((v) => v.toJson()).toList();
-    }
     data['id'] = this.id;
-    data['userId'] = userId;
+    data['userId'] = this.userId;
     data['video'] = this.video;
     data['bio'] = this.bio;
     data['education'] = this.education;
@@ -79,16 +68,19 @@ class TutorDTO {
     data['interests'] = this.interests;
     data['languages'] = this.languages;
     data['specialties'] = this.specialties;
-    data['isOnline'] = this.isOnline;
+    if (this.user != null) {
+      data['User'] = this.user!.toJson();
+    }
+    data['isFavorite'] = this.isFavorite;
+    data['avgRating'] = this.avgRating;
+    data['price'] = this.price;
     return data;
   }
 
-  int calculateRating() {
-    int sum = 0;
-    for (var feedback in feedbacks!) {
-      sum += feedback.rating!;
+  convertLanguageCode() async {
+    List<String> listLanguagePart = languages!.split(',');
+    for (String language in listLanguagePart) {
+      listLanguages.add(LanguageLocal.getDisplayLanguage(language));
     }
-    double average = sum / feedbacks!.length;
-    return average.toInt();
   }
 }

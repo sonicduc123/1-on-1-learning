@@ -47,7 +47,7 @@ class TutorsInfo {
     for (TutorDTO tutor in tutors!.listTutor!) {
       for (int i = 0; i < favorites.length; i++) {
         if (favorites[i].tutorID == tutor.userId) {
-          tutor.isFavarite = true;
+          tutor.isFavorite = true;
           favorites.removeAt(i);
           continue;
         }
@@ -70,10 +70,10 @@ class TutorsInfo {
 }
 
 sortListTutor(TutorDTO a, TutorDTO b) {
-  if (a.isFavarite && !b.isFavarite) {
+  if (a.isFavorite && !b.isFavorite) {
     return -1;
   }
-  if (b.isFavarite && !a.isFavarite) {
+  if (b.isFavorite && !a.isFavorite) {
     return 1;
   }
 

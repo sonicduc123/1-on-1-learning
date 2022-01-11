@@ -23,6 +23,7 @@ void main() {
       title: 'Tutor App',
       home: TutorApp(),
       routes: Routes.routes,
+      onGenerateRoute: (settings) => Routes.generateRoute(settings),
     ),
   );
 }
@@ -130,6 +131,9 @@ class _TutorAppState extends State<TutorApp> {
           showUnselectedLabels: true,
           onTap: (index) {
             setState(() {
+              if (index == BottomBars.home || index == BottomBars.tutor) {
+                getListTutor();
+              }
               selectedIndex = index;
             });
           },

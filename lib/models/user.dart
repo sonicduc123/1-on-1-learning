@@ -1,3 +1,10 @@
+import 'dart:developer';
+
+import 'package:country_codes/country_codes.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:let_tutor/models/course.dart';
+import 'package:let_tutor/models/tutor_feedback.dart';
+
 class User {
   String? id;
   String? email;
@@ -6,9 +13,11 @@ class User {
   String? country;
   String? phone;
   String? language;
-  DateTime? birthday;
+  String? birthday;
   bool? isActivated;
   int? timezone;
+  List<Feedbacks>? feedbacks;
+  List<Courses>? courses;
 
   User(
       {this.id,
@@ -20,7 +29,9 @@ class User {
       this.language,
       this.birthday,
       this.isActivated,
-      this.timezone});
+      this.timezone,
+      this.feedbacks,
+      this.courses});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -33,6 +44,18 @@ class User {
     birthday = json['birthday'];
     isActivated = json['isActivated'];
     timezone = json['timezone'];
+    if (json['feedbacks'] != null) {
+      feedbacks = <Feedbacks>[];
+      json['feedbacks'].forEach((v) {
+        feedbacks!.add(new Feedbacks.fromJson(v));
+      });
+    }
+    if (json['courses'] != null) {
+      courses = <Courses>[];
+      json['courses'].forEach((v) {
+        courses!.add(new Courses.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -47,7 +70,21 @@ class User {
     data['birthday'] = this.birthday;
     data['isActivated'] = this.isActivated;
     data['timezone'] = this.timezone;
+    if (this.feedbacks != null) {
+      data['feedbacks'] = this.feedbacks!.map((v) => v.toJson()).toList();
+    }
+    if (this.courses != null) {
+      data['courses'] = this.courses!.map((v) => v.toJson()).toList();
+    }
     return data;
+  }
+
+  Future<void> convertCountryCode() async {
+    await CountryCodes.init();
+    if (country != null) {
+      Locale local = Locale('en', country);
+      country = CountryCodes.detailsForLocale(local).localizedName;
+    }
   }
 }
 

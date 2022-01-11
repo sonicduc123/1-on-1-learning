@@ -7,6 +7,7 @@ import 'package:let_tutor/ui/authentication/register.dart';
 import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/detail_course/detail_course.dart';
 import 'package:let_tutor/ui/detail_tutor/detail_tutor.dart';
+import 'package:let_tutor/ui/detail_tutor/models/detail_tutor_argument.dart';
 //import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/meeting/meeting.dart';
 import 'package:let_tutor/ui/schedule/booking_history/booking_history.dart';
@@ -41,7 +42,6 @@ class Routes {
     chat: (BuildContext context) => Chat(),
     upcomming: (BuildContext context) => Upcoming(),
     tutor: (BuildContext context) => Tutor(),
-    detailTutor: (BuildContext context) => DetailTutor(),
     detailCourse: (BuildContext context) => DetailCourse(),
     //setting: (BuildContext context) => Setting(),
     profile: (BuildContext context) => Profile(),
@@ -49,4 +49,13 @@ class Routes {
     bookingHistory: (BuildContext context) => BookingHistory(),
     sessionHistory: (BuildContext context) => SessionHistory(),
   };
+
+  static generateRoute(settings) {
+    if (settings.name == Routes.detailTutor) {
+      DetailTutorArgument args = settings.arguments as DetailTutorArgument;
+      return MaterialPageRoute(builder: (context) {
+        return DetailTutor(tutorId: args.tutorId, callback: args.callback,);
+      });
+    }
+  }
 }
