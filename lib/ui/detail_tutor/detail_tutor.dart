@@ -12,6 +12,7 @@ import 'package:let_tutor/ui/detail_tutor/widgets/information_chip.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_field.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/interaction_button.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/rating_and_comment.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/video_infor.dart';
 import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
@@ -84,6 +85,11 @@ class _DetailTutorState extends State<DetailTutor> {
     //     ),
     //   ],
     // );
+    Widget video = isLoading
+        ? Container()
+        : VideoInfor(
+            videoUrl: tutorDetail!.video!,
+          );
 
     Widget description = Text(
       !isLoading ? tutorDetail!.bio! : "",
@@ -126,7 +132,9 @@ class _DetailTutorState extends State<DetailTutor> {
                   Column(
                     children: List.generate(
                       tutorDetail!.user!.courses!.length,
-                      (index) => Course(courses: tutorDetail!.user!.courses![index],),
+                      (index) => Course(
+                        courses: tutorDetail!.user!.courses![index],
+                      ),
                     ),
                   )
                 ],
@@ -169,6 +177,7 @@ class _DetailTutorState extends State<DetailTutor> {
                     space(15),
                     bookingButton,
                     space(15),
+                    video,
                     //interactionButtons,
                     space(20),
                     description,

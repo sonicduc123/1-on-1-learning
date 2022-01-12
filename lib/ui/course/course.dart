@@ -12,7 +12,7 @@ class Course extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
       width: 400,
       child: Card(
         shape: RoundedRectangleBorder(
