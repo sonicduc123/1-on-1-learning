@@ -5,6 +5,7 @@ import 'package:let_tutor/ui/authentication/forgot_password.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
 import 'package:let_tutor/ui/authentication/register.dart';
 import 'package:let_tutor/ui/chat/chat.dart';
+import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/detail_course/detail_course.dart';
 import 'package:let_tutor/ui/detail_tutor/detail_tutor.dart';
 import 'package:let_tutor/ui/detail_tutor/models/detail_tutor_argument.dart';
@@ -23,10 +24,11 @@ class Routes {
   static const String login = '/login';
   static const String forgotPassword = '/forgot_password';
   static const String register = '/register';
-  static const String chat = '/chat';
+  //static const String chat = '/chat';
   static const String upcomming = '/upcomming';
   static const String tutor = '/tutor';
   static const String detailTutor = '/detail_tutor';
+  static const String course = '/course';
   static const String detailCourse = '/detail_course';
   static const String setting = '/setting';
   static const String profile = '/profile';
@@ -39,9 +41,10 @@ class Routes {
     // login: (BuildContext context) => Login(),
     register: (BuildContext context) => Register(),
     forgotPassword: (BuildContext context) => ForgotPassword(),
-    chat: (BuildContext context) => Chat(),
+    //chat: (BuildContext context) => Chat(),
     upcomming: (BuildContext context) => Upcoming(),
     tutor: (BuildContext context) => Tutor(),
+    course: (BuildContext context) => CoursePage(),
     detailCourse: (BuildContext context) => DetailCourse(),
     //setting: (BuildContext context) => Setting(),
     profile: (BuildContext context) => Profile(),
@@ -54,7 +57,10 @@ class Routes {
     if (settings.name == Routes.detailTutor) {
       DetailTutorArgument args = settings.arguments as DetailTutorArgument;
       return MaterialPageRoute(builder: (context) {
-        return DetailTutor(tutorId: args.tutorId, callback: args.callback,);
+        return DetailTutor(
+          tutorId: args.tutorId,
+          callback: args.callback,
+        );
       });
     }
   }

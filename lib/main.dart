@@ -10,6 +10,7 @@ import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
 import 'package:let_tutor/ui/chat/chat.dart';
+import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
@@ -96,8 +97,8 @@ class _TutorAppState extends State<TutorApp> {
         switch (selectedIndex) {
           case BottomBars.home:
             return HomePage(callback: tabBarCallback);
-          case BottomBars.chat:
-            return Chat();
+          case BottomBars.course:
+            return CoursePage();
           case BottomBars.upcoming:
             return Upcoming();
           case BottomBars.tutor:
@@ -116,8 +117,7 @@ class _TutorAppState extends State<TutorApp> {
         return BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.message_rounded), label: 'Message'),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Course'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.access_time), label: 'Schedule'),
             BottomNavigationBarItem(
