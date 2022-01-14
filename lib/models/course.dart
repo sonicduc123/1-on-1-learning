@@ -1,4 +1,5 @@
 import 'package:let_tutor/models/topic.dart';
+import 'package:let_tutor/models/user.dart';
 
 class Courses {
   String? id;
@@ -11,6 +12,7 @@ class Courses {
   String? otherDetails;
   TutorCourse? tutorCourse;
   List<Topics>? topics;
+  List<User>? users;
 
   Courses({
     this.id,
@@ -22,6 +24,7 @@ class Courses {
     this.purpose,
     this.otherDetails,
     this.tutorCourse,
+    this.users,
   });
 
   Courses.fromJson(Map<String, dynamic> json) {
@@ -42,6 +45,12 @@ class Courses {
         topics!.add(new Topics.fromJson(v));
       });
     }
+    if (json['users'] != null) {
+      users = <User>[];
+      json['users'].forEach((v) {
+        users!.add(new User.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -59,6 +68,9 @@ class Courses {
     }
     if (this.topics != null) {
       data['topics'] = this.topics!.map((v) => v.toJson()).toList();
+    }
+    if (this.users != null) {
+      data['users'] = this.users!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -124,6 +136,27 @@ class CourseData {
     data['count'] = this.count;
     if (this.courses != null) {
       data['rows'] = this.courses!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class CourseDetail {
+  String? message;
+  Courses? course;
+
+  CourseDetail({this.message, this.course});
+
+  CourseDetail.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    course = json['data'] != null ? new Courses.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
+    if (this.course != null) {
+      data['data'] = this.course!.toJson();
     }
     return data;
   }

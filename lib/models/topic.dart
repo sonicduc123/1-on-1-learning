@@ -5,9 +5,6 @@ class Topics {
   String? name;
   String? nameFile;
   String? description;
-  Null? videoUrl;
-  String? createdAt;
-  String? updatedAt;
 
   Topics(
       {this.id,
@@ -15,10 +12,7 @@ class Topics {
       this.orderCourse,
       this.name,
       this.nameFile,
-      this.description,
-      this.videoUrl,
-      this.createdAt,
-      this.updatedAt});
+      this.description,});
 
   Topics.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,9 +21,6 @@ class Topics {
     name = json['name'];
     nameFile = json['nameFile'];
     description = json['description'];
-    videoUrl = json['videoUrl'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -40,9 +31,6 @@ class Topics {
     data['name'] = this.name;
     data['nameFile'] = this.nameFile;
     data['description'] = this.description;
-    data['videoUrl'] = this.videoUrl;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
     return data;
   }
 }

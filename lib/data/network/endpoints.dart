@@ -27,4 +27,7 @@ class Endpoints {
 
   // get list course
   static const String getListCourse = baseUrl + "course?";
+
+  // get course detail
+  static const String getCourse = baseUrl + "course/";
 }

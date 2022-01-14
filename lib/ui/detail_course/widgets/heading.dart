@@ -6,6 +6,9 @@ class Heading extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: TextStyle(fontSize: 20),);
+    return Text(
+      title,
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    );
   }
 }

@@ -133,7 +133,7 @@ class _DetailTutorState extends State<DetailTutor> {
                     children: List.generate(
                       tutorDetail!.user!.courses!.length,
                       (index) => Course(
-                        courses: tutorDetail!.user!.courses![index],
+                        course: tutorDetail!.user!.courses![index],
                       ),
                     ),
                   )

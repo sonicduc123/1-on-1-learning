@@ -5,9 +5,9 @@ import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class Course extends StatelessWidget {
-  const Course({Key? key, required this.courses}) : super(key: key);
+  const Course({Key? key, required this.course}) : super(key: key);
 
-  final Courses courses;
+  final Courses course;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Course extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(courses.imageUrl!),
+              child: Image.network(course.imageUrl!),
             ),
             Container(
               padding: const EdgeInsets.all(20),
@@ -31,7 +31,7 @@ class Course extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    courses.name!,
+                    course.name!,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
@@ -39,7 +39,7 @@ class Course extends StatelessWidget {
                   ),
                   space(10),
                   Text(
-                    courses.description!,
+                    course.description!,
                     style: const TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class Course extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: Text(
-                      'Level ' + courses.level!,
+                      'Level ' + course.level!,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -57,7 +57,7 @@ class Course extends StatelessWidget {
                   ),
                   space(10),
                   createButtonExpanded('Explore', action: () {
-                    Navigator.pushNamed(context, Routes.detailCourse);
+                    Navigator.pushNamed(context, Routes.detailCourse, arguments: course.id);
                   }),
                 ],
               ),

@@ -95,7 +95,7 @@ class _CoursePageState extends State<CoursePage> {
                             children: List.generate(
                               listSearchCourse.length,
                               (index) => Course(
-                                courses: listSearchCourse[index],
+                                course: listSearchCourse[index],
                               ),
                             ),
                           ),

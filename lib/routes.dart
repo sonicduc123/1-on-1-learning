@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/forgot_password.dart';
@@ -45,7 +46,6 @@ class Routes {
     upcomming: (BuildContext context) => Upcoming(),
     tutor: (BuildContext context) => Tutor(),
     course: (BuildContext context) => CoursePage(),
-    detailCourse: (BuildContext context) => DetailCourse(),
     //setting: (BuildContext context) => Setting(),
     profile: (BuildContext context) => Profile(),
     meeting: (BuildContext context) => Meeting(),
@@ -61,6 +61,11 @@ class Routes {
           tutorId: args.tutorId,
           callback: args.callback,
         );
+      });
+    } else if (settings.name == Routes.detailCourse) {
+      String courseID = settings.arguments as String;
+      return MaterialPageRoute(builder: (context) {
+        return DetailCourse(courseID: courseID);
       });
     }
   }

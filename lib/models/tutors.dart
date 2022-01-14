@@ -53,7 +53,6 @@ class TutorsInfo {
         }
       }
     }
-
     tutors!.listTutor!.sort((a, b) => sortListTutor(a, b));
   }
 
