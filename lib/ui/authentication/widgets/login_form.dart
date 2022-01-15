@@ -33,8 +33,10 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     SharedPreferences.getInstance().then((value) {
-      emailController.text = value.getString("email")!;
-      passwordController.text = value.getString("password")!;
+      if (value.getString("email") != null) {
+        emailController.text = value.getString("email")!;
+        passwordController.text = value.getString("password")!;
+      }
     });
   }
 

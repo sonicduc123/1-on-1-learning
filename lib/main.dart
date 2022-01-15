@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
@@ -42,12 +43,8 @@ class _TutorAppState extends State<TutorApp> {
   UserInfor? userInfor;
   Tutors? listTutor;
   TutorsInfo? tutorsInfo;
-
-  @override
-  void initState() {
-    getUserInfor();
-    getListTutor();
-  }
+  bool isLoadingUser = true;
+  bool isLoadingListTutor = true;
 
   void getListTutor() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -59,6 +56,9 @@ class _TutorAppState extends State<TutorApp> {
     }
     tutorsInfo = TutorsInfo.fromJson(jsonDecode(response.body));
     listTutor = tutorsInfo!.tutors;
+    setState(() {
+      isLoadingListTutor = false;
+    });
   }
 
   void getUserInfor() async {
@@ -70,6 +70,9 @@ class _TutorAppState extends State<TutorApp> {
       handleErrorFetch(response.body, context);
     }
     userInfor = UserInfor.fromJson(jsonDecode(response.body));
+    setState(() {
+      isLoadingUser = false;
+    });
   }
 
   void tabBarCallback(int index) {
@@ -81,6 +84,8 @@ class _TutorAppState extends State<TutorApp> {
   void loginSuccessCallback() {
     setState(() {
       isLogin = true;
+      getUserInfor();
+      getListTutor();
     });
   }
 
@@ -94,6 +99,11 @@ class _TutorAppState extends State<TutorApp> {
   Widget build(BuildContext context) {
     Widget setCurrentPage() {
       if (isLogin) {
+        if (isLoadingListTutor || isLoadingUser) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         switch (selectedIndex) {
           case BottomBars.home:
             return HomePage(callback: tabBarCallback);
@@ -104,9 +114,12 @@ class _TutorAppState extends State<TutorApp> {
           case BottomBars.tutor:
             return Tutor();
           case BottomBars.setting:
-            return Setting(logoutCallback: logoutCallback);
+            return Setting(
+              logoutCallback: logoutCallback,
+              user: userInfor!.user!,
+            );
           default:
-            return HomePage(callback: tabBarCallback);
+            HomePage(callback: tabBarCallback);
         }
       }
       return Login(loginSuccessCallback: loginSuccessCallback);
@@ -144,7 +157,9 @@ class _TutorAppState extends State<TutorApp> {
 
     return MultiProvider(
       providers: [
-        Provider(create: (context) => listTutor!.listTutor),
+        Provider(
+            create: (context) =>
+                isLoadingListTutor ? <TutorDTO>[] : listTutor!.listTutor),
         Provider(create: (context) => userInfor)
       ],
       child: Scaffold(
