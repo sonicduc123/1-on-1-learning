@@ -7,6 +7,7 @@ import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/homepage/widgets/title.dart';
 import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
 import 'package:let_tutor/widgets/card_info.dart';
@@ -15,11 +16,19 @@ import 'package:let_tutor/widgets/space.dart';
 import 'package:provider/src/provider.dart';
 
 typedef TabBarCallback = void Function(int tabIndex);
+typedef UserChangeCallback = void Function(User user);
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.callback}) : super(key: key);
+  const HomePage(
+      {Key? key,
+      required this.callback,
+      required this.user,
+      required this.userChangeCallback})
+      : super(key: key);
 
   final TabBarCallback callback;
+  final User user;
+  final UserChangeCallback userChangeCallback;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,14 +38,12 @@ class _HomePageState extends State<HomePage> {
   int indexChip = 0;
   List<TutorDTO> listFilterTutor = [];
   List<TutorDTO> listTutor = [];
-  UserInfor? userInfor;
 
   @override
   void initState() {
     // TODO: implement initState
     listTutor = context.read<List<TutorDTO>>();
     listFilterTutor = listTutor.sublist(0);
-    userInfor = context.read<UserInfor>();
     super.initState();
   }
 
@@ -71,6 +78,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // user = context.watch<User>();
+    // log(user!.name!);
+    // log(user!.avatar!);
+
     Widget listSpecialities =
         ListChip(listChip: listChip, callback: listChipCallback);
 
@@ -107,10 +118,10 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, Routes.profile);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(user: widget.user, callback: widget.userChangeCallback)));
               },
               child: CircleAvatar(
-                backgroundImage: NetworkImage(userInfor!.user!.avatar!),
+                backgroundImage: NetworkImage(widget.user.avatar!),
               ),
             ),
             margin: const EdgeInsets.only(right: 10),

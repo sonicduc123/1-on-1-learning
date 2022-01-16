@@ -36,6 +36,11 @@ dependencies:
   tiengviet: ^0.5.0
   video_player: ^2.2.11
   advance_pdf_viewer: ^2.0.0
+  country_code_picker: ^2.0.2
+  flutter_localizations:
+    sdk: flutter
+  language_picker: ^0.4.1
+  image_picker: ^0.8.4+4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
 

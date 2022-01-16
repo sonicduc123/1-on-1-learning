@@ -30,4 +30,13 @@ class Endpoints {
 
   // get course detail
   static const String getCourse = baseUrl + "course/";
+
+  // change password
+  static const String changePassword = baseUrl + "auth/change-password";
+
+  // change user infor
+  static const String changeUserInfor = baseUrl + "user/info";
+
+  // upload avatar
+  static const String uploadAvatar = baseUrl + "user/uploadAvatar";
 }

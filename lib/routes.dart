@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/models/course.dart';
+import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/forgot_password.dart';
@@ -47,7 +48,7 @@ class Routes {
     tutor: (BuildContext context) => Tutor(),
     course: (BuildContext context) => CoursePage(),
     //setting: (BuildContext context) => Setting(),
-    profile: (BuildContext context) => Profile(),
+
     meeting: (BuildContext context) => Meeting(),
     bookingHistory: (BuildContext context) => BookingHistory(),
     sessionHistory: (BuildContext context) => SessionHistory(),
@@ -67,6 +68,6 @@ class Routes {
       return MaterialPageRoute(builder: (context) {
         return DetailCourse(courseID: courseID);
       });
-    }
+    } 
   }
 }

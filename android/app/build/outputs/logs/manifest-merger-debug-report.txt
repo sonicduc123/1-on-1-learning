@@ -1,11 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
-INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
-INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
-INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
-MERGED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
+ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
+INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
+INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
+INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
+MERGED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
 MERGED from [:shared_preferences_android] D:\flutter\1-on-1-learning\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
+MERGED from [:flutter_plugin_android_lifecycle] D:\flutter\1-on-1-learning\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:video_player] D:\flutter\1-on-1-learning\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:sqflite] D:\flutter\1-on-1-learning\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider_android] D:\flutter\1-on-1-learning\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
@@ -15,10 +17,11 @@ MERGED from [com.google.android.exoplayer:exoplayer-hls:2.14.1] C:\Users\IBM\.gr
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\a31267c2b9cb16c8c6674a974edcadc5\jetified-exoplayer-dash-2.14.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\80d87a1569fa646d87abf499e88e622c\jetified-exoplayer-smoothstreaming-2.14.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ae7e24b3175291cd1958f55269920237\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\edc8758795abf1ce73a47930e4eca79c\exifinterface-1.3.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\2f70304b103eacfab05dbe55739e869f\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\49dee3543bc65746b6bba9f83aa0b18a\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\86cf751735e9e9dd0416cce35c4a71a1\customview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\d67cd79abd1ca209502f51c69d23182b\core-1.1.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\b37a656be7da34e79d326523a32fbcaa\lifecycle-runtime-2.2.0\AndroidManifest.xml:17:1-24:12
@@ -39,16 +42,18 @@ INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.x
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
+		ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-44:12
+		ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:1-45:12
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:1:11-69
 application
 ADDED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml:3:4-41:19
+MERGED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
+MERGED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
 MERGED from [androidx.core:core:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\d67cd79abd1ca209502f51c69d23182b\core-1.1.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\d67cd79abd1ca209502f51c69d23182b\core-1.1.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\af9af86a2035b10a0514f89f66cf8a9a\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
@@ -113,6 +118,10 @@ INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xm
 INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml
 MERGED from [:shared_preferences_android] D:\flutter\1-on-1-learning\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\flutter\1-on-1-learning\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\flutter\1-on-1-learning\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\flutter\1-on-1-learning\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:video_player] D:\flutter\1-on-1-learning\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:video_player] D:\flutter\1-on-1-learning\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] D:\flutter\1-on-1-learning\build\sqflite\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
@@ -131,14 +140,16 @@ MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\U
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\80d87a1569fa646d87abf499e88e622c\jetified-exoplayer-smoothstreaming-2.14.1\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ae7e24b3175291cd1958f55269920237\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ae7e24b3175291cd1958f55269920237\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\edc8758795abf1ce73a47930e4eca79c\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\edc8758795abf1ce73a47930e4eca79c\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ba80674a1a5fdce2b1b29eea5683af77\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\2f70304b103eacfab05dbe55739e869f\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\2f70304b103eacfab05dbe55739e869f\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\49dee3543bc65746b6bba9f83aa0b18a\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\49dee3543bc65746b6bba9f83aa0b18a\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\68865d38a53fb5c240061f062e474515\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\86cf751735e9e9dd0416cce35c4a71a1\customview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\86cf751735e9e9dd0416cce35c4a71a1\customview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.1.0] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\d67cd79abd1ca209502f51c69d23182b\core-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -169,6 +180,22 @@ INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.x
 	android:minSdkVersion
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\flutter\1-on-1-learning\android\app\src\debug\AndroidManifest.xml
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-74
+	android:exported
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:75
+	android:resource
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-72
+	android:name
+		ADDED from [:image_picker] D:\flutter\1-on-1-learning\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-67
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\ae7e24b3175291cd1958f55269920237\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\IBM\.gradle\caches\transforms-2\files-2.1\694d764a55c8785e30f85a7f0e3ee2a7\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:24:5-79

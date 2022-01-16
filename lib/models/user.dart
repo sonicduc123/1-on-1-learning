@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/models/tutor_feedback.dart';
 
-class User {
+class User extends ChangeNotifier {
   String? id;
   String? email;
   String? name;
@@ -86,9 +86,14 @@ class User {
       country = CountryCodes.detailsForLocale(local).localizedName;
     }
   }
+
+  void changeNotify() {
+    notifyListeners();
+    log('notify listener');
+  }
 }
 
-class UserInfor {
+class UserInfor extends ChangeNotifier {
   User? user;
 
   UserInfor({this.user});
@@ -103,5 +108,10 @@ class UserInfor {
       data['user'] = this.user!.toJson();
     }
     return data;
+  }
+
+  void changeNotify() {
+    notifyListeners();
+    user!.changeNotify();
   }
 }

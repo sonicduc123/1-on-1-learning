@@ -1,38 +1,61 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/account/widgets/list_item.dart';
+import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 typedef LogoutCallback = Function();
+typedef UserChangeCallback = Function(User user);
 
-class Setting extends StatelessWidget {
-  const Setting({Key? key, required this.logoutCallback, required this.user})
+class Setting extends StatefulWidget {
+  const Setting(
+      {Key? key,
+      required this.logoutCallback,
+      required this.user,
+      required this.userChangeCallback})
       : super(key: key);
 
   final LogoutCallback logoutCallback;
+  final UserChangeCallback userChangeCallback;
   final User user;
 
+  @override
+  _SettingState createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     Widget information = ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(user.avatar!),
+        backgroundImage: NetworkImage(widget.user.avatar!),
         radius: 30,
       ),
       title: Text(
-        user.name!,
+        widget.user.name!,
         style: const TextStyle(
           color: Colors.black,
           fontSize: 18,
         ),
       ),
-      subtitle: Text(user.email!),
+      subtitle: Text(widget.user.email!),
       contentPadding: const EdgeInsets.only(left: 60, bottom: 10),
       onTap: () {
-        Navigator.pushNamed(context, Routes.profile);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    Profile(user: widget.user, callback: widget.userChangeCallback)));
       },
     );
 
@@ -65,7 +88,7 @@ class Setting extends StatelessWidget {
         alignment: Alignment.topRight, child: Text('Version 1.1.0'));
 
     Widget logoutButton = createButtonExpanded('Log Out', action: () {
-      logoutCallback();
+      widget.logoutCallback();
     });
 
     return Scaffold(

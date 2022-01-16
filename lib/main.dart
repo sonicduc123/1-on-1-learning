@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/constants/supported_location.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
@@ -18,6 +22,7 @@ import 'package:let_tutor/ui/tutor/tutor.dart';
 import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:country_code_picker/country_localizations.dart';
 
 void main() {
   runApp(
@@ -26,6 +31,12 @@ void main() {
       home: TutorApp(),
       routes: Routes.routes,
       onGenerateRoute: (settings) => Routes.generateRoute(settings),
+      supportedLocales: SupportedLocation.locates,
+      localizationsDelegates: const [
+        CountryLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
     ),
   );
 }
@@ -70,8 +81,16 @@ class _TutorAppState extends State<TutorApp> {
       handleErrorFetch(response.body, context);
     }
     userInfor = UserInfor.fromJson(jsonDecode(response.body));
+    userInfor!.changeNotify();
     setState(() {
       isLoadingUser = false;
+    });
+    log('main: ' + userInfor!.user!.name!);
+  }
+
+  void userChangeCallback(User userChange) {
+    setState(() {
+      userInfor!.user = userChange;
     });
   }
 
@@ -106,7 +125,11 @@ class _TutorAppState extends State<TutorApp> {
         }
         switch (selectedIndex) {
           case BottomBars.home:
-            return HomePage(callback: tabBarCallback);
+            return HomePage(
+              callback: tabBarCallback,
+              user: userInfor!.user!,
+              userChangeCallback: userChangeCallback,
+            );
           case BottomBars.course:
             return CoursePage();
           case BottomBars.upcoming:
@@ -117,9 +140,14 @@ class _TutorAppState extends State<TutorApp> {
             return Setting(
               logoutCallback: logoutCallback,
               user: userInfor!.user!,
+              userChangeCallback: userChangeCallback,
             );
           default:
-            HomePage(callback: tabBarCallback);
+            HomePage(
+              callback: tabBarCallback,
+              user: userInfor!.user!,
+              userChangeCallback: userChangeCallback,
+            );
         }
       }
       return Login(loginSuccessCallback: loginSuccessCallback);
@@ -157,10 +185,10 @@ class _TutorAppState extends State<TutorApp> {
 
     return MultiProvider(
       providers: [
-        Provider(
-            create: (context) =>
-                isLoadingListTutor ? <TutorDTO>[] : listTutor!.listTutor),
-        Provider(create: (context) => userInfor)
+        Provider(create: (context) => listTutor!.listTutor),
+        // ChangeNotifierProvider.value(
+        //   value: userInfor!.user,
+        // )
       ],
       child: Scaffold(
         body: setCurrentPage(),
