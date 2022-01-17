@@ -59,7 +59,7 @@ class SessionHistoryItem extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('Give Feedback'),
+                  child: const Text('Give Feedback'),
                 ),
               ),
               Expanded(

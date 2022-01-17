@@ -47,34 +47,34 @@ class User extends ChangeNotifier {
     if (json['feedbacks'] != null) {
       feedbacks = <Feedbacks>[];
       json['feedbacks'].forEach((v) {
-        feedbacks!.add(new Feedbacks.fromJson(v));
+        feedbacks!.add(Feedbacks.fromJson(v));
       });
     }
     if (json['courses'] != null) {
       courses = <Courses>[];
       json['courses'].forEach((v) {
-        courses!.add(new Courses.fromJson(v));
+        courses!.add(Courses.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['name'] = this.name;
-    data['avatar'] = this.avatar;
-    data['country'] = this.country;
-    data['phone'] = this.phone;
-    data['language'] = this.language;
-    data['birthday'] = this.birthday;
-    data['isActivated'] = this.isActivated;
-    data['timezone'] = this.timezone;
-    if (this.feedbacks != null) {
-      data['feedbacks'] = this.feedbacks!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['email'] = email;
+    data['name'] = name;
+    data['avatar'] = avatar;
+    data['country'] = country;
+    data['phone'] = phone;
+    data['language'] = language;
+    data['birthday'] = birthday;
+    data['isActivated'] = isActivated;
+    data['timezone'] = timezone;
+    if (feedbacks != null) {
+      data['feedbacks'] = feedbacks!.map((v) => v.toJson()).toList();
     }
-    if (this.courses != null) {
-      data['courses'] = this.courses!.map((v) => v.toJson()).toList();
+    if (courses != null) {
+      data['courses'] = courses!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -99,13 +99,13 @@ class UserInfor extends ChangeNotifier {
   UserInfor({this.user});
 
   UserInfor.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }

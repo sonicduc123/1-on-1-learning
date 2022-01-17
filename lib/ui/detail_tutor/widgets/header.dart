@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
@@ -24,11 +22,6 @@ class DetailTutorHeader extends StatefulWidget {
 }
 
 class _DetailTutorHeaderState extends State<DetailTutorHeader> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   onPressFavorite() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

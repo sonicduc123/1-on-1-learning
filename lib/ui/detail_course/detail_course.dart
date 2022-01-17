@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/ui/course/widget/pdf_file.dart';
 import 'package:let_tutor/ui/detail_course/widgets/heading.dart';
 import 'package:let_tutor/ui/detail_course/widgets/label_item.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailCourse extends StatefulWidget {
   const DetailCourse({Key? key, required this.courseID}) : super(key: key);
@@ -26,7 +22,6 @@ class _DetailCourseState extends State<DetailCourse> {
   @override
   void initState() {
     getCourseDetail();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -34,14 +29,7 @@ class _DetailCourseState extends State<DetailCourse> {
     setState(() {
       isLoading = true;
     });
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    Response response =
-        await get(Uri.parse(Endpoints.getCourse + widget.courseID), headers: {
-      "Authorization": "Bearer " + pref.getString("accessToken")!,
-    });
-    CourseDetail courseDetail =
-        CourseDetail.fromJson(jsonDecode(response.body));
-    course = courseDetail.course!;
+    course = await GetAPI.getCourseDetail(widget.courseID);
     setState(() {
       isLoading = false;
     });
@@ -121,7 +109,7 @@ class _DetailCourseState extends State<DetailCourse> {
       children: [
         const Heading(title: 'Overview'),
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Text(
             "- Why take this course?\n" +
                 (isLoading ? '' : course!.reason!) +
@@ -180,11 +168,11 @@ class _DetailCourseState extends State<DetailCourse> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(200),
+        preferredSize: const Size.fromHeight(200),
         child: AppBar(
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new),
+            icon: const Icon(Icons.arrow_back_ios_new),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -202,7 +190,7 @@ class _DetailCourseState extends State<DetailCourse> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: isLoading
               ? const Center(child: CircularProgressIndicator())

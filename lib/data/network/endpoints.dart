@@ -39,4 +39,8 @@ class Endpoints {
 
   // upload avatar
   static const String uploadAvatar = baseUrl + "user/uploadAvatar";
+
+  // get list schedule
+  static const String getListSchedule = baseUrl +
+      "booking/list/student?orderBy=meeting&sortBy=asc&";
 }

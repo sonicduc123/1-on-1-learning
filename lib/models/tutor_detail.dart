@@ -1,7 +1,4 @@
-import 'dart:developer';
 
-import 'package:country_codes/country_codes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:let_tutor/constants/language_code.dart';
 import 'package:let_tutor/models/user.dart';
 
@@ -50,30 +47,30 @@ class TutorDetail {
     languages = json['languages'];
     convertLanguageCode();
     specialties = json['specialties'];
-    user = json['User'] != null ? new User.fromJson(json['User']) : null;
+    user = json['User'] != null ? User.fromJson(json['User']) : null;
     isFavorite = json['isFavorite'];
     avgRating = (json['avgRating']).toDouble();
     price = json['price'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['video'] = this.video;
-    data['bio'] = this.bio;
-    data['education'] = this.education;
-    data['experience'] = this.experience;
-    data['profession'] = this.profession;
-    data['interests'] = this.interests;
-    data['languages'] = this.languages;
-    data['specialties'] = this.specialties;
-    if (this.user != null) {
-      data['User'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['userId'] = userId;
+    data['video'] = video;
+    data['bio'] = bio;
+    data['education'] = education;
+    data['experience'] = experience;
+    data['profession'] = profession;
+    data['interests'] = interests;
+    data['languages'] = languages;
+    data['specialties'] = specialties;
+    if (user != null) {
+      data['User'] = user!.toJson();
     }
-    data['isFavorite'] = this.isFavorite;
-    data['avgRating'] = this.avgRating;
-    data['price'] = this.price;
+    data['isFavorite'] = isFavorite;
+    data['avgRating'] = avgRating;
+    data['price'] = price;
     return data;
   }
 

@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/widgets/space.dart';
 
 class UpcomingItem extends StatelessWidget {
-  const UpcomingItem({Key? key}) : super(key: key);
+  const UpcomingItem({Key? key, required this.schedule}) : super(key: key);
+
+  final Schedule schedule;
 
   @override
   Widget build(BuildContext context) {
+    DateTime start = DateTime.fromMicrosecondsSinceEpoch(
+        schedule.scheduleDetailInfo!.startPeriodTimestamp! * 1000);
+
+    DateTime end = DateTime.fromMicrosecondsSinceEpoch(
+        schedule.scheduleDetailInfo!.endPeriodTimestamp! * 1000);
+
     return Card(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       elevation: 0,
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/avatar.png'),
+                  backgroundImage: NetworkImage(schedule
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.avatar!),
                   radius: 30,
                 ),
                 space(10),
@@ -24,22 +34,23 @@ class UpcomingItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Pham Anh Duc',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      schedule
+                          .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name!,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     space(10),
                     Row(
-                      children: const [
-                        Text('2021-10-06   '),
+                      children: [
+                        Text(start.toString().substring(0, 10) + '   '),
                         Text(
-                          '06:30',
-                          style: TextStyle(color: Colors.blue),
+                          start.toString().substring(11, 16),
+                          style: const TextStyle(color: Colors.blue),
                         ),
-                        Text(' - '),
+                        const Text(' - '),
                         Text(
-                          '07:00',
-                          style: TextStyle(color: Colors.red),
+                          end.toString().substring(11, 16),
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ],
                     ),
@@ -57,13 +68,13 @@ class UpcomingItem extends StatelessWidget {
                     onPrimary: Colors.blue,
                   ),
                   onPressed: () {},
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
               ),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('Go to Meeting'),
+                  child: const Text('Go to Meeting'),
                 ),
               ),
             ],

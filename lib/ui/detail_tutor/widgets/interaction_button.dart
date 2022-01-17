@@ -18,7 +18,7 @@ class InteractionButton extends StatelessWidget {
         space(20),
         Text(
           name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.blue,
           ),
         )

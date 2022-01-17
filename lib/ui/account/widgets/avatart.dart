@@ -1,13 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/data/network/post_api.dart';
 import 'package:let_tutor/models/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 typedef UserChangeCallback = Function(User user);
 
@@ -38,22 +34,7 @@ class _AvatarState extends State<Avatar> {
   }
 
   uploadAvatar() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    //create multipart request for POST or PATCH method
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse(Endpoints.uploadAvatar));
-    request.headers["Authorization"] =
-        "Bearer " + prefs.getString("accessToken")!;
-    //create multipart using filepath, string or bytes
-    MultipartFile pic = await MultipartFile.fromPath("avatar", imageFile.path);
-    //add multipart to request
-    request.files.add(pic);
-    var response = await request.send();
-    //Get the response from the server
-    var responseData = await response.stream.toBytes();
-    var responseString = String.fromCharCodes(responseData);
-    User u = User.fromJson(jsonDecode(responseString));
+    User u = await PostAPI.changeAvatar(imageFile.path);
     widget.callback(u);
   }
 

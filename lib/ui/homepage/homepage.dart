@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
@@ -6,7 +5,6 @@ import 'package:let_tutor/constants/chips.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
-import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/homepage/widgets/title.dart';
 import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
@@ -41,7 +39,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     listTutor = context.read<List<TutorDTO>>();
     listFilterTutor = listTutor.sublist(0);
     super.initState();

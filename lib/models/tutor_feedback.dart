@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:let_tutor/models/tutor_student.dart';
 
 class Feedbacks {
@@ -19,18 +17,18 @@ class Feedbacks {
     createdAt = json['createdAt'];
     time = calculateTimeToNow(DateTime.parse(createdAt!));
     student = json['firstInfo'] != null
-        ? new Student.fromJson(json['firstInfo'])
+        ? Student.fromJson(json['firstInfo'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['rating'] = this.rating;
-    data['content'] = this.content;
-    data['createdAt'] = this.createdAt;
-    if (this.student != null) {
-      data['firstInfo'] = this.student!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['rating'] = rating;
+    data['content'] = content;
+    data['createdAt'] = createdAt;
+    if (student != null) {
+      data['firstInfo'] = student!.toJson();
     }
     return data;
   }

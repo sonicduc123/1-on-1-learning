@@ -8,7 +8,7 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget registerForm = RegisterForm();
+    Widget registerForm = const RegisterForm();
 
     Widget otherWayLogin = const Text(
       'Or continue with',

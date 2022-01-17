@@ -37,40 +37,40 @@ class Courses {
     purpose = json['purpose'];
     otherDetails = json['other_details'];
     tutorCourse = json['TutorCourse'] != null
-        ? new TutorCourse.fromJson(json['TutorCourse'])
+        ? TutorCourse.fromJson(json['TutorCourse'])
         : null;
     if (json['topics'] != null) {
       topics = <Topics>[];
       json['topics'].forEach((v) {
-        topics!.add(new Topics.fromJson(v));
+        topics!.add(Topics.fromJson(v));
       });
     }
     if (json['users'] != null) {
       users = <User>[];
       json['users'].forEach((v) {
-        users!.add(new User.fromJson(v));
+        users!.add(User.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['imageUrl'] = this.imageUrl;
-    data['level'] = this.level;
-    data['reason'] = this.reason;
-    data['purpose'] = this.purpose;
-    data['other_details'] = this.otherDetails;
-    if (this.tutorCourse != null) {
-      data['TutorCourse'] = this.tutorCourse!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    data['imageUrl'] = imageUrl;
+    data['level'] = level;
+    data['reason'] = reason;
+    data['purpose'] = purpose;
+    data['other_details'] = otherDetails;
+    if (tutorCourse != null) {
+      data['TutorCourse'] = tutorCourse!.toJson();
     }
-    if (this.topics != null) {
-      data['topics'] = this.topics!.map((v) => v.toJson()).toList();
+    if (topics != null) {
+      data['topics'] = topics!.map((v) => v.toJson()).toList();
     }
-    if (this.users != null) {
-      data['users'] = this.users!.map((v) => v.toJson()).toList();
+    if (users != null) {
+      data['users'] = users!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -88,8 +88,8 @@ class TutorCourse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['UserId'] = this.userId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['UserId'] = userId;
     return data;
   }
 }
@@ -102,12 +102,12 @@ class CourseMessage {
 
   CourseMessage.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? new CourseData.fromJson(json['data']) : null;
+    data = json['data'] != null ? CourseData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -126,16 +126,16 @@ class CourseData {
     if (json['rows'] != null) {
       courses = <Courses>[];
       json['rows'].forEach((v) {
-        courses!.add(new Courses.fromJson(v));
+        courses!.add(Courses.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    if (this.courses != null) {
-      data['rows'] = this.courses!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['count'] = count;
+    if (courses != null) {
+      data['rows'] = courses!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -149,14 +149,14 @@ class CourseDetail {
 
   CourseDetail.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    course = json['data'] != null ? new Courses.fromJson(json['data']) : null;
+    course = json['data'] != null ? Courses.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    if (this.course != null) {
-      data['data'] = this.course!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    if (course != null) {
+      data['data'] = course!.toJson();
     }
     return data;
   }

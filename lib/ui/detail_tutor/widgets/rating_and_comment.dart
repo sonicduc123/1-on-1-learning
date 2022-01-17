@@ -16,7 +16,7 @@ class RatingComment extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,7 +31,7 @@ class RatingComment extends StatelessWidget {
                 children: [
                   Text(
                     feedbacks.student!.name!,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   RatingStar(rating: feedbacks.rating!),
                   space(5),

@@ -12,7 +12,7 @@ class SessionHistory extends StatelessWidget {
     return Scaffold(
       appBar: createAppBar('Session History', true, context),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
             const CupertinoSearchTextField(

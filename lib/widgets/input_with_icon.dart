@@ -18,7 +18,7 @@ Widget createInputWithIcon(
             decoration: InputDecoration(
               hintText: "Enter your " + hint.toLowerCase(),
             ),
-            validator: (value) => validate_input(value, hint),
+            validator: (value) => validateInput(value, hint),
             obscureText: hint == 'Password',
           ),
         ),

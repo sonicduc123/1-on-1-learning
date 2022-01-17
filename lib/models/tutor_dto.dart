@@ -1,5 +1,4 @@
 import 'package:let_tutor/models/tutor_feedback.dart';
-import 'package:let_tutor/models/user.dart';
 
 class TutorDTO {
   String? avatar;
@@ -20,22 +19,23 @@ class TutorDTO {
   bool isFavorite = false;
   int rating = 0;
 
-  TutorDTO(
-      {this.avatar,
-      this.name,
-      this.country,
-      this.feedbacks,
-      this.id,
-      this.userId,
-      this.video,
-      this.bio,
-      this.education,
-      this.experience,
-      this.profession,
-      this.interests,
-      this.languages,
-      this.specialties,
-      this.isOnline,});
+  TutorDTO({
+    this.avatar,
+    this.name,
+    this.country,
+    this.feedbacks,
+    this.id,
+    this.userId,
+    this.video,
+    this.bio,
+    this.education,
+    this.experience,
+    this.profession,
+    this.interests,
+    this.languages,
+    this.specialties,
+    this.isOnline,
+  });
 
   TutorDTO.fromJson(Map<String, dynamic> json) {
     avatar = json['avatar'];
@@ -44,7 +44,7 @@ class TutorDTO {
     if (json['feedbacks'] != null) {
       feedbacks = <Feedbacks>[];
       json['feedbacks'].forEach((v) {
-        feedbacks!.add(new Feedbacks.fromJson(v));
+        feedbacks!.add(Feedbacks.fromJson(v));
       });
     }
     id = json['id'];
@@ -62,33 +62,36 @@ class TutorDTO {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['avatar'] = this.avatar;
-    data['name'] = this.name;
-    data['country'] = this.country;
-    if (this.feedbacks != null) {
-      data['feedbacks'] = this.feedbacks!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['avatar'] = avatar;
+    data['name'] = name;
+    data['country'] = country;
+    if (feedbacks != null) {
+      data['feedbacks'] = feedbacks!.map((v) => v.toJson()).toList();
     }
-    data['id'] = this.id;
+    data['id'] = id;
     data['userId'] = userId;
-    data['video'] = this.video;
-    data['bio'] = this.bio;
-    data['education'] = this.education;
-    data['experience'] = this.experience;
-    data['profession'] = this.profession;
-    data['interests'] = this.interests;
-    data['languages'] = this.languages;
-    data['specialties'] = this.specialties;
-    data['isOnline'] = this.isOnline;
+    data['video'] = video;
+    data['bio'] = bio;
+    data['education'] = education;
+    data['experience'] = experience;
+    data['profession'] = profession;
+    data['interests'] = interests;
+    data['languages'] = languages;
+    data['specialties'] = specialties;
+    data['isOnline'] = isOnline;
     return data;
   }
 
   int calculateRating() {
     int sum = 0;
-    for (var feedback in feedbacks!) {
-      sum += feedback.rating!;
+    double average = 0;
+    if (feedbacks != null) {
+      for (var feedback in feedbacks!) {
+        sum += feedback.rating!;
+      }
+      average = sum / feedbacks!.length;
     }
-    double average = sum / feedbacks!.length;
     return average.toInt();
   }
 }

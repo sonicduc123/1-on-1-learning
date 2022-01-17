@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/models/course.dart';
-import 'package:let_tutor/models/user.dart';
-import 'package:let_tutor/ui/account/profile.dart';
-import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/forgot_password.dart';
-import 'package:let_tutor/ui/authentication/login.dart';
 import 'package:let_tutor/ui/authentication/register.dart';
-import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/detail_course/detail_course.dart';
 import 'package:let_tutor/ui/detail_tutor/detail_tutor.dart';
@@ -41,17 +35,17 @@ class Routes {
   static final routes = <String, WidgetBuilder>{
     // home: (BuildContext context) => HomePage(),
     // login: (BuildContext context) => Login(),
-    register: (BuildContext context) => Register(),
-    forgotPassword: (BuildContext context) => ForgotPassword(),
+    register: (BuildContext context) => const Register(),
+    forgotPassword: (BuildContext context) => const ForgotPassword(),
     //chat: (BuildContext context) => Chat(),
-    upcomming: (BuildContext context) => Upcoming(),
-    tutor: (BuildContext context) => Tutor(),
-    course: (BuildContext context) => CoursePage(),
+    upcomming: (BuildContext context) => const Upcoming(),
+    tutor: (BuildContext context) => const Tutor(),
+    course: (BuildContext context) => const CoursePage(),
     //setting: (BuildContext context) => Setting(),
 
-    meeting: (BuildContext context) => Meeting(),
-    bookingHistory: (BuildContext context) => BookingHistory(),
-    sessionHistory: (BuildContext context) => SessionHistory(),
+    meeting: (BuildContext context) => const Meeting(),
+    bookingHistory: (BuildContext context) => const BookingHistory(),
+    sessionHistory: (BuildContext context) => const SessionHistory(),
   };
 
   static generateRoute(settings) {

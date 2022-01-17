@@ -10,8 +10,8 @@ class FavoriteTutor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['secondId'] = this.tutorID;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['secondId'] = tutorID;
     return data;
   }
 }

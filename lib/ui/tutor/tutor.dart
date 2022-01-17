@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
@@ -23,7 +21,6 @@ class _TutorState extends State<Tutor> {
 
   @override
   void initState() {
-    // TODO: implement initState
     listTutor = context.read<List<TutorDTO>>();
     listSearchTutor = listTutor!.sublist(0);
     super.initState();
@@ -64,7 +61,7 @@ class _TutorState extends State<Tutor> {
             CupertinoSearchTextField(
               controller: searchController,
               placeholder: 'Search tutors by name, nation, ...',
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               prefixIcon: const Icon(Icons.search),
               onChanged: (value) => {
                 setState(() {

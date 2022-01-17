@@ -7,13 +7,13 @@ class BookingHistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      margin: EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: ListTile(
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           backgroundImage: AssetImage('assets/images/avatar.png'),
           radius: 30,
         ),
-        title: Text('Pham Anh Duc'),
+        title: const Text('Pham Anh Duc'),
         subtitle: Row(
           children: const [
             Text('2021-10-06   '),

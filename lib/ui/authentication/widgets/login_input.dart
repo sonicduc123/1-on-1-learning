@@ -13,5 +13,5 @@ Widget createInput(String name, bool isPassword, TextEditingController controlle
         ),
       ),
       obscureText: isPassword,
-      validator: (String? value) => validate_input(value, name),
+      validator: (String? value) => validateInput(value, name),
     );

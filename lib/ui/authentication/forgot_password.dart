@@ -1,14 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
-import 'package:let_tutor/models/error.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
+import 'package:let_tutor/data/network/post_api.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
-import 'package:let_tutor/widgets/dialog.dart';
 import 'package:let_tutor/widgets/input_with_icon.dart';
 import 'package:let_tutor/widgets/space.dart';
 
@@ -29,23 +22,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       isLoading = true;
     });
 
-    Response response = await post(
-      Uri.parse(Endpoints.forgotPassword),
-      body: {'email': emailController.text},
-    );
+    await PostAPI.forgotPasswordAccount(emailController.text, context);
 
     setState(() {
       isLoading = false;
     });
-
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-    } else {
-      makeDialog(
-          'Check your email',
-          'We just send an email to you with a link to reset your password',
-          context);
-    }
   }
 
   @override

@@ -1,18 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/profile.dart';
 import 'package:let_tutor/ui/account/widgets/list_item.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 typedef LogoutCallback = Function();
 typedef UserChangeCallback = Function(User user);

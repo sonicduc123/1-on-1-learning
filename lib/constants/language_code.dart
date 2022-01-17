@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class LanguageLocal {
   static final isoLangs = {
     "ab": {"name": "Abkhaz", "nativeName": "аҧсуа"},

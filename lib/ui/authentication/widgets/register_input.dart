@@ -32,7 +32,7 @@ Widget createRegisterInput(String name, bool isPassword,
               return "Your confirm password must be same your password";
             }
           }
-          return validate_input(value, name);
+          return validateInput(value, name);
         },
       ),
     ],

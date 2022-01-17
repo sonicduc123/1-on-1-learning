@@ -1,15 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/ui/course/course.dart';
-import 'package:let_tutor/ui/detail_course/detail_course.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiengviet/tiengviet.dart';
 
 class CoursePage extends StatefulWidget {
@@ -27,7 +22,6 @@ class _CoursePageState extends State<CoursePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getListCourse();
     super.initState();
   }
@@ -36,14 +30,9 @@ class _CoursePageState extends State<CoursePage> {
     setState(() {
       isLoading = true;
     });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response = await get(Uri.parse(Endpoints.getListCourse), headers: {
-      "Authorization": "Bearer " + prefs.getString("accessToken")!,
-    });
-    CourseMessage courseMessage =
-        CourseMessage.fromJson(jsonDecode(response.body));
+    List<Courses> listCourseAPI = await GetAPI.getListCourse();
     setState(() {
-      listCourse = courseMessage.data!.courses;
+      listCourse = listCourseAPI;
       listSearchCourse = listCourse!.sublist(0);
       isLoading = false;
     });
@@ -68,7 +57,7 @@ class _CoursePageState extends State<CoursePage> {
             CupertinoSearchTextField(
               controller: searchController,
               placeholder: 'Search courses by name',
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               prefixIcon: const Icon(Icons.search),
               onChanged: (value) => {
                 setState(() {

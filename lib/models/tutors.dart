@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutor_favarite.dart';
 
@@ -59,7 +57,7 @@ class TutorsInfo {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (tutors != null) {
-      data['tutors'] = this.tutors!.toJson();
+      data['tutors'] = tutors!.toJson();
     }
     if (favoriteTutor != null) {
       data['favoriteTutor'] = favoriteTutor!.map((v) => v.toJson()).toList();

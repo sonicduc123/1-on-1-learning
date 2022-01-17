@@ -19,7 +19,6 @@ class _PDFViewState extends State<PDFView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     loadPDF();
     super.initState();
   }
@@ -52,7 +51,7 @@ class _PDFViewState extends State<PDFView> {
       ),
       body: Center(
         child: _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : PDFViewer(
                 document: doc,
                 zoomSteps: 1,

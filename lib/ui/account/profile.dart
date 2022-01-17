@@ -1,16 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/data/network/post_api.dart';
+import 'package:let_tutor/data/network/put_api.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/ui/account/widgets/avatart.dart';
 import 'package:let_tutor/ui/account/widgets/date_picker.dart';
 import 'package:let_tutor/ui/account/widgets/language_picker.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/input_with_icon.dart';
@@ -60,40 +55,14 @@ class _ProfileState extends State<Profile> {
     setState(() {
       isLoading = true;
     });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // put user infor
-    Response response = await put(
-      Uri.parse(Endpoints.changeUserInfor),
-      headers: {
-        "Authorization": "Bearer " + prefs.getString("accessToken")!,
-      },
-      body: {
-        "name": nameController.text,
-        "language": languageController.text,
-        "country": locationController.text,
-        "birthday": birthdayController.text,
-      },
-    );
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-      return;
-    }
+    // change user infor
+    await PutAPI.changeUserInfor(nameController.text, languageController.text,
+        locationController.text, birthdayController.text);
 
     // change password
-    response = await post(Uri.parse(Endpoints.changePassword), headers: {
-      "Authorization": "Bearer " + prefs.getString("accessToken")!,
-    }, body: {
-      "password": prefs.getString("password"),
-      "newPassword": passwordController.text,
-    });
-
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-      return;
-    }
+    await PostAPI.changePassword(passwordController.text);
 
     setState(() {
-      prefs.setString("password", passwordController.text);
       widget.user.name = nameController.text;
       widget.user.language = languageController.text;
       widget.user.country = locationController.text;
@@ -101,6 +70,7 @@ class _ProfileState extends State<Profile> {
       isLoading = false;
       widget.callback(widget.user);
     });
+
     if (!isLoading) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

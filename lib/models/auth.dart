@@ -8,18 +8,18 @@ class Auth {
   Auth({this.user, this.tokens});
 
   Auth.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     tokens =
-        json['tokens'] != null ? new Tokens.fromJson(json['tokens']) : null;
+        json['tokens'] != null ? Tokens.fromJson(json['tokens']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    if (this.tokens != null) {
-      data['tokens'] = this.tokens!.toJson();
+    if (tokens != null) {
+      data['tokens'] = tokens!.toJson();
     }
     return data;
   }

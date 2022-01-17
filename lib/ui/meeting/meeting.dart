@@ -6,7 +6,7 @@ class Meeting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget header = Text('Tutoring Meeting Room  00:23');
+    Widget header = const Text('Tutoring Meeting Room  00:23');
 
     Widget timer = Container(
       padding: const EdgeInsets.all(10),
@@ -29,16 +29,16 @@ class Meeting extends StatelessWidget {
       ),
     );
 
-    Widget avatar = CircleAvatar(
+    Widget avatar = const CircleAvatar(
       backgroundImage: AssetImage('assets/images/avatar.png'),
       radius: 80,
     );
 
-    Widget status = Text('You are the only one in the meeting');
+    Widget status = const Text('You are the only one in the meeting');
 
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Row(
           children: [
             Expanded(

@@ -20,7 +20,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
   Widget _buildDialogItem(Language language) => Row(
         children: <Widget>[
           Text(language.name),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Flexible(child: Text("(${language.isoCode})"))
         ],
       );
@@ -30,11 +30,11 @@ class _LanguagePickerState extends State<LanguagePicker> {
         builder: (context) => Theme(
             data: Theme.of(context).copyWith(primaryColor: Colors.pink),
             child: LanguagePickerDialog(
-                titlePadding: EdgeInsets.all(8.0),
+                titlePadding: const EdgeInsets.all(8.0),
                 searchCursorColor: Colors.pinkAccent,
-                searchInputDecoration: InputDecoration(hintText: 'Search...'),
+                searchInputDecoration: const InputDecoration(hintText: 'Search...'),
                 isSearchable: true,
-                title: Text('Select your language'),
+                title: const Text('Select your language'),
                 onValuePicked: (Language language) => setState(() {
                       _selectedDialogLanguage = language;
                       widget.controller.text = _selectedDialogLanguage.name;
@@ -58,7 +58,7 @@ class _LanguagePickerState extends State<LanguagePicker> {
             decoration: const InputDecoration(
               hintText: "Enter your language",
             ),
-            validator: (value) => validate_input(value, "language"),
+            validator: (value) => validateInput(value, "language"),
             onTap: () => _openLanguagePickerDialog(),
           ),
         ),

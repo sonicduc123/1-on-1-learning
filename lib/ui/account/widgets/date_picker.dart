@@ -70,7 +70,7 @@ class _DatePickerState extends State<DatePicker> {
                 decoration: const InputDecoration(
                   hintText: "Enter your birthday",
                 ),
-                validator: (value) => validate_input(value, 'birthday'),
+                validator: (value) => validateInput(value, 'birthday'),
                 //textAlign: TextAlign.center,
               ),
             ),

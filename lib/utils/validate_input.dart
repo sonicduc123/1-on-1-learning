@@ -1,4 +1,4 @@
-String? validate_input(String? value, String? type) {
+String? validateInput(String? value, String? type) {
   if (value == null || value.isEmpty) {
     return 'Please enter your $type';
   }

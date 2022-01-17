@@ -23,9 +23,9 @@ class ChatItem extends StatelessWidget {
           ),
         ],
       ),
-      title: Text('Pham Anh Duc'),
-      subtitle: Text('You: hello world'),
-      trailing: Text(
+      title: const Text('Pham Anh Duc'),
+      subtitle: const Text('You: hello world'),
+      trailing: const Text(
         '2021-10-21 09:57PM',
         style: TextStyle(fontSize: 11),
       ),

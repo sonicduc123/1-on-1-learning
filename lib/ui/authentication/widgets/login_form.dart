@@ -1,14 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
-import 'package:let_tutor/models/auth.dart';
-import 'package:let_tutor/models/error.dart';
+import 'package:let_tutor/data/network/post_api.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/authentication/widgets/login_input.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,31 +31,23 @@ class _LoginFormState extends State<LoginForm> {
         passwordController.text = value.getString("password")!;
       }
     });
+    super.initState();
   }
 
   Future<void> onLoginPress() async {
     setState(() {
       isLoading = true;
     });
-    Response response = await post(Uri.parse(Endpoints.login), body: {
-      "email": emailController.text,
-      "password": passwordController.text,
-    });
+
+    bool isLoginSuccess = await PostAPI.loginAccount(
+        emailController.text, passwordController.text, context);
+
     setState(() {
       isLoading = false;
     });
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-      return;
-    } else {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("email", emailController.text);
-      prefs.setString("password", passwordController.text);
-      Auth auth = Auth.fromJson(jsonDecode(response.body));
-      prefs.setString("accessToken", auth.tokens!.access!.token!);
-      prefs.setString("refreshToken", auth.tokens!.refresh!.token!);
+    if (isLoginSuccess) {
+      widget.loginSuccessCallback();
     }
-    widget.loginSuccessCallback();
   }
 
   @override

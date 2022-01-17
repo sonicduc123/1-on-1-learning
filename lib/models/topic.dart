@@ -24,13 +24,13 @@ class Topics {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['courseId'] = this.courseId;
-    data['orderCourse'] = this.orderCourse;
-    data['name'] = this.name;
-    data['nameFile'] = this.nameFile;
-    data['description'] = this.description;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['courseId'] = courseId;
+    data['orderCourse'] = orderCourse;
+    data['name'] = name;
+    data['nameFile'] = nameFile;
+    data['description'] = description;
     return data;
   }
 }

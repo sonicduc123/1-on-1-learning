@@ -10,9 +10,9 @@ class BookingHistory extends StatelessWidget {
     return Scaffold(
       appBar: createAppBar('Booking History', true, context),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView(
-          children: List.generate(10, (index) => BookingHistoryItem()),
+          children: List.generate(10, (index) => const BookingHistoryItem()),
         ),
       ),
     );

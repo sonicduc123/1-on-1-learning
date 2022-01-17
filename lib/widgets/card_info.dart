@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -10,7 +9,6 @@ import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/rating_star.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:country_codes/country_codes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 typedef FavoriteCallback = void Function();
@@ -84,7 +82,7 @@ class _BriefInfoCardState extends State<BriefInfoCard> {
                           children: [
                             Text(
                               widget.tutor.name!,
-                              style: TextStyle(fontSize: 17),
+                              style: const TextStyle(fontSize: 17),
                             ),
                             RatingStar(
                               rating: widget.tutor.rating,

@@ -7,18 +7,18 @@ class Tokens {
   Tokens({this.access, this.refresh});
 
   Tokens.fromJson(Map<String, dynamic> json) {
-    access = json['access'] != null ? new Token.fromJson(json['access']) : null;
+    access = json['access'] != null ? Token.fromJson(json['access']) : null;
     refresh =
-        json['refresh'] != null ? new Token.fromJson(json['refresh']) : null;
+        json['refresh'] != null ? Token.fromJson(json['refresh']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.access != null) {
-      data['access'] = this.access!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (access != null) {
+      data['access'] = access!.toJson();
     }
-    if (this.refresh != null) {
-      data['refresh'] = this.refresh!.toJson();
+    if (refresh != null) {
+      data['refresh'] = refresh!.toJson();
     }
     return data;
   }

@@ -1,34 +1,26 @@
-import 'dart:convert';
-import 'dart:developer';
 
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:http/http.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/constants/supported_location.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
-import 'package:let_tutor/models/tutor_dto.dart';
+import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/ui/account/setting.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
-import 'package:let_tutor/ui/chat/chat.dart';
 import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:country_code_picker/country_localizations.dart';
 
 void main() {
   runApp(
     MaterialApp(
       title: 'Tutor App',
-      home: TutorApp(),
+      home: const TutorApp(),
       routes: Routes.routes,
       onGenerateRoute: (settings) => Routes.generateRoute(settings),
       supportedLocales: SupportedLocation.locates,
@@ -42,7 +34,7 @@ void main() {
 }
 
 class TutorApp extends StatefulWidget {
-  TutorApp({Key? key}) : super(key: key);
+  const TutorApp({Key? key}) : super(key: key);
 
   @override
   _TutorAppState createState() => _TutorAppState();
@@ -58,14 +50,7 @@ class _TutorAppState extends State<TutorApp> {
   bool isLoadingListTutor = true;
 
   void getListTutor() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response = await get(Uri.parse(Endpoints.getListTutor), headers: {
-      "Authorization": "Bearer " + prefs.getString("accessToken")!,
-    });
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-    }
-    tutorsInfo = TutorsInfo.fromJson(jsonDecode(response.body));
+    tutorsInfo = await GetAPI.getListTutor();
     listTutor = tutorsInfo!.tutors;
     setState(() {
       isLoadingListTutor = false;
@@ -73,19 +58,10 @@ class _TutorAppState extends State<TutorApp> {
   }
 
   void getUserInfor() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response = await get(Uri.parse(Endpoints.getUserInfor), headers: {
-      "Authorization": "Bearer " + prefs.getString("accessToken")!,
-    });
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-    }
-    userInfor = UserInfor.fromJson(jsonDecode(response.body));
-    userInfor!.changeNotify();
+    userInfor = await GetAPI.getUserInfor();
     setState(() {
       isLoadingUser = false;
     });
-    log('main: ' + userInfor!.user!.name!);
   }
 
   void userChangeCallback(User userChange) {
@@ -131,11 +107,11 @@ class _TutorAppState extends State<TutorApp> {
               userChangeCallback: userChangeCallback,
             );
           case BottomBars.course:
-            return CoursePage();
+            return const CoursePage();
           case BottomBars.upcoming:
-            return Upcoming();
+            return const Upcoming();
           case BottomBars.tutor:
-            return Tutor();
+            return const Tutor();
           case BottomBars.setting:
             return Setting(
               logoutCallback: logoutCallback,
@@ -158,7 +134,7 @@ class _TutorAppState extends State<TutorApp> {
         return BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Course'),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Courses'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.access_time), label: 'Schedule'),
             BottomNavigationBarItem(

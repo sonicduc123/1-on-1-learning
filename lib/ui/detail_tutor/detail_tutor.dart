@@ -1,23 +1,16 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/tutor_detail.dart';
 import 'package:let_tutor/ui/course/course.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/header.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_block.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_chip.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_field.dart';
-import 'package:let_tutor/ui/detail_tutor/widgets/interaction_button.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/rating_and_comment.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/video_infor.dart';
-import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 typedef FavoriteCallback = void Function();
 
@@ -38,7 +31,6 @@ class _DetailTutorState extends State<DetailTutor> {
 
   @override
   void initState() {
-    // TODO: implement initState
     getDetailTutor();
     super.initState();
   }
@@ -47,18 +39,9 @@ class _DetailTutorState extends State<DetailTutor> {
     setState(() {
       isLoading = true;
     });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response = await get(
-      Uri.parse(Endpoints.getTutor + widget.tutorId),
-      headers: {
-        "Authorization": "Bearer " + prefs.getString('accessToken')!,
-      },
-    );
-    if (response.statusCode != 200) {
-      handleErrorFetch(response.body, context);
-    }
-    tutorDetail = TutorDetail.fromJson(jsonDecode(response.body));
-    await tutorDetail!.user!.convertCountryCode();
+
+    tutorDetail = await GetAPI.getTutorDetail(widget.tutorId);
+
     setState(() {
       isLoading = false;
     });
@@ -93,7 +76,7 @@ class _DetailTutorState extends State<DetailTutor> {
 
     Widget description = Text(
       !isLoading ? tutorDetail!.bio! : "",
-      style: TextStyle(fontSize: 15),
+      style: const TextStyle(fontSize: 15),
     );
 
     Widget languages = InforChip(
@@ -128,7 +111,7 @@ class _DetailTutorState extends State<DetailTutor> {
         : tutorDetail!.user!.courses!.isNotEmpty
             ? Column(
                 children: [
-                  InforField(title: 'Course'),
+                  const InforField(title: 'Course'),
                   Column(
                     children: List.generate(
                       tutorDetail!.user!.courses!.length,
@@ -169,7 +152,7 @@ class _DetailTutorState extends State<DetailTutor> {
       appBar: createAppBar('Detail Information of Tutor', true, context),
       body: !isLoading
           ? Container(
-              padding: EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -194,7 +177,7 @@ class _DetailTutorState extends State<DetailTutor> {
                 ),
               ),
             )
-          : Center(child: CircularProgressIndicator()),
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
