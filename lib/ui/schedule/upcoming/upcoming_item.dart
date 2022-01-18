@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/data/network/del_api.dart';
 import 'package:let_tutor/models/schedule.dart';
+import 'package:let_tutor/ui/schedule/upcoming/widgets/cancel_dialog.dart';
 import 'package:let_tutor/widgets/space.dart';
 
+typedef CancelScheduleCallback = Function(String id);
+
 class UpcomingItem extends StatelessWidget {
-  const UpcomingItem({Key? key, required this.schedule}) : super(key: key);
+  const UpcomingItem({Key? key, required this.schedule, required this.callback})
+      : super(key: key);
 
   final Schedule schedule;
+  final CancelScheduleCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +73,10 @@ class UpcomingItem extends StatelessWidget {
                     primary: Colors.grey[50],
                     onPrimary: Colors.blue,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    makeCancelDialog(
+                        schedule.scheduleDetailId!, callback, context);
+                  },
                   child: const Text('Cancel'),
                 ),
               ),

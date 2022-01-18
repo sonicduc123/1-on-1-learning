@@ -46,4 +46,7 @@ class Endpoints {
 
   // get total time learning
   static const String getTotalTimeLearn = baseUrl + "call/total";
+
+  // cancel booking
+  static const String cancelBooking = baseUrl + "booking";
 }
