@@ -12,7 +12,6 @@ import 'package:let_tutor/ui/homepage/widgets/upcomming_lesson.dart';
 import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/list_chip.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:provider/src/provider.dart';
 
 typedef TabBarCallback = void Function(int tabIndex);
 typedef UserChangeCallback = void Function(User user);
@@ -82,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     // user = context.watch<User>();
     // log(user!.name!);
     // log(user!.avatar!);
-  Widget upcomingLesson = UpcommingLesson(listSchedule: widget.listSchedule, tabBarCallback: widget.callback,);
+  Widget upcomingLesson = UpcomingLesson(listSchedule: widget.listSchedule, tabBarCallback: widget.callback,);
 
     Widget listSpecialities =
         ListChip(listChip: listChip, callback: listChipCallback);

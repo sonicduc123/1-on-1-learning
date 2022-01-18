@@ -2,6 +2,7 @@ import 'package:let_tutor/data/network/get_api/course_detail.dart';
 import 'package:let_tutor/data/network/get_api/list_course.dart';
 import 'package:let_tutor/data/network/get_api/list_schedule.dart';
 import 'package:let_tutor/data/network/get_api/list_tutor.dart';
+import 'package:let_tutor/data/network/get_api/total_time_learn.dart';
 import 'package:let_tutor/data/network/get_api/tutor_detail.dart';
 import 'package:let_tutor/data/network/get_api/user_infor.dart';
 
@@ -24,4 +25,7 @@ class GetAPI {
 
   // get user infor
   static getUserInfor() => getUserInforAPI();
+
+  // get total time learn
+  static getTotalTimeLearn() => getTotalTimeLearnAPI();
 }

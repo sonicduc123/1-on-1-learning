@@ -136,7 +136,9 @@ class _TutorAppState extends State<TutorApp> {
               listSchedule: listSchedule!,
             );
           case BottomBars.tutor:
-            return Tutor(listTutor: tutorsInfo!.tutors!.listTutor!,);
+            return Tutor(
+              listTutor: tutorsInfo!.tutors!.listTutor!,
+            );
           case BottomBars.setting:
             return Setting(
               logoutCallback: logoutCallback,
@@ -177,6 +179,9 @@ class _TutorAppState extends State<TutorApp> {
             setState(() {
               if (index == BottomBars.home || index == BottomBars.tutor) {
                 getListTutor();
+              }
+              if (index == BottomBars.home || index == BottomBars.upcoming) {
+                getListSchedule();
               }
               selectedIndex = index;
             });

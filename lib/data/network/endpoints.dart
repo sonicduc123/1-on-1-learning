@@ -41,6 +41,9 @@ class Endpoints {
   static const String uploadAvatar = baseUrl + "user/uploadAvatar";
 
   // get list schedule
-  static const String getListSchedule = baseUrl +
-      "booking/list/student?orderBy=meeting&sortBy=asc&";
+  static const String getListSchedule =
+      baseUrl + "booking/list/student?orderBy=meeting&sortBy=asc&";
+
+  // get total time learning
+  static const String getTotalTimeLearn = baseUrl + "call/total";
 }
