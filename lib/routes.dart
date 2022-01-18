@@ -9,7 +9,6 @@ import 'package:let_tutor/ui/detail_tutor/models/detail_tutor_argument.dart';
 import 'package:let_tutor/ui/meeting/meeting.dart';
 import 'package:let_tutor/ui/schedule/booking_history/booking_history.dart';
 import 'package:let_tutor/ui/schedule/session_history/session_history.dart';
-import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
 
 class Routes {
@@ -38,8 +37,8 @@ class Routes {
     register: (BuildContext context) => const Register(),
     forgotPassword: (BuildContext context) => const ForgotPassword(),
     //chat: (BuildContext context) => Chat(),
-    upcomming: (BuildContext context) => const Upcoming(),
-    tutor: (BuildContext context) => const Tutor(),
+    // upcomming: (BuildContext context) => Upcoming(),
+    //tutor: (BuildContext context) => const Tutor(),
     course: (BuildContext context) => const CoursePage(),
     //setting: (BuildContext context) => Setting(),
 
@@ -62,6 +61,6 @@ class Routes {
       return MaterialPageRoute(builder: (context) {
         return DetailCourse(courseID: courseID);
       });
-    } 
+    }
   }
 }

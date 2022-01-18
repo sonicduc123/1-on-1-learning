@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/constants/supported_location.dart';
 import 'package:let_tutor/data/network/get_api.dart';
+import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
@@ -46,21 +48,36 @@ class _TutorAppState extends State<TutorApp> {
   UserInfor? userInfor;
   Tutors? listTutor;
   TutorsInfo? tutorsInfo;
+  List<Schedule>? listSchedule;
+  bool isLoadingSchedule = true;
   bool isLoadingUser = true;
   bool isLoadingListTutor = true;
 
   void getListTutor() async {
-    tutorsInfo = await GetAPI.getListTutor();
-    listTutor = tutorsInfo!.tutors;
+    TutorsInfo loadTutorInfo = await GetAPI.getListTutor();
+    log('load tutor');
     setState(() {
+      tutorsInfo = loadTutorInfo;
+      listTutor = tutorsInfo!.tutors;
       isLoadingListTutor = false;
     });
   }
 
   void getUserInfor() async {
-    userInfor = await GetAPI.getUserInfor();
+    UserInfor loadUserInfor = await GetAPI.getUserInfor();
+    log('load user');
     setState(() {
+      userInfor = loadUserInfor;
       isLoadingUser = false;
+    });
+  }
+
+  getListSchedule() async {
+    List<Schedule> loadListSchedule = await GetAPI.getListSchedule(1, 20);
+    log('load schedule');
+    setState(() {
+      listSchedule = loadListSchedule;
+      isLoadingSchedule = false;
     });
   }
 
@@ -79,8 +96,12 @@ class _TutorAppState extends State<TutorApp> {
   void loginSuccessCallback() {
     setState(() {
       isLogin = true;
+      isLoadingListTutor = true;
+      isLoadingSchedule = true;
+      isLoadingUser = true;
       getUserInfor();
       getListTutor();
+      getListSchedule();
     });
   }
 
@@ -94,7 +115,7 @@ class _TutorAppState extends State<TutorApp> {
   Widget build(BuildContext context) {
     Widget setCurrentPage() {
       if (isLogin) {
-        if (isLoadingListTutor || isLoadingUser) {
+        if (isLoadingListTutor || isLoadingUser || isLoadingSchedule) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -105,13 +126,17 @@ class _TutorAppState extends State<TutorApp> {
               callback: tabBarCallback,
               user: userInfor!.user!,
               userChangeCallback: userChangeCallback,
+              listSchedule: listSchedule!,
+              listTutor: tutorsInfo!.tutors!.listTutor!,
             );
           case BottomBars.course:
             return const CoursePage();
           case BottomBars.upcoming:
-            return const Upcoming();
+            return Upcoming(
+              listSchedule: listSchedule!,
+            );
           case BottomBars.tutor:
-            return const Tutor();
+            return Tutor(listTutor: tutorsInfo!.tutors!.listTutor!,);
           case BottomBars.setting:
             return Setting(
               logoutCallback: logoutCallback,
@@ -123,6 +148,8 @@ class _TutorAppState extends State<TutorApp> {
               callback: tabBarCallback,
               user: userInfor!.user!,
               userChangeCallback: userChangeCallback,
+              listSchedule: listSchedule!,
+              listTutor: tutorsInfo!.tutors!.listTutor!,
             );
         }
       }
@@ -159,17 +186,9 @@ class _TutorAppState extends State<TutorApp> {
       return null;
     }
 
-    return MultiProvider(
-      providers: [
-        Provider(create: (context) => listTutor!.listTutor),
-        // ChangeNotifierProvider.value(
-        //   value: userInfor!.user,
-        // )
-      ],
-      child: Scaffold(
-        body: setCurrentPage(),
-        bottomNavigationBar: createBottonNavigationBar(),
-      ),
+    return Scaffold(
+      body: setCurrentPage(),
+      bottomNavigationBar: createBottonNavigationBar(),
     );
   }
 }

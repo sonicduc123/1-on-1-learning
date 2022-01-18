@@ -8,27 +8,27 @@ import 'package:provider/src/provider.dart';
 import 'package:tiengviet/tiengviet.dart';
 
 class Tutor extends StatefulWidget {
-  const Tutor({Key? key}) : super(key: key);
+  const Tutor({Key? key, required this.listTutor}) : super(key: key);
+
+  final List<TutorDTO> listTutor;
 
   @override
   _TutorState createState() => _TutorState();
 }
 
 class _TutorState extends State<Tutor> {
-  List<TutorDTO>? listTutor;
   List<TutorDTO> listSearchTutor = [];
   TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
-    listTutor = context.read<List<TutorDTO>>();
-    listSearchTutor = listTutor!.sublist(0);
+    listSearchTutor = widget.listTutor.sublist(0);
     super.initState();
   }
 
   favoriteCallback() {
     setState(() {
-      listTutor!.sort((a, b) => sortListTutor(a, b));
+      widget.listTutor.sort((a, b) => sortListTutor(a, b));
       listSearchTutor.sort((a, b) => sortListTutor(a, b));
     });
   }
@@ -66,7 +66,7 @@ class _TutorState extends State<Tutor> {
               onChanged: (value) => {
                 setState(() {
                   listSearchTutor = [];
-                  for (var tutor in listTutor!) {
+                  for (var tutor in widget.listTutor) {
                     if (TiengViet.parse(tutor.name!)
                         .toLowerCase()
                         .contains(value.toLowerCase())) {

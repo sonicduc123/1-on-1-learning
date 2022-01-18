@@ -15,7 +15,7 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
-  List<Courses>? listCourse;
+  List<Courses> listCourse = [];
   List<Courses> listSearchCourse = [];
   TextEditingController searchController = TextEditingController();
   bool isLoading = true;
@@ -33,7 +33,7 @@ class _CoursePageState extends State<CoursePage> {
     List<Courses> listCourseAPI = await GetAPI.getListCourse();
     setState(() {
       listCourse = listCourseAPI;
-      listSearchCourse = listCourse!.sublist(0);
+      listSearchCourse = listCourse.sublist(0);
       isLoading = false;
     });
   }
@@ -62,7 +62,7 @@ class _CoursePageState extends State<CoursePage> {
               onChanged: (value) => {
                 setState(() {
                   listSearchCourse = [];
-                  for (var course in listCourse!) {
+                  for (var course in listCourse) {
                     if (TiengViet.parse(course.name!)
                         .toLowerCase()
                         .contains(value.toLowerCase())) {

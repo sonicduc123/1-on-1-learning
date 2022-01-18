@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/constants/chips.dart';
+import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
@@ -21,12 +22,18 @@ class HomePage extends StatefulWidget {
       {Key? key,
       required this.callback,
       required this.user,
-      required this.userChangeCallback})
+      required this.userChangeCallback,
+      required this.listSchedule,
+      required this.listTutor,
+      })
       : super(key: key);
 
   final TabBarCallback callback;
   final User user;
   final UserChangeCallback userChangeCallback;
+  final List<Schedule> listSchedule;
+  final List<TutorDTO> listTutor;
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -35,16 +42,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int indexChip = 0;
   List<TutorDTO> listFilterTutor = [];
-  List<TutorDTO> listTutor = [];
 
   @override
   void initState() {
-    listTutor = context.read<List<TutorDTO>>();
-    listFilterTutor = listTutor.sublist(0);
+    listFilterTutor = widget.listTutor.sublist(0);
     super.initState();
   }
 
-  Widget upcomingLesson = const UpcommingLesson();
   List<String> listChip = Chips.listChip;
 
   listChipCallback(int newIndexChip) {
@@ -52,11 +56,11 @@ class _HomePageState extends State<HomePage> {
       () {
         indexChip = newIndexChip;
         if (newIndexChip == 0) {
-          listFilterTutor = listTutor.sublist(0);
+          listFilterTutor = widget.listTutor.sublist(0);
           return;
         }
         listFilterTutor = [];
-        for (TutorDTO tutor in listTutor) {
+        for (TutorDTO tutor in widget.listTutor) {
           List<String> listSpecialties = tutor.specialties!.split(",");
           if (listSpecialties.contains(listChip[newIndexChip].toLowerCase())) {
             listFilterTutor.add(tutor);
@@ -68,7 +72,7 @@ class _HomePageState extends State<HomePage> {
 
   favoriteCallback() {
     setState(() {
-      listTutor.sort((a, b) => sortListTutor(a, b));
+      widget.listTutor.sort((a, b) => sortListTutor(a, b));
       listFilterTutor.sort((a, b) => sortListTutor(a, b));
     });
   }
@@ -78,6 +82,7 @@ class _HomePageState extends State<HomePage> {
     // user = context.watch<User>();
     // log(user!.name!);
     // log(user!.avatar!);
+  Widget upcomingLesson = UpcommingLesson(listSchedule: widget.listSchedule, tabBarCallback: widget.callback,);
 
     Widget listSpecialities =
         ListChip(listChip: listChip, callback: listChipCallback);

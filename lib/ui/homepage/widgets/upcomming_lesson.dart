@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/constants/bottom_bar.dart';
+import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/routes.dart';
 import 'package:let_tutor/widgets/space.dart';
+import 'package:intl/intl.dart';
+
+typedef TabBarCallback = void Function(int tabIndex);
 
 class UpcommingLesson extends StatelessWidget {
-  const UpcommingLesson({Key? key}) : super(key: key);
+  UpcommingLesson(
+      {Key? key, required this.listSchedule, required this.tabBarCallback})
+      : super(key: key);
+
+  final List<Schedule> listSchedule;
+  final TabBarCallback tabBarCallback;
+  DateTime? upcomingDateStart;
+  DateTime? upcomingDateEnd;
+  DateFormat dateFormatStart = DateFormat('EEE, d MMM yyyy, hh:mm');
+  DateFormat dateFormatEnd = DateFormat('hh:mm');
 
   @override
   Widget build(BuildContext context) {
+    if (listSchedule.isNotEmpty) {
+      upcomingDateStart = DateTime.fromMillisecondsSinceEpoch(
+          listSchedule[0].scheduleDetailInfo!.startPeriodTimestamp!);
+      upcomingDateEnd = DateTime.fromMillisecondsSinceEpoch(
+          listSchedule[0].scheduleDetailInfo!.endPeriodTimestamp!);
+    }
     return Container(
       child: Column(
         children: [
@@ -23,18 +43,26 @@ class UpcommingLesson extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           space(10),
-          const Text(
-            'Wed, 06 Oct 21 06:03 - 06:55',
-            style: TextStyle(color: Colors.white),
+          Text(
+            listSchedule.isNotEmpty
+                ? dateFormatStart.format(upcomingDateStart!) +
+                    ' - ' +
+                    dateFormatEnd.format(upcomingDateEnd!)
+                : 'There is no schedule',
+            style: const TextStyle(color: Colors.white),
           ),
           space(10),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, Routes.meeting);
+              if (listSchedule.isNotEmpty) {
+                Navigator.pushNamed(context, Routes.meeting);
+              } else {
+                tabBarCallback(BottomBars.tutor);
+              }
             },
-            child: const Text(
-              'Enter lesson room',
-              style: TextStyle(
+            child: Text(
+              listSchedule.isNotEmpty ? 'Enter lesson room' : 'Book a schedule',
+              style: const TextStyle(
                 color: Colors.blue,
               ),
             ),
