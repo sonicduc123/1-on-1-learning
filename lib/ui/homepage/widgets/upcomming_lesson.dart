@@ -33,17 +33,18 @@ class _UpcomingLessonState extends State<UpcomingLesson> {
 
   @override
   initState() {
-    setState(() {
-      getTotalTimeLearn();
-    });
+    getTotalTimeLearn();
+
     super.initState();
   }
 
   getTotalTimeLearn() async {
     totalTimeLearn = await GetAPI.getTotalTimeLearn();
     log(totalTimeLearn.toString());
-    hours = totalTimeLearn ~/ 60;
-    minutes = totalTimeLearn % 60;
+    setState(() {
+      hours = totalTimeLearn ~/ 60;
+      minutes = totalTimeLearn % 60;
+    });
   }
 
   @override

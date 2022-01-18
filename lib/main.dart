@@ -54,6 +54,9 @@ class _TutorAppState extends State<TutorApp> {
   bool isLoadingListTutor = true;
 
   void getListTutor() async {
+    setState(() {
+      isLoadingListTutor = true;
+    });
     TutorsInfo loadTutorInfo = await GetAPI.getListTutor();
     log('load tutor');
     setState(() {
@@ -64,6 +67,9 @@ class _TutorAppState extends State<TutorApp> {
   }
 
   void getUserInfor() async {
+    setState(() {
+      isLoadingUser = true;
+    });
     UserInfor loadUserInfor = await GetAPI.getUserInfor();
     log('load user');
     setState(() {
@@ -73,6 +79,9 @@ class _TutorAppState extends State<TutorApp> {
   }
 
   getListSchedule() async {
+    setState(() {
+      isLoadingSchedule = true;
+    });
     List<Schedule> loadListSchedule = await GetAPI.getListSchedule(1, 20);
     log('load schedule');
     setState(() {
@@ -96,9 +105,6 @@ class _TutorAppState extends State<TutorApp> {
   void loginSuccessCallback() {
     setState(() {
       isLogin = true;
-      isLoadingListTutor = true;
-      isLoadingSchedule = true;
-      isLoadingUser = true;
       getUserInfor();
       getListTutor();
       getListSchedule();

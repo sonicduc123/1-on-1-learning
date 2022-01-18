@@ -9,11 +9,11 @@ class UpcomingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime start = DateTime.fromMicrosecondsSinceEpoch(
-        schedule.scheduleDetailInfo!.startPeriodTimestamp! * 1000);
+    DateTime start = DateTime.fromMillisecondsSinceEpoch(
+        schedule.scheduleDetailInfo!.startPeriodTimestamp!);
 
-    DateTime end = DateTime.fromMicrosecondsSinceEpoch(
-        schedule.scheduleDetailInfo!.endPeriodTimestamp! * 1000);
+    DateTime end = DateTime.fromMillisecondsSinceEpoch(
+        schedule.scheduleDetailInfo!.endPeriodTimestamp!);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 20),

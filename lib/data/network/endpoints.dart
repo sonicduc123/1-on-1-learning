@@ -42,7 +42,7 @@ class Endpoints {
 
   // get list schedule
   static const String getListSchedule =
-      baseUrl + "booking/list/student?orderBy=meeting&sortBy=asc&";
+      baseUrl + "booking/list/student?orderBy=meeting&";
 
   // get total time learning
   static const String getTotalTimeLearn = baseUrl + "call/total";

@@ -1,5 +1,6 @@
 import 'package:let_tutor/data/network/get_api/course_detail.dart';
 import 'package:let_tutor/data/network/get_api/list_course.dart';
+import 'package:let_tutor/data/network/get_api/list_history.dart';
 import 'package:let_tutor/data/network/get_api/list_schedule.dart';
 import 'package:let_tutor/data/network/get_api/list_tutor.dart';
 import 'package:let_tutor/data/network/get_api/total_time_learn.dart';
@@ -28,4 +29,9 @@ class GetAPI {
 
   // get total time learn
   static getTotalTimeLearn() => getTotalTimeLearnAPI();
+
+  // get list history
+  // get list schedule
+  static getListHistory(int page, int perPage) =>
+      getListHistoryAPI(page, perPage);
 }

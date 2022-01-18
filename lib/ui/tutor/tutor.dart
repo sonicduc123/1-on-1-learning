@@ -4,7 +4,6 @@ import 'package:let_tutor/models/tutor_dto.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/widgets/card_info.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:provider/src/provider.dart';
 import 'package:tiengviet/tiengviet.dart';
 
 class Tutor extends StatefulWidget {
@@ -60,7 +59,7 @@ class _TutorState extends State<Tutor> {
           children: [
             CupertinoSearchTextField(
               controller: searchController,
-              placeholder: 'Search tutors by name, nation, ...',
+              placeholder: 'Search tutors by name',
               padding: const EdgeInsets.all(8),
               prefixIcon: const Icon(Icons.search),
               onChanged: (value) => {

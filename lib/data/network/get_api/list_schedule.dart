@@ -11,7 +11,8 @@ Future<List<Schedule>> getListScheduleAPI(int page, int perPage) async {
   int now = DateTime.now().millisecondsSinceEpoch;
   Response response = await get(
     Uri.parse(Endpoints.getListSchedule +
-        "page=$page" +
+        "sortBy=asc" +
+        "&page=$page" +
         "&perPage=$perPage" +
         "&dateTimeGte=$now"),
     headers: {"Authorization": "Bearer " + prefs.getString("accessToken")!},
