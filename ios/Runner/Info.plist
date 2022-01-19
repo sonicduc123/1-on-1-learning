@@ -47,6 +47,10 @@
 	<string>Upload image from camera for screen background</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Post videos to profile</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) MyApp needs access to your camera for meetings.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) MyApp needs access to your microphone for meetings.</string>
 </dict>
 <key>NSAppTransportSecurity</key>
 <dict>

@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/data/network/get_api.dart';
+import 'package:let_tutor/models/meeting_dto.dart';
 import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/routes.dart';
+import 'package:let_tutor/ui/meeting/video_call.dart';
 import 'package:let_tutor/widgets/space.dart';
 import 'package:intl/intl.dart';
 
@@ -25,8 +28,8 @@ class UpcomingLesson extends StatefulWidget {
 class _UpcomingLessonState extends State<UpcomingLesson> {
   DateTime? upcomingDateStart;
   DateTime? upcomingDateEnd;
-  DateFormat dateFormatStart = DateFormat('EEE, d MMM yyyy, hh:mm');
-  DateFormat dateFormatEnd = DateFormat('hh:mm');
+  final DateFormat dateFormatStart = DateFormat('EEE, d MMM yyyy, hh:mm');
+  final DateFormat dateFormatEnd = DateFormat('hh:mm');
   int totalTimeLearn = 0;
   int hours = 0;
   int minutes = 0;
@@ -40,11 +43,30 @@ class _UpcomingLessonState extends State<UpcomingLesson> {
 
   getTotalTimeLearn() async {
     totalTimeLearn = await GetAPI.getTotalTimeLearn();
-    log(totalTimeLearn.toString());
     setState(() {
       hours = totalTimeLearn ~/ 60;
       minutes = totalTimeLearn % 60;
     });
+  }
+
+  gotoMeeting() {
+    String link = widget.listSchedule[0].studentMeetingLink!;
+    String data = link.split('.')[1];
+    int count = 0;
+    while (data.length % 4 != 0) {
+      count++;
+      data += "0";
+    }
+    String decode = utf8.decode(base64Decode(data));
+    MeetingDTO meetingDTO = MeetingDTO.fromJson(
+        jsonDecode(decode.substring(0, decode.length - count)));
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            Meeting(meetingDTO: meetingDTO, token: link.substring(13)),
+      ),
+    );
   }
 
   @override
@@ -83,7 +105,7 @@ class _UpcomingLessonState extends State<UpcomingLesson> {
           ElevatedButton(
             onPressed: () {
               if (widget.listSchedule.isNotEmpty) {
-                Navigator.pushNamed(context, Routes.meeting);
+                gotoMeeting();
               } else {
                 widget.tabBarCallback(BottomBars.tutor);
               }

@@ -12,13 +12,12 @@ class Feedbacks {
 
   Feedbacks.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    rating = json['rating'];
+    rating = json['rating'].toInt();
     content = json['content'];
     createdAt = json['createdAt'];
     time = calculateTimeToNow(DateTime.parse(createdAt!));
-    student = json['firstInfo'] != null
-        ? Student.fromJson(json['firstInfo'])
-        : null;
+    student =
+        json['firstInfo'] != null ? Student.fromJson(json['firstInfo']) : null;
   }
 
   Map<String, dynamic> toJson() {

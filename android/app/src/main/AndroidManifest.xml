@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lettutor.let_tutor">
+    package="com.lettutor.let_tutor"
+    xmlns:tools="http://schemas.android.com/tools">>
    <application
+        tools:replace="android:label"
         android:label="let_tutor"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

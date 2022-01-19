@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:let_tutor/data/network/del_api.dart';
+import 'package:let_tutor/models/meeting_dto.dart';
 import 'package:let_tutor/models/schedule.dart';
+import 'package:let_tutor/ui/meeting/video_call.dart';
 import 'package:let_tutor/ui/schedule/upcoming/widgets/cancel_dialog.dart';
 import 'package:let_tutor/widgets/space.dart';
 
@@ -15,11 +18,34 @@ class UpcomingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    gotoMeeting() {
+      String link = schedule.studentMeetingLink!;
+      String data = link.split('.')[1];
+      int count = 0;
+      while (data.length % 4 != 0) {
+        count++;
+        data += "0";
+      }
+      String decode = utf8.decode(base64Decode(data));
+      MeetingDTO meetingDTO = MeetingDTO.fromJson(
+          jsonDecode(decode.substring(0, decode.length - count)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              Meeting(meetingDTO: meetingDTO, token: link.substring(13)),
+        ),
+      );
+    }
+
     DateTime start = DateTime.fromMillisecondsSinceEpoch(
         schedule.scheduleDetailInfo!.startPeriodTimestamp!);
 
     DateTime end = DateTime.fromMillisecondsSinceEpoch(
         schedule.scheduleDetailInfo!.endPeriodTimestamp!);
+
+    DateTime now = DateTime.now();
+    bool isAbleCancel = start.difference(now).inHours >= 2;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 20),
@@ -73,16 +99,20 @@ class UpcomingItem extends StatelessWidget {
                     primary: Colors.grey[50],
                     onPrimary: Colors.blue,
                   ),
-                  onPressed: () {
-                    makeCancelDialog(
-                        schedule.scheduleDetailId!, callback, context);
-                  },
+                  onPressed: isAbleCancel
+                      ? () {
+                          makeCancelDialog(
+                              schedule.scheduleDetailId!, callback, context);
+                        }
+                      : null,
                   child: const Text('Cancel'),
                 ),
               ),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    gotoMeeting();
+                  },
                   child: const Text('Go to Meeting'),
                 ),
               ),
