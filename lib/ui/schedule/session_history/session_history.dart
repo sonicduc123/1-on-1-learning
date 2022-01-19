@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/ui/schedule/session_history/widgets/session_history_item.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
-import 'package:let_tutor/widgets/space.dart';
 
 class SessionHistory extends StatefulWidget {
   const SessionHistory({Key? key}) : super(key: key);

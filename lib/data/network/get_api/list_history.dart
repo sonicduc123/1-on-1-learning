@@ -1,6 +1,5 @@
 // get list schedule
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:let_tutor/data/network/endpoints.dart';

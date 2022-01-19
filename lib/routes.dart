@@ -6,10 +6,10 @@ import 'package:let_tutor/ui/detail_course/detail_course.dart';
 import 'package:let_tutor/ui/detail_tutor/detail_tutor.dart';
 import 'package:let_tutor/ui/detail_tutor/models/detail_tutor_argument.dart';
 //import 'package:let_tutor/ui/homepage/homepage.dart';
-import 'package:let_tutor/ui/meeting/video_call.dart';
+// import 'package:let_tutor/ui/meeting/video_call.dart';
 import 'package:let_tutor/ui/schedule/booking_history/booking_history.dart';
 import 'package:let_tutor/ui/schedule/session_history/session_history.dart';
-import 'package:let_tutor/ui/tutor/tutor.dart';
+// import 'package:let_tutor/ui/tutor/tutor.dart';
 
 class Routes {
   Routes._();

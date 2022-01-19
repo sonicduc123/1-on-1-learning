@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/data/network/get_api.dart';
+import 'package:let_tutor/data/network/post_api.dart';
+import 'package:let_tutor/models/schedule_tutor.dart';
 import 'package:let_tutor/models/tutor_detail.dart';
 import 'package:let_tutor/ui/course/course.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/header.dart';
@@ -7,6 +9,7 @@ import 'package:let_tutor/ui/detail_tutor/widgets/information_block.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_chip.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/information_field.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/rating_and_comment.dart';
+import 'package:let_tutor/ui/detail_tutor/widgets/show_date_picker.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/video_infor.dart';
 import 'package:let_tutor/widgets/app_bar.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
@@ -27,6 +30,7 @@ class DetailTutor extends StatefulWidget {
 
 class _DetailTutorState extends State<DetailTutor> {
   TutorDetail? tutorDetail;
+  List<ScheduleTutorData>? listScheduleTutor;
   bool isLoading = false;
 
   @override
@@ -41,6 +45,7 @@ class _DetailTutorState extends State<DetailTutor> {
     });
 
     tutorDetail = await GetAPI.getTutorDetail(widget.tutorId);
+    listScheduleTutor = await PostAPI.getScheduleTutor(widget.tutorId);
 
     setState(() {
       isLoading = false;
@@ -56,7 +61,9 @@ class _DetailTutorState extends State<DetailTutor> {
           )
         : Container();
 
-    Widget bookingButton = createButtonExpanded('Booking', action: () {});
+    Widget bookingButton = createButtonExpanded('Booking', action: () {
+      showDateSchedulePicker(context, listScheduleTutor!);
+    });
 
     // Widget interactionButtons = Row(
     //   children: const [

@@ -16,7 +16,6 @@ import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(

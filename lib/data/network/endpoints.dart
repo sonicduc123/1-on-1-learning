@@ -49,4 +49,10 @@ class Endpoints {
 
   // cancel booking
   static const String cancelBooking = baseUrl + "booking";
+
+  // get schedule's tutor
+  static const String getScheduleTutor = baseUrl + "schedule";
+
+  // book a class
+  static const String bookAClass = baseUrl + "booking";
 }
