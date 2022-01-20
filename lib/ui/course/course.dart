@@ -23,7 +23,8 @@ class Course extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(course.imageUrl!),
+              child: Image.network(course.imageUrl!,
+                  key: ValueKey(course.imageUrl!)),
             ),
             Container(
               padding: const EdgeInsets.all(20),
@@ -57,7 +58,8 @@ class Course extends StatelessWidget {
                   ),
                   space(10),
                   createButtonExpanded('Explore', action: () {
-                    Navigator.pushNamed(context, Routes.detailCourse, arguments: course.id);
+                    Navigator.pushNamed(context, Routes.detailCourse,
+                        arguments: course.id);
                   }),
                 ],
               ),

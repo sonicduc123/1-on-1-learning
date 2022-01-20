@@ -13,7 +13,7 @@ class GetAPI {
       getListScheduleAPI(page, perPage);
 
   // get list course
-  static getListCourse() => getListCourseAPI();
+  static getListCourse(int page, int size, String search) => getListCourseAPI(page, size, search);
 
   // get course detail
   static getCourseDetail(String courseID) => getCourseDetailAPI(courseID);

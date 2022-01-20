@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,20 @@ class _CoursePageState extends State<CoursePage> {
   List<Courses> listCourse = [];
   List<Courses> listSearchCourse = [];
   TextEditingController searchController = TextEditingController();
+  ScrollController scrollController = ScrollController();
   bool isLoading = true;
+  int page = 0;
+  final int size = 8;
 
   @override
   void initState() {
     getListCourse();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        getListCourse();
+      }
+    });
     super.initState();
   }
 
@@ -30,12 +40,21 @@ class _CoursePageState extends State<CoursePage> {
     setState(() {
       isLoading = true;
     });
-    List<Courses> listCourseAPI = await GetAPI.getListCourse();
+    page++;
+    List<Courses> listCourseAPI =
+        await GetAPI.getListCourse(page, size, searchController.text);
     setState(() {
-      listCourse = listCourseAPI;
+      listCourse.addAll(listCourseAPI);
       listSearchCourse = listCourse.sublist(0);
       isLoading = false;
     });
+    log(listSearchCourse.length.toString());
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,38 +78,46 @@ class _CoursePageState extends State<CoursePage> {
               placeholder: 'Search courses by name',
               padding: const EdgeInsets.all(8),
               prefixIcon: const Icon(Icons.search),
-              onChanged: (value) => {
+              onSubmitted: (value) => {
+                log(value),
                 setState(() {
-                  listSearchCourse = [];
-                  for (var course in listCourse) {
-                    if (TiengViet.parse(course.name!)
-                        .toLowerCase()
-                        .contains(value.toLowerCase())) {
-                      listSearchCourse.add(course);
-                    }
-                  }
-                })
+                  page = 0;
+                  listCourse = [];
+                  scrollController.animateTo(0,
+                      duration: const Duration(seconds: 2),
+                      curve: Curves.ease); // for (var course in listCourse) {
+                  //   if (TiengViet.parse(course.name!)
+                  //       .toLowerCase()
+                  //       .contains(value.toLowerCase())) {
+                  //     listSearchCourse.add(course);
+                  //   }
+                  // }
+                }),
+                getListCourse()
               },
             ),
             space(20),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : listSearchCourse.isNotEmpty
-                    ? Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: List.generate(
-                              listSearchCourse.length,
-                              (index) => Course(
-                                course: listSearchCourse[index],
-                              ),
-                            ),
+            Expanded(
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  children: List.generate(
+                    listSearchCourse.length + 1,
+                    (index) => index == listSearchCourse.length
+                        ? isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : listSearchCourse.isNotEmpty
+                                ? Container()
+                                : const Text('There is no course in system')
+                        : Course(
+                            course: listSearchCourse[index],
                           ),
-                        ),
-                      )
-                    : const Text('There is no course in system'),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

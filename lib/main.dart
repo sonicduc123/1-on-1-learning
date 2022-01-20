@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,12 @@ import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
 import 'package:let_tutor/ui/schedule/upcoming/upcoming.dart';
 import 'package:let_tutor/ui/tutor/tutor.dart';
+import 'package:let_tutor/utils/override_http.dart';
 
 void main() {
+  // fix load full respone of image before close connection
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(
     MaterialApp(
       title: 'Tutor App',
