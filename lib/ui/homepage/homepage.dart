@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:let_tutor/constants/bottom_bar.dart';
 import 'package:let_tutor/constants/chips.dart';
@@ -15,24 +14,25 @@ import 'package:let_tutor/widgets/space.dart';
 
 typedef TabBarCallback = void Function(int tabIndex);
 typedef UserChangeCallback = void Function(User user);
+typedef FavoriteCallback = void Function();
 
 class HomePage extends StatefulWidget {
-  const HomePage(
-      {Key? key,
-      required this.callback,
-      required this.user,
-      required this.userChangeCallback,
-      required this.listSchedule,
-      required this.listTutor,
-      })
-      : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.callback,
+    required this.user,
+    required this.userChangeCallback,
+    required this.listSchedule,
+    required this.listTutor,
+    required this.favoriteCallback,
+  }) : super(key: key);
 
   final TabBarCallback callback;
   final User user;
   final UserChangeCallback userChangeCallback;
+  final FavoriteCallback favoriteCallback;
   final List<Schedule> listSchedule;
   final List<TutorDTO> listTutor;
-
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       widget.listTutor.sort((a, b) => sortListTutor(a, b));
       listFilterTutor.sort((a, b) => sortListTutor(a, b));
+      widget.favoriteCallback();
     });
   }
 
@@ -81,7 +82,10 @@ class _HomePageState extends State<HomePage> {
     // user = context.watch<User>();
     // log(user!.name!);
     // log(user!.avatar!);
-  Widget upcomingLesson = UpcomingLesson(listSchedule: widget.listSchedule, tabBarCallback: widget.callback,);
+    Widget upcomingLesson = UpcomingLesson(
+      listSchedule: widget.listSchedule,
+      tabBarCallback: widget.callback,
+    );
 
     Widget listSpecialities =
         ListChip(listChip: listChip, callback: listChipCallback);
@@ -119,7 +123,12 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(user: widget.user, callback: widget.userChangeCallback)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                            user: widget.user,
+                            callback: widget.userChangeCallback)));
               },
               child: CircleAvatar(
                 backgroundImage: NetworkImage(widget.user.avatar!),

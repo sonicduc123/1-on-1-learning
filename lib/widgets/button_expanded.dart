@@ -7,12 +7,17 @@ Widget createButtonExpanded(String name, {VoidCallback? action}) => Row(
         Expanded(
           child: ElevatedButton(
             onPressed: action,
-            child: Text(
-              name,
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
+            child: name == 'Booked'
+                ? Text(
+                    name,
+                    style: const TextStyle(fontSize: 18, color: Colors.blue),
+                  )
+                : Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),

@@ -3,6 +3,7 @@ import 'package:let_tutor/models/schedule_tutor.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/show_booking_infor.dart';
 import 'package:let_tutor/widgets/button_expanded.dart';
 import 'package:let_tutor/widgets/space.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void showTimeSchedulePicker(
     BuildContext context, List<ScheduleTutorData> listSchedule) {
@@ -18,9 +19,9 @@ void showTimeSchedulePicker(
         DateTime.fromMillisecondsSinceEpoch(listSchedule[i].endTimestamp!);
     endTime.add(end.toString().substring(11, 16));
   }
-  // String userId = "";
-  // SharedPreferences.getInstance()
-  //     .then((prefs) => userId = prefs.getString('id')!);
+  String userId = "";
+  SharedPreferences.getInstance()
+      .then((prefs) => userId = prefs.getString('id')!);
 
   showModalBottomSheet<void>(
     context: context,
@@ -54,7 +55,17 @@ void showTimeSchedulePicker(
                           children: [
                             createButtonExpanded(
                               listSchedule[index].isBooked!
-                                  ? 'Reserved'
+                                  ? listSchedule[index]
+                                                  .scheduleDetails![0]
+                                                  .bookingInfo !=
+                                              null &&
+                                          listSchedule[index]
+                                                  .scheduleDetails![0]
+                                                  .bookingInfo![0]
+                                                  .userId ==
+                                              userId
+                                      ? 'Booked'
+                                      : 'Reserved'
                                   : startTime[index] + ' - ' + endTime[index],
                               action: listSchedule[index].isBooked! ||
                                       listSchedule[index].endTimestamp! < now

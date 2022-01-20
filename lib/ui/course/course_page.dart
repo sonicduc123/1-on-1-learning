@@ -6,7 +6,6 @@ import 'package:let_tutor/data/network/get_api.dart';
 import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/ui/course/course.dart';
 import 'package:let_tutor/widgets/space.dart';
-import 'package:tiengviet/tiengviet.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({Key? key}) : super(key: key);

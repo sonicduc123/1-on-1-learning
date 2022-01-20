@@ -11,7 +11,7 @@ import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/models/tutors.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/routes.dart';
-import 'package:let_tutor/ui/account/setting.dart';
+import 'package:let_tutor/ui/account/personal.dart';
 import 'package:let_tutor/ui/authentication/login.dart';
 import 'package:let_tutor/ui/course/course_page.dart';
 import 'package:let_tutor/ui/homepage/homepage.dart';
@@ -106,6 +106,12 @@ class _TutorAppState extends State<TutorApp> {
     });
   }
 
+  favoriteCallback() {
+    setState(() {
+      listTutor!.listTutor!.sort((a, b) => sortListTutor(a, b));
+    });
+  }
+
   void loginSuccessCallback() {
     setState(() {
       isLogin = true;
@@ -138,6 +144,7 @@ class _TutorAppState extends State<TutorApp> {
               userChangeCallback: userChangeCallback,
               listSchedule: listSchedule!,
               listTutor: tutorsInfo!.tutors!.listTutor!,
+              favoriteCallback: favoriteCallback,
             );
           case BottomBars.course:
             return const CoursePage();
@@ -146,9 +153,10 @@ class _TutorAppState extends State<TutorApp> {
           case BottomBars.tutor:
             return Tutor(
               listTutor: tutorsInfo!.tutors!.listTutor!,
+              favoriteCallback: favoriteCallback,
             );
           case BottomBars.setting:
-            return Setting(
+            return Personal(
               logoutCallback: logoutCallback,
               user: userInfor!.user!,
               userChangeCallback: userChangeCallback,
@@ -160,6 +168,7 @@ class _TutorAppState extends State<TutorApp> {
               userChangeCallback: userChangeCallback,
               listSchedule: listSchedule!,
               listTutor: tutorsInfo!.tutors!.listTutor!,
+              favoriteCallback: favoriteCallback,
             );
         }
       }
@@ -185,9 +194,9 @@ class _TutorAppState extends State<TutorApp> {
           showUnselectedLabels: true,
           onTap: (index) {
             setState(() {
-              if (index == BottomBars.home || index == BottomBars.tutor) {
-                getListTutor();
-              }
+              // if (index == BottomBars.home || index == BottomBars.tutor) {
+              //   getListTutor();
+              // }
               if (index == BottomBars.home) {
                 getListSchedule();
               }

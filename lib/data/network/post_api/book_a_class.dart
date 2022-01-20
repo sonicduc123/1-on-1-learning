@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:let_tutor/data/network/endpoints.dart';
+import 'package:let_tutor/models/error.dart';
 import 'package:let_tutor/utils/handle_error_fetch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<bool> bookAClassAPI(
+Future<String> bookAClassAPI(
     String scheduleId, String note, BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Response response = await post(
@@ -23,7 +24,9 @@ Future<bool> bookAClassAPI(
   );
   if (response.statusCode != 200) {
     handleErrorFetch(response.body, context);
-    return false;
-  }
-  return true;
+    ErrorFetch errorFetch = ErrorFetch.fromJson(jsonDecode(response.body));
+    return errorFetch.message!;
+  }   
+
+  return "success";
 }

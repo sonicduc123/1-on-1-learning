@@ -8,14 +8,14 @@ typedef Callback = Function();
 Future<void> showBookingInforDialog(String scheduleId, String date,
     String start, String end, BuildContext context, Callback callback) async {
   bookAClass(String scheduleId, String note, BuildContext context) async {
-    bool isSuccess = await PostAPI.bookAClass(scheduleId, note, context);
+    String message = await PostAPI.bookAClass(scheduleId, note, context);
     Navigator.pop(context);
-    if (isSuccess) {
+    if (message == "success") {
       makeDialog('Booking successfully',
           'Please wait to join meeting with your tutor.', context);
       callback();
     } else {
-      makeDialog('Error', 'Please book another schedule', context);
+      makeDialog('Error', message, context);
     }
   }
 

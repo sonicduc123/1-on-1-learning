@@ -10,8 +10,8 @@ import 'package:let_tutor/widgets/space.dart';
 typedef LogoutCallback = Function();
 typedef UserChangeCallback = Function(User user);
 
-class Setting extends StatefulWidget {
-  const Setting(
+class Personal extends StatefulWidget {
+  const Personal(
       {Key? key,
       required this.logoutCallback,
       required this.user,
@@ -23,10 +23,10 @@ class Setting extends StatefulWidget {
   final User user;
 
   @override
-  _SettingState createState() => _SettingState();
+  _PersonalState createState() => _PersonalState();
 }
 
-class _SettingState extends State<Setting> {
+class _PersonalState extends State<Personal> {
   @override
   Widget build(BuildContext context) {
     Widget information = ListTile(
@@ -47,20 +47,20 @@ class _SettingState extends State<Setting> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    Profile(user: widget.user, callback: widget.userChangeCallback)));
+                builder: (context) => Profile(
+                    user: widget.user, callback: widget.userChangeCallback)));
       },
     );
 
-    Widget viewFeedbacks = listItem(Icons.person_outline, 'View Feedbacks');
+    // Widget viewFeedbacks = listItem(Icons.person_outline, 'View Feedbacks');
 
-    Widget bookingHistory = listItem(
-      Icons.list,
-      'Booking History',
-      action: () {
-        Navigator.pushNamed(context, Routes.bookingHistory);
-      },
-    );
+    // Widget bookingHistory = listItem(
+    //   Icons.list,
+    //   'Booking History',
+    //   action: () {
+    //     Navigator.pushNamed(context, Routes.bookingHistory);
+    //   },
+    // );
 
     Widget sessionHistory = listItem(
       Icons.history,
@@ -70,12 +70,12 @@ class _SettingState extends State<Setting> {
       },
     );
 
-    Widget advancedSettings =
-        listItem(Icons.settings_outlined, 'Advanced Settings');
+    // Widget advancedSettings =
+    //     listItem(Icons.settings_outlined, 'Advanced Settings');
 
-    Widget outWebsite = listItem(Icons.language, 'Our Website');
+    // Widget outWebsite = listItem(Icons.language, 'Our Website');
 
-    Widget facebook = listItem(Icons.facebook_outlined, 'Facebook');
+    // Widget facebook = listItem(Icons.facebook_outlined, 'Facebook');
 
     Widget version = const Align(
         alignment: Alignment.topRight, child: Text('Version 1.1.0'));
@@ -85,20 +85,21 @@ class _SettingState extends State<Setting> {
     });
 
     return Scaffold(
-      appBar: createAppBar('Setttings', false, context),
+      appBar: createAppBar('Personal', false, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           children: [
             information,
-            viewFeedbacks,
-            bookingHistory,
+            // viewFeedbacks,
+            // bookingHistory,
+
             sessionHistory,
-            advancedSettings,
-            space(15),
-            outWebsite,
-            facebook,
-            space(5),
+            // advancedSettings,
+            // space(15),
+            // outWebsite,
+            // facebook,
+            space(MediaQuery.of(context).size.height - 450),
             version,
             logoutButton,
           ],
