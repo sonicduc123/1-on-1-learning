@@ -11,13 +11,23 @@ class Part extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           icon,
           size: 20,
         ),
         space(5),
-        Text(name),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

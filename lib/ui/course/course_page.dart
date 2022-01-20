@@ -43,8 +43,8 @@ class _CoursePageState extends State<CoursePage> {
     page++;
     List<Courses> listCourseAPI =
         await GetAPI.getListCourse(page, size, searchController.text);
+    listCourse.addAll(listCourseAPI);
     setState(() {
-      listCourse.addAll(listCourseAPI);
       listSearchCourse = listCourse.sublist(0);
       isLoading = false;
     });

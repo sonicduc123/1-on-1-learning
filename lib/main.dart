@@ -86,7 +86,7 @@ class _TutorAppState extends State<TutorApp> {
     setState(() {
       isLoadingSchedule = true;
     });
-    List<Schedule> loadListSchedule = await GetAPI.getListSchedule(1, 20);
+    List<Schedule> loadListSchedule = await GetAPI.getListSchedule(1, 1);
     log('load schedule');
     setState(() {
       listSchedule = loadListSchedule;
@@ -142,9 +142,7 @@ class _TutorAppState extends State<TutorApp> {
           case BottomBars.course:
             return const CoursePage();
           case BottomBars.upcoming:
-            return Upcoming(
-              listSchedule: listSchedule!,
-            );
+            return const Upcoming();
           case BottomBars.tutor:
             return Tutor(
               listTutor: tutorsInfo!.tutors!.listTutor!,
@@ -190,7 +188,7 @@ class _TutorAppState extends State<TutorApp> {
               if (index == BottomBars.home || index == BottomBars.tutor) {
                 getListTutor();
               }
-              if (index == BottomBars.home || index == BottomBars.upcoming) {
+              if (index == BottomBars.home) {
                 getListSchedule();
               }
               selectedIndex = index;

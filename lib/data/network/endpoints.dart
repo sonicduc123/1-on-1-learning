@@ -19,6 +19,9 @@ class Endpoints {
   // get list tutor
   static const String getListTutor = baseUrl + "tutor/more?";
 
+  // search tutor
+  static const String searchTutor = baseUrl + "tutor/search";
+
   // add tutor to favorite list
   static const String addFavorite = baseUrl + "user/manageFavoriteTutor";
 

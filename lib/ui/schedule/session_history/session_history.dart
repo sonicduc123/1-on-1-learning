@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/data/network/get_api.dart';
@@ -16,18 +15,30 @@ class SessionHistory extends StatefulWidget {
 class _SessionHistoryState extends State<SessionHistory> {
   List<Schedule> listHistory = [];
   bool isLoading = true;
+  ScrollController scrollController = ScrollController();
+  int page = 0;
+  final int perPage = 10;
 
   @override
   initState() {
     getListHistory();
-
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        getListHistory();
+      }
+    });
     super.initState();
   }
 
   getListHistory() async {
-    List<Schedule> loadListHistory = await GetAPI.getListHistory(1, 20);
     setState(() {
-      listHistory = loadListHistory;
+      isLoading = true;
+    });
+    page++;
+    List<Schedule> loadListHistory = await GetAPI.getListHistory(page, perPage);
+    setState(() {
+      listHistory.addAll(loadListHistory);
       isLoading = false;
     });
   }
@@ -38,29 +49,36 @@ class _SessionHistoryState extends State<SessionHistory> {
       appBar: createAppBar('Session History', true, context),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        child: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: [
-                  // const CupertinoSearchTextField(
-                  //   placeholder: 'Search message',
-                  //   padding: EdgeInsets.all(8),
-                  // ),
-                  // space(20),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: List.generate(
-                          listHistory.length,
-                          (index) => SessionHistoryItem(
+        child: Column(
+          children: [
+            // const CupertinoSearchTextField(
+            //   placeholder: 'Search message',
+            //   padding: EdgeInsets.all(8),
+            // ),
+            // space(20),
+            Expanded(
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  children: List.generate(
+                    listHistory.length + 1,
+                    (index) => index == listHistory.length
+                        ? isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : listHistory.isNotEmpty
+                                ? Container()
+                                : const Center(
+                                    child: Text('There is no history schedule'),
+                                  )
+                        : SessionHistoryItem(
                             schedule: listHistory[index],
                           ),
-                        ),
-                      ),
-                    ),
                   ),
-                ],
+                ),
               ),
+            ),
+          ],
+        ),
       ),
     );
   }

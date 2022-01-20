@@ -6,6 +6,7 @@ import 'package:let_tutor/data/network/post_api/forgot_password_account.dart';
 import 'package:let_tutor/data/network/post_api/get_schedule_tutor.dart';
 import 'package:let_tutor/data/network/post_api/login_account.dart';
 import 'package:let_tutor/data/network/post_api/register_account.dart';
+import 'package:let_tutor/data/network/post_api/search_tutor.dart';
 
 class PostAPI {
   // change password
@@ -32,4 +33,9 @@ class PostAPI {
   // book a class
   static bookAClass(String scheduleId, String note, BuildContext context) =>
       bookAClassAPI(scheduleId, note, context);
+
+  // search tutor
+  static searchTutor(
+          int page, int perPage, List<String> specialties, String search) =>
+      searchTutorAPI(page, perPage, specialties, search);
 }

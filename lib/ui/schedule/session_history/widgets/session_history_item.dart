@@ -40,6 +40,7 @@ class SessionHistoryItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(schedule
@@ -47,43 +48,46 @@ class SessionHistoryItem extends StatelessWidget {
                   radius: 30,
                 ),
                 space(10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      schedule
-                          .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name!,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    space(10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Part(
-                          icon: Icons.calendar_today,
-                          name: dateFormatStart.format(start),
-                        ),
-                        space(5),
-                        Part(
-                          icon: Icons.alarm,
-                          name: '$hourLearn h $minuteLearn',
-                        ),
-                        space(5),
-                        Part(
-                          icon: Icons.star_outline,
-                          name: schedule.scoreByTutor != null
-                              ? 'Mark: ' +
-                                  schedule.scoreByTutor!.toString() +
-                                  '\n' +
-                                  'Feedback: ' +
-                                  schedule.tutorReview!
-                              : 'Not feedback yet',
-                        ),
-                      ],
-                    )
-                  ],
-                )
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        schedule
+                            .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name!,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      space(10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Part(
+                            icon: Icons.calendar_today,
+                            name: dateFormatStart.format(start),
+                          ),
+                          space(5),
+                          Part(
+                            icon: Icons.alarm,
+                            name: '$hourLearn h $minuteLearn',
+                          ),
+                          space(5),
+                          Part(
+                            icon: Icons.star_outline,
+                            name: schedule.scoreByTutor != null
+                                ? 'Mark: ' +
+                                    schedule.scoreByTutor!.toString() +
+                                    '\n' +
+                                    'Feedback: ' +
+                                    schedule.tutorReview!
+                                : 'Not feedback yet',
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

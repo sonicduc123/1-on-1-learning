@@ -41,7 +41,10 @@ class TutorsInfo {
         favoriteTutor!.add(FavoriteTutor.fromJson(v));
       });
     }
-    List<FavoriteTutor> favorites = favoriteTutor!.sublist(0);
+    List<FavoriteTutor> favorites = [];
+    if (favoriteTutor != null) {
+      favorites = favoriteTutor!.sublist(0);
+    }
     for (TutorDTO tutor in tutors!.listTutor!) {
       for (int i = 0; i < favorites.length; i++) {
         if (favorites[i].tutorID == tutor.userId) {
