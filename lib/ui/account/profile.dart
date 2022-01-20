@@ -41,8 +41,15 @@ class _ProfileState extends State<Profile> {
     if (widget.user.language != null) {
       languageController.text = widget.user.language!;
     }
-    locationController.text = widget.user.country!;
-    birthdayController.text = widget.user.birthday!;
+    if (widget.user.country != null) {
+      locationController.text = widget.user.country!;
+    }
+    if (widget.user.birthday != null) {
+      birthdayController.text = widget.user.birthday!;
+    } else {
+      DateTime now = DateTime.now();
+      birthdayController.text = now.toString().substring(0, 10);
+    }
     super.initState();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:let_tutor/models/schedule_tutor.dart';
 import 'package:let_tutor/ui/detail_tutor/widgets/show_booking_infor.dart';
@@ -21,7 +23,7 @@ void showTimeSchedulePicker(
   }
   String userId = "";
   SharedPreferences.getInstance()
-      .then((prefs) => userId = prefs.getString('id')!);
+      .then((prefs) => {userId = prefs.getString('id')!, log(userId)});
 
   showModalBottomSheet<void>(
     context: context,

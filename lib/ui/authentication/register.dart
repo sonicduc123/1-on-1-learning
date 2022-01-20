@@ -47,7 +47,7 @@ class Register extends StatelessWidget {
             Navigator.pop(context);
           },
           child: const Text(
-            'Log In',
+            'Sign In',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 15,
@@ -66,16 +66,16 @@ class Register extends StatelessWidget {
             children: [
               registerForm,
               space(15),
-              otherWayLogin,
-              space(15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  facebookIcon,
-                  space(30),
-                  googleIcon,
-                ],
-              ),
+              // otherWayLogin,
+              // space(15),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     facebookIcon,
+              //     space(30),
+              //     googleIcon,
+              //   ],
+              // ),
               space(10),
               signInRediect,
             ],

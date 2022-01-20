@@ -88,16 +88,16 @@ class Login extends StatelessWidget {
               space(20),
               loginForm,
               space(15),
-              otherWayLogin,
-              space(15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  facebookIcon,
-                  space(30),
-                  googleIcon,
-                ],
-              ),
+              // otherWayLogin,
+              // space(15),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     facebookIcon,
+              //     space(30),
+              //     googleIcon,
+              //   ],
+              // ),
               space(15),
               signUpRediect
             ],

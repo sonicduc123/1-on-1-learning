@@ -53,6 +53,15 @@ void showDateSchedulePicker(
                               .toString()
                               .substring(0, 10),
                           action: () {
+                            if (listSchedule[index]
+                                .scheduleDetails![0]
+                                .bookingInfo!
+                                .isNotEmpty) {
+                              log(listSchedule[index]
+                                  .scheduleDetails![0]
+                                  .bookingInfo![0]
+                                  .userId!);
+                            }
                             showTimeSchedulePicker(
                                 context, getListByDate(index));
                           },
